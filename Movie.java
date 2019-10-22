@@ -11,14 +11,14 @@ public class Movie {
 	public ArrayList <String> cast;
 
 	
-	public float userRating=0;
+	//public float userRating=0;
 	//public ArrayList <String> reviewAndRatings;
 	
 	public Movie() {
 	}
 	//Calculate average of user rating
-	public void calcAverageUserRating(float rating) {
-		this.userRating = (this.userRating+rating)/2;
+	//public void calcAverageUserRating(float rating) {
+	//	this.userRating = (this.userRating+rating)/2;
 	}
 	//setMethods
 	public void setTitle(String title) {
