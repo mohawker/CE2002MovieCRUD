@@ -9,10 +9,10 @@ import java.util.Date;
 public class MovieTicket {
 	
 	// Multipliers for price
-	public float PEAK_PERIOD_MULT = (float) 1.5;
-	public float GOLD_CLASS_MULT = 5;
-	public float THREED_MULT = 3;
-	public int BASE_PRICE = 8;
+	static public float PEAK_PERIOD_MULT = (float) 1.5;
+	static public float GOLD_CLASS_MULT = 5;
+	static public float THREED_MULT = 3;
+	static public int BASE_PRICE = 8;
 	
 	public Movie movie;
 	public Cinema cinema;
@@ -60,13 +60,39 @@ public class MovieTicket {
 	    }	
 	}
 
+	static public void setBase(int newPrice) {BASE_PRICE =newPrice;}
+	static public void setPeakMult(float newMult) {PEAK_PERIOD_MULT =newMult;}
+	static public void set3DMult(float newMult) {THREED_MULT =newMult;}
+	static public void setGoldMult(float newMult) {GOLD_CLASS_MULT =newMult;}
+
+	
 	public void setPrice() {
-		if(cinema.cinema_type == "3D") {this.price *= THREED_MULT;}
-		if(cinema.cinema_type == "GoldClass") {this.price *= GOLD_CLASS_MULT;}
-		if (this.isPeak) {this.price *= PEAK_PERIOD_MULT;};
+		System.out.printf("The base price is $%.2f", this.price);
+		System.out.println();
+		if(cinema.cinema_type == "3D") {
+			this.price *= THREED_MULT;
+			System.out.println("This is a 3D movie, a surcharge of X" + THREED_MULT + " is applied");
+			System.out.println("Current price is $" + this.price);
+			System.out.println();
+		}
+		if(cinema.cinema_type == "GoldClass") {
+			this.price *= GOLD_CLASS_MULT;
+			System.out.println("This is a Gold Class, a surcharge of X" + GOLD_CLASS_MULT + " is applied");
+			System.out.printf("Current price is $%.2f", this.price);
+			System.out.println();
+		}
+		if (this.isPeak) {
+			this.price *= PEAK_PERIOD_MULT;
+			System.out.println("This is purchased during peak period, a surcharge of X" + PEAK_PERIOD_MULT + "is applied");
+			System.out.printf("Current price is $%.2f", this.price);
+			System.out.println();
+		};
+		System.out.printf("The final price is $%.2f", this.price);
+		System.out.println();
 	}
 
 	public float getPrice() {
-		System.out.println("Price is " + this.price);
+		System.out.printf("Price is %.2f", this.price);
+		System.out.println();
 		return price;}
 }

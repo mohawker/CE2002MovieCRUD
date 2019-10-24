@@ -85,7 +85,20 @@ public class User {
 		Scanner scan = new Scanner(System.in);
 		int choice = scan.nextInt();
 		String showtime = cinema_showing.showtimes.get(choice-1);
-		return cinema_showing.bookSeats(showtime, movie);
+		return cinema_showing.bookSeat(showtime, movie);
+	}
+	
+	public ArrayList<MovieTicket> bookPurchaseMultipleTickets(Cineplex cineplex, Movie movie){
+		int index = cineplex.movies.indexOf(movie);
+		Cinema cinema_showing = cineplex.cinemas.get(index);
+		System.out.println("These are the available showtimes. Please select one");
+		for (int i=0; i<cinema_showing.showtimes.size(); i++) {
+			System.out.println((i+1) + ". " + cinema_showing.showtimes.get(i));
+		}
+		Scanner scan = new Scanner(System.in);
+		int choice = scan.nextInt();
+		String showtime = cinema_showing.showtimes.get(choice-1);
+		return cinema_showing.bookMultipleSeats(showtime, movie);
 	}
 	
 	public void addTicket(MovieTicket ticket) {

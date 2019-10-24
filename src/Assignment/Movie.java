@@ -10,6 +10,7 @@ public class Movie {
 	public String director;
 	public String type;
 	public int movieSales=0;
+	public float averageRating = 0;
 	public ArrayList <String> cast;
 	public ArrayList <Review> movieReviews=new ArrayList <Review>(); // When creating a new movie, there are no reviuews
 	
@@ -37,8 +38,8 @@ public class Movie {
 		System.out.println();
 		while (i.hasNext()) {
 			Review review_printed = i.next();
-			System.out.println("Rating of " + review_printed.rating);
-			System.out.println(review_printed.comment);
+			System.out.println("Rating of " + review_printed.rating + " out of 5");
+			System.out.println("Comment: " + review_printed.comment);
 			System.out.println();
 		}
 	}
@@ -56,6 +57,8 @@ public class Movie {
 		
 		System.out.println("Genres: " + this.type);
 		System.out.println("Synopsis: " + this.synopsis);
+		
+		printReviews();
 	}
 	
 	// Set Methods
@@ -73,6 +76,17 @@ public class Movie {
 	public String getDirector() {return director;}
 	public String getType() {return type;}
 	
-	
+	public int getMovieSales() {return movieSales;}
+	public float getAverageRating() {
+		float totalRating = 0;
+		if (this.movieReviews.size()==0) {
+			return (float)0;
+		}else {
+			for (int i=0; i<this.movieReviews.size(); i++) {
+				totalRating += this.movieReviews.get(i).rating;
+			}
+			return totalRating/(this.movieReviews.size());
+		}
+	}
 	
 }
