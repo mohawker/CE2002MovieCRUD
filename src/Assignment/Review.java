@@ -13,12 +13,21 @@ public class Review {
 		Scanner scan = new Scanner (System.in);
 		System.out.println("What is your comment for " + movie.title + "?");
 		String comment = scan.nextLine();
-		System.out.println("What is your rating out of 5?");
-		float rating = scan.nextFloat();
-		this.comment = comment;
-		this.rating = rating;
-		this.userID = user.getUsername();
-		this.movie = movie;
+		while (1==1) {
+			System.out.println("What is your rating out of 5?");
+			float rating = scan.nextFloat();
+			if (rating<0 || rating >5) {
+				System.out.println("Only values from 0-5 are valid");
+				System.out.println("Please try again");
+
+			}else {
+				this.comment = comment;
+				this.rating = rating;
+				this.userID = user.getUsername();
+				this.movie = movie;
+				break;
+			}
+		}
 	}
 	
 	//getMethods

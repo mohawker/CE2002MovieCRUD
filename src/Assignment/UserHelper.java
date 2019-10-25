@@ -17,7 +17,6 @@ public class UserHelper extends Helper{
 		System.out.println("Would you like you view the showtimes? (Y/N)");
 		if (scan.next().equals("Y")) {
 			System.out.println("Please select the movie you would like to see");
-			printAllMovies(uniqueMovies);
 			Movie movie_chosen = selectFromAllMovie(uniqueMovies);
 			
 			if (movie_chosen.status.equals("Showing")){
@@ -78,10 +77,8 @@ public class UserHelper extends Helper{
 			MovieTicket ticket = user.bookPurchaseTicket(cineplex_chosen, movie_chosen);
 			user.addTicket(ticket);
 		}else {
-			ArrayList<MovieTicket> tickets = user.bookPurchaseMultipleTickets(cineplex_chosen, movie_chosen);
-			for (int i=0; i<tickets.size(); i++) {
-				user.addTicket(tickets.get(i));
-			}
+			MovieTicket ticket = user.bookPurchaseMultipleTickets(cineplex_chosen, movie_chosen);
+			user.addTicket(ticket);
 		}
 	}
 

@@ -35,9 +35,12 @@ public class User {
 		System.out.println("Generating Ticket History");
 		System.out.println("-----------------------");
 		for (int i = 0; i < ticket_history.size(); i++) {
-			System.out.println("Transation ID is " + ticket_history.get(i).TID);
-			System.out.println("Ticket for " + ticket_history.get(i).movie.title + " at " + ticket_history.get(i).time);
-			System.out.println("Purchased on " + ticket_history.get(i).currentDateTime);
+			MovieTicket ticket = ticket_history.get(i);
+			System.out.println("Transation ID is " + ticket.TID);
+			System.out.println(ticket.quantityTicket + " Ticket(s) for " + ticket.movie.title + " at " + ticket.time);
+			System.out.printf("Each ticket is $%.2f\n", ticket.perTicketPrice);
+			System.out.printf("Total price is $%.2f\n", ticket.getPrice());
+			System.out.println("Purchased on " + ticket.currentDateTime);
 			System.out.println();
 		}
 	}
@@ -88,7 +91,7 @@ public class User {
 		return cinema_showing.bookSeat(showtime, movie);
 	}
 	
-	public ArrayList<MovieTicket> bookPurchaseMultipleTickets(Cineplex cineplex, Movie movie){
+	public MovieTicket bookPurchaseMultipleTickets(Cineplex cineplex, Movie movie){
 		int index = cineplex.movies.indexOf(movie);
 		Cinema cinema_showing = cineplex.cinemas.get(index);
 		System.out.println("These are the available showtimes. Please select one");

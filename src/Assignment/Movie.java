@@ -47,6 +47,13 @@ public class Movie {
 	public void printMovie() {
 		System.out.println("Title: " + this.title);
 		System.out.println("Director: " + this.director);
+		
+		if (this.movieReviews.size() == 0){
+			System.out.println("There are no ratings available");
+		}else {
+			System.out.println("The overall rating is " + this.getAverageRating());
+		}
+		
 		System.out.println("Showing Status: " + this.status);
 		
 		System.out.print("Cast: ");
@@ -88,5 +95,4 @@ public class Movie {
 			return totalRating/(this.movieReviews.size());
 		}
 	}
-	
 }
