@@ -1,5 +1,4 @@
 package Assignment;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -7,6 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime;   
 
 public class MOBLIMA {
 
@@ -55,10 +56,24 @@ public class MOBLIMA {
 		Scanner scan = new Scanner(System.in);
 		int choice = scan.nextInt();
 		if (choice == 1) {
-			User user = new User("Vincent", "vincentyongweijie@gmail.com", "83189252", 22);
+		// User Login Customization (Name & Age Input)
+			System.out.println("What is your name?");
+			String userName = scan.next();
+			System.out.println("How old are you?");
+			int userAge = scan.nextInt();
+		// Constructor for User Called
+			User user = new User(userName, "vincentyongweijie@gmail.com", "83189252", userAge);
+		// UserHelper is created - Enables user functions
 			UserHelper userHelper = new UserHelper(uniqueMovies, user, cineplexes);
+			System.out.println("------------------------------------------------------");
 			System.out.println("Welcome, " + user.getUsername());
+			System.out.printf("The date is: %s\n", java.time.LocalDate.now());
+			System.out.println("Pricing Today for 2D Tickets: Regular Weekday ($8)");
+			if (user.getAge()>=55) {
+				System.out.println("Please note that you are eligible for senior citizen discounts!");
+			}
 			while (1==1) {
+				System.out.println("------------------------------------------------------");
 				System.out.println("1. List Movie");
 				System.out.println("2. View Movie Details");
 				System.out.println("3. Check Seat Availability");
@@ -67,6 +82,9 @@ public class MOBLIMA {
 				System.out.println("6. List Top 5 Movies by Ticket Sales or Overall Rating");
 				System.out.println("7. Add Rating");
 				System.out.println("8. Login as Admin");
+				System.out.println("-1. Log Off & Shut Down");
+				System.out.println("------------------------------------------------------");
+				System.out.println("Please select (1-8) : ");
 				choice = scan.nextInt();
 				switch (choice){
 					case 1:
@@ -93,6 +111,10 @@ public class MOBLIMA {
 					case 8:
 						userHelper.adminView(cineplexes, uniqueMovies);
 						break;
+					case -1:
+						System.out.println("Thank you for using MOBLIMA!");
+						System.out.println("System Logging Off...");
+						return;	
 					default:
 						System.out.println("Please enter a valid choice");
 				}
@@ -250,7 +272,7 @@ public class MOBLIMA {
 		
 		ArrayList<String> cast_7 = new ArrayList<String>();
 		cast_7.add("Constance Wu");cast_7.add("Jennifer Lopez");cast_7.add("Lili Reinhart");
-		movies[6] = new Movie("Hustlers", "Showing", "Hustlers follows a crew of savvy former strip club employees who band together to turn the tables on their Wall Street clients. The film was inspired by the viral article published by New York Magazine entitled “The Hustlers at Scores” written by Jessica Pressler.", "Lorene Scafaria", "Comedy", cast_7);
+		movies[6] = new Movie("Hustlers", "Showing", "Hustlers follows a crew of savvy former strip club employees who band together to turn the tables on their Wall Street clients. The film was inspired by the viral article published by New York Magazine entitled ï¿½The Hustlers at Scoresï¿½ written by Jessica Pressler.", "Lorene Scafaria", "Comedy", cast_7);
 		
 		ArrayList<String> cast_8 = new ArrayList<String>();
 		cast_8.add("Alexander Skarsgard");cast_8.add("Nat Wolff");cast_8.add("Adam Long");
