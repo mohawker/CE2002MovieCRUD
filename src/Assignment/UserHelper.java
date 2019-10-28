@@ -72,17 +72,22 @@ public class UserHelper extends Helper{
 		System.out.println("Would you like to book single or multiple seats?");
 		System.out.println("1. Single Seat");
 		System.out.println("2. Multiple Seats");
+		int choice=-1;
 		while (!scan.hasNextInt()){
 			System.out.println("Error... Please input an Integer");
 			scan.nextLine();
 		}
-		int choice = scan.nextInt();
-		if (choice == 1) {
-			MovieTicket ticket = user.bookPurchaseTicket(cineplex_chosen, movie_chosen);
-			user.addTicket(ticket);
-		}else {
-			MovieTicket ticket = user.bookPurchaseMultipleTickets(cineplex_chosen, movie_chosen);
-			user.addTicket(ticket);
+		while (choice != 1 ||choice !=2) {
+			choice = scan.nextInt();
+			if (choice == 1) {
+				MovieTicket ticket = user.bookPurchaseTicket(cineplex_chosen, movie_chosen);
+				user.addTicket(ticket);
+			}else if (choice==2){
+				MovieTicket ticket = user.bookPurchaseMultipleTickets(cineplex_chosen, movie_chosen);
+				user.addTicket(ticket);
+			}else {
+				System.out.println("Incorrect selection please select option 1 or 2");
+			}
 		}
 	}
 
