@@ -78,6 +78,10 @@ public class AdminHelper extends Helper{
 		
 		System.out.println("Current showtimes are " + currShowtimes);
 		System.out.println("How many showtimes " + movieChosen.title + " would you like to update?");
+		while (!scan.hasNextInt()){
+			System.out.println("Error... Please input an Integer");
+			scan.nextLine();
+		}
 		int choice = scan.nextInt();
 		scan.nextLine();
 		for (int i=0; i<choice; i++) {
@@ -120,6 +124,10 @@ public class AdminHelper extends Helper{
 		System.out.println("2. Peak Period Multiplier");
 		System.out.println("3. 3D Multiplier");
 		System.out.println("4. Gold Class Multiplier");
+		while (!scan.hasNextInt()){
+			System.out.println("Error... Please input an Integer");
+			scan.nextLine();
+		}
 		int choice = scan.nextInt();
 		float mult;
 		switch (choice) {
