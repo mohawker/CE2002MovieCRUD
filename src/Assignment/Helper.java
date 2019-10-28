@@ -99,6 +99,10 @@ public class Helper {
 			}
 		}
 		System.out.print("Select your movie: ");
+		while (!scan.hasNextInt()) {
+			System.out.println("Error... Please input an Integer");
+			scan.nextLine();	
+		}
 		int choice = scan.nextInt();
 		return uniqueMoviesList.get(choice-1);
 	}
@@ -107,6 +111,10 @@ public class Helper {
 		Scanner scan = new Scanner(System.in);
 		List<Movie> uniqueMoviesList = new ArrayList<Movie>(uniqueMovies);
 		System.out.print("Select your movie: ");
+		while (!scan.hasNextInt()) {
+			System.out.println("Error... Please input an Integer");
+			scan.nextLine();	
+		}
 		int choice = scan.nextInt();
 		return uniqueMoviesList.get(choice-1);
 	}
@@ -115,9 +123,21 @@ public class Helper {
 		Scanner scan = new Scanner(System.in);
 		printCineplexMovie(cineplex);
 		System.out.print("Select your movie: ");
-		int choice = scan.nextInt();
-		user.viewMovieDetail(cineplex.movies.get(choice-1));
-		return cineplex.movies.get(choice-1);
+		int choice = -1;
+		while (!scan.hasNextInt()) {
+			System.out.println("Error... Please input an Integer");
+			scan.nextLine();	
+		}
+		while (choice<1 || choice > cineplex.movies.size()) {
+			choice = scan.nextInt();
+			if (choice>=1 && choice <= cineplex.movies.size()) {
+				user.viewMovieDetail(cineplex.movies.get(choice-1));
+				return cineplex.movies.get(choice-1);
+			}
+			else {
+				System.out.println("Please enter a valid selection from 1-"+ cineplex.movies.size());
+			}
+		}return cineplex.movies.get(choice-1);
 	}
 
 	public void printCineplexes(ArrayList<Cineplex> cineplexes) {
@@ -130,7 +150,18 @@ public class Helper {
 	public Cineplex selectCineplex(ArrayList<Cineplex> cineplexes) {
 		Scanner scan = new Scanner(System.in);
 		System.out.print("Select Cineplex: ");
-		int choice = scan.nextInt();
+		int choice = -1;
+		while (!scan.hasNextInt()) {
+			System.out.println("Error... Please input an Integer");
+			scan.nextLine();	
+		}
+		while (choice <1 || choice >3) {
+			choice = scan.nextInt();
+			if (choice <1 && choice >3 )
+				return cineplexes.get(choice-1);
+			else
+				System.out.println("Please enter a valid selection from 1-3");
+		}
 		return cineplexes.get(choice-1);
 	}
 
@@ -139,6 +170,10 @@ public class Helper {
 		System.out.println("Select the cinema:");
 		for (int i = 0; i<cineplex.cinemas.size(); i++) {
 			System.out.println((i+1) + ". Cinema Code " + cineplex.cinemas.get(i).cinema_code + "(" + cineplex.cinemas.get(i).cinema_type + ")");
+		}
+		while (!scan.hasNextInt()) {
+			System.out.println("Error... Please input an Integer");
+			scan.nextLine();	
 		}
 		int choice = scan.nextInt();
 		return cineplex.cinemas.get(choice-1);
