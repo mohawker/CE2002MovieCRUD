@@ -85,6 +85,10 @@ public class MOBLIMA {
 				System.out.println("-1. Log Off & Shut Down");
 				System.out.println("------------------------------------------------------");
 				System.out.println("Please select (1-8) : ");
+				while (!scan.hasNextInt()){
+					System.out.println("Error... Please input an Integer");
+					scan.nextLine();
+				}
 				choice = scan.nextInt();
 				switch (choice){
 					case 1:
@@ -136,6 +140,10 @@ public class MOBLIMA {
 				System.out.println("7. Configure System Settings");
 				System.out.println("8. List Top 5 Movies by Ticket Sales or Overall Rating");
 				System.out.println("9. Logout to see User view");
+				while (!scan.hasNextInt()){
+					System.out.println("Error... Please input an Integer");
+					scan.nextLine();
+				}
 				choice = scan.nextInt();
 				scan.nextLine();
 				switch (choice){
