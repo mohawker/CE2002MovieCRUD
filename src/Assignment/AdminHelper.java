@@ -21,13 +21,13 @@ public class AdminHelper extends Helper{
 			Cinema cinema_chosen = selectCinema(cineplex_chosen);
 			replaceMovie(cineplex_chosen, cinema_chosen, movie, showtimes);
 		}
-		printAllMovies(uniqueMovies);
+		printMovies(uniqueMovies);
 		return movie;
 	}
 	
 	public void admin_2(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
-		printAllMovies(uniqueMovies);
-		Movie movie_chosen = selectFromAllMovie(uniqueMovies);
+		printMovies(uniqueMovies);
+		Movie movie_chosen = selectMovie(uniqueMovies);
 		System.out.println("What is the new showing status of " + movie_chosen.title + "? (Showing/End of Showing)");
 		Scanner scan = new Scanner(System.in);
 		String newStatus = scan.nextLine();
@@ -48,12 +48,12 @@ public class AdminHelper extends Helper{
 	}
 
 	public void admin_3(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
-		printAllMovies(uniqueMovies);
-		Movie movie_chosen = selectFromAllMovie(uniqueMovies);
+		printMovies(uniqueMovies);
+		Movie movie_chosen = selectMovie(uniqueMovies);
 		System.out.println(movie_chosen.title + " will be set to End of Showing");
 		movie_chosen.status = "End of Showing";
 		uniqueMovies.remove(movie_chosen);
-		printAllMovies(uniqueMovies);
+		printMovies(uniqueMovies);
 	}
 	
 	public void admin_4(Admin admin, ArrayList<Cineplex> cineplexes, Cineplex cineplex_1, Cineplex cineplex_2, Cineplex cineplex_3, Set<Movie> uniqueMovies) {
@@ -71,7 +71,7 @@ public class AdminHelper extends Helper{
 		Scanner scan = new Scanner(System.in);
 		printCineplexes(cineplexes);
 		Cineplex cineplexChosen = selectCineplex(cineplexes);
-		Movie movieChosen = selectFromCineplexMovie(user, cineplexChosen);
+		Movie movieChosen = selectMovie(user, cineplexChosen);
 		
 		int index = cineplexChosen.movies.indexOf(movieChosen);
 		ArrayList <String> currShowtimes = cineplexChosen.cinemas.get(index).showtimes;
@@ -99,7 +99,7 @@ public class AdminHelper extends Helper{
 		Scanner scan = new Scanner(System.in);
 		printCineplexes(cineplexes);
 		Cineplex cineplexChosen = selectCineplex(cineplexes);
-		Movie movieChosen = selectFromCineplexMovie(user, cineplexChosen);
+		Movie movieChosen = selectMovie(user, cineplexChosen);
 		
 		int index = cineplexChosen.movies.indexOf(movieChosen);
 		ArrayList <String> currShowtimes = cineplexChosen.cinemas.get(index).showtimes;
@@ -163,42 +163,10 @@ public class AdminHelper extends Helper{
 		System.out.println("1. Sales");
 		System.out.println("2. Overall Rating");
 		int choice = scan.nextInt();
-		ArrayList<Movie> uniqueMoviesList = new ArrayList<Movie>(uniqueMovies);
-		ArrayList<Movie> sortedMoviesList = new ArrayList<Movie>();
-		sortedMoviesList.add(uniqueMoviesList.get(0));
-		
 		if (choice == 1) {
-			for (int i=1; i<uniqueMoviesList.size(); i++) {
-				for (int j=0; j<sortedMoviesList.size(); j++) {
-					if (uniqueMoviesList.get(i).movieSales>sortedMoviesList.get(j).movieSales) {
-						sortedMoviesList.add(j, uniqueMoviesList.get(i));
-						break;
-					}else if (j == sortedMoviesList.size()-1) {
-						sortedMoviesList.add(j, uniqueMoviesList.get(i));
-						break;
-					}
-				}
-			}
-			for (int i=0; i<5; i++) {
-				Movie movie_chosen = sortedMoviesList.get(i);
-				System.out.println(movie_chosen.title + " has total sales of $" + movie_chosen.movieSales);
-			}
+			sortMovies(uniqueMovies, true);
 		}else {
-			for (int i=1; i<uniqueMoviesList.size(); i++) {
-				for (int j=0; j<sortedMoviesList.size(); j++) {
-					if (uniqueMoviesList.get(i).getAverageRating()>sortedMoviesList.get(j).getAverageRating()) {
-						sortedMoviesList.add(j, uniqueMoviesList.get(i));
-						break;
-					}else if (j == sortedMoviesList.size()-1) {
-						sortedMoviesList.add(j, uniqueMoviesList.get(i));
-						break;
-					}
-				}
-			}
-			for (int i=0; i<5; i++) {
-				Movie movie_chosen = sortedMoviesList.get(i);
-				System.out.println(movie_chosen.title + " has overall rating of " + movie_chosen.getAverageRating() + " out of 5.0");
-			}
+			sortMovies(uniqueMovies, false);
 		}
 	}
 }

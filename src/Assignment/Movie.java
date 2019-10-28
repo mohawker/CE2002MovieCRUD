@@ -12,7 +12,7 @@ public class Movie {
 	public int movieSales=0;
 	public float averageRating = 0;
 	public ArrayList <String> cast;
-	public ArrayList <Review> movieReviews=new ArrayList <Review>(); // When creating a new movie, there are no reviuews
+	public ArrayList <Review> movieReviews=new ArrayList <Review>(); // When creating a new movie, there are no reviews
 	
 	public Movie(String title, String status, String synopsis, String director, String type, ArrayList <String> cast) {
 		this.title = title;
