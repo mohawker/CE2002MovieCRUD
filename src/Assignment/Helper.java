@@ -163,6 +163,10 @@ public class Helper {
 			System.out.println("7. Configure System Settings");
 			System.out.println("8. List Top 5 Movies by Ticket Sales or Overall Rating");
 			System.out.println("9. Logout to see User view");
+			while (!scan.hasNextInt()){
+				System.out.println("Error... Please input an Integer");
+				scan.nextLine();
+			}
 			int choice = scan.nextInt();
 			scan.nextLine();
 			switch (choice){
@@ -213,6 +217,10 @@ public class Helper {
 			System.out.println("6. List Top 5 Movies by Ticket Sales or Overall Rating");
 			System.out.println("7. Add Rating");
 			System.out.println("8. Login as Admin");
+			while (!scan.hasNextInt()){
+				System.out.println("Error... Please input an Integer");
+				scan.nextLine();
+			}
 			int choice = scan.nextInt();
 			switch (choice){
 				case 1:
