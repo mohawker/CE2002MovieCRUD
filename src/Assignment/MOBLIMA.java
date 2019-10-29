@@ -38,6 +38,7 @@ public class MOBLIMA {
 			System.out.printf("The date is: %s\n", java.time.LocalDate.now());
 			while (true) {
 				System.out.println("------------------------------------------------------");
+				System.out.println("[0] Search Movie");
 				System.out.println("[1] List Movie");
 				System.out.println("[2] View Movie Details");
 				System.out.println("[3] Check Seat Availability");
@@ -48,12 +49,13 @@ public class MOBLIMA {
 				System.out.println("[8] Login as Admin");
 				System.out.println("[9] Log Off & Shut Down");
 				System.out.println("------------------------------------------------------");
-				System.out.print("Please select (1-9) : ");
+				System.out.print("Please select (0-9) : ");
 				
 				// error checker class - checkInt , checkStr etc
-				choice = InputHandler.integerInput(1, 9);
+				choice = InputHandler.integerInput(0, 9);
 				System.out.println();
 				switch (choice){
+					case 0:{userHelper.searchUniqueMovies(uniqueMovies, cineplexes);break;}
 					case 1:{userHelper.listUniqueMovies(uniqueMovies, cineplexes);break;}
 					case 2:{userHelper.viewMovieDetails(user, uniqueMovies);break;}
 					case 3:{userHelper.checkSeatAvailability(user, cineplexes);break;}

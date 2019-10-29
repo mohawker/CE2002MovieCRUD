@@ -2,6 +2,7 @@ package Assignment;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -19,6 +20,31 @@ public class UserHelper extends Helper{
 		this.showtimeHelper = new ShowtimeHelper(uniqueMovies, user, cineplexes);
 		this.viewHelper = new ViewHelper(uniqueMovies, user, cineplexes);
 		this.cineplexHelper = new CineplexHelper(uniqueMovies, user, cineplexes);
+	}
+	
+	public void searchUniqueMovies(Set<Movie> uniqueMovies, ArrayList<Cineplex> cineplexes) {
+		Scanner scan = new Scanner(System.in);
+		System.out.println("=== Movie Search ===");
+//		movieHelper.printMovies(uniqueMovies);
+		System.out.print("Enter movie title to search: ");
+		String userInput = scan.nextLine();
+		List<Movie> uniqueMoviesList = new ArrayList<Movie>(uniqueMovies);
+		boolean found = false; //assume not found
+		Movie movieChosen = null;
+		for (int i = 0; i < uniqueMovies.size(); i++) {
+			System.out.println(uniqueMoviesList.get(i).getTitle());
+			//make all titles lower case, remove left and right space. 
+			if (uniqueMoviesList.get(i).title.toLowerCase().contains(userInput.trim())) {
+				found = true;
+				movieChosen = uniqueMoviesList.get(i);
+			};			
+		}
+		if (found) {
+			movieHelper.printMovieShowings(movieChosen, cineplexes);
+		}
+		else {
+			System.out.print("Movie not found!");
+		}
 	}
 	
 	public void listUniqueMovies(Set<Movie> uniqueMovies, ArrayList<Cineplex> cineplexes) {
