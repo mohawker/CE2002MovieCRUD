@@ -32,14 +32,13 @@ public class AdminHelper extends Helper{
 			Cinema cinema_chosen = cinemaHelper.printAndSelectCinema(cineplex_chosen);
 			movieHelper.replaceMovie(cineplex_chosen, cinema_chosen, movie, showtimes);
 		}
-		movieHelper.printMovies(uniqueMovies);
 		return movie;
 	}
 	
 	public void updateMovieListing(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
 		movieHelper.printMovies(uniqueMovies);
 		Movie movie_chosen = movieHelper.selectMovie(uniqueMovies);
-		System.out.println("What is the new showing status of " + movie_chosen.title + "? (Showing/End of Showing)");
+		System.out.print("New Showing Status of " + movie_chosen.title + "(Showing/End of Showing): ");
 		Scanner scan = new Scanner(System.in);
 		String newStatus = scan.nextLine();
 		if (movie_chosen.status.equals(newStatus)) {
@@ -70,7 +69,7 @@ public class AdminHelper extends Helper{
 	public void createCinemaShowtimes(Admin admin, ArrayList<Cineplex> cineplexes, Cineplex cineplex_1, Cineplex cineplex_2, Cineplex cineplex_3, Set<Movie> uniqueMovies) {
 		Movie movie_chosen = movieHelper.printAndSelectFromUnshownMovies(uniqueMovies);
 		movie_chosen.status = "Showing";
-		System.out.println("Where would you like to show this movie in?");
+		System.out.println("Choose Cineplex to be shown in:");
 		cineplexHelper.printCineplexes(cineplexes);
 		Cineplex cineplex_chosen = cineplexHelper.selectCineplex(cineplexes);
 		ArrayList <String> showtimes = showtimeHelper.createShowtimes();
@@ -83,12 +82,13 @@ public class AdminHelper extends Helper{
 		cineplexHelper.printCineplexes(cineplexes);
 		Cineplex cineplexChosen = cineplexHelper.selectCineplex(cineplexes);
 		Movie movieChosen = movieHelper.selectMovie(user, cineplexChosen);
-		
+		String date = movieHelper.printAndSelectMovieDates(cineplexChosen, movieChosen);
 		int index = cineplexChosen.movies.indexOf(movieChosen);
-		ArrayList <String> currShowtimes = cineplexChosen.cinemas.get(index).showtimes;
+		int dateIndex = cineplexChosen.cinemas.get(index).dates.indexOf(date);
+		ArrayList <String> currShowtimes = cineplexChosen.cinemas.get(index).showtimes[dateIndex];
 		
-		System.out.println("Current showtimes are " + currShowtimes);
-		System.out.println("How many showtimes " + movieChosen.title + " would you like to update?");
+		System.out.println("Current Showtimes : " + currShowtimes);
+		System.out.print("Number of Showtimes for " + movieChosen.title + " to be updated: ");
 		while (!scan.hasNextInt()){
 			System.out.println("Error... Please input an Integer");
 			scan.nextLine();
@@ -96,14 +96,14 @@ public class AdminHelper extends Helper{
 		int choice = scan.nextInt();
 		scan.nextLine();
 		for (int i=0; i<choice; i++) {
-			System.out.println("Which showtime would you like to remove?");
+			System.out.print("Remove Showtime: ");
 			currShowtimes.remove(scan.nextLine());
-			System.out.println("What showtime would you like to add?");
+			System.out.print("Add Showtime:");
 			currShowtimes.add(scan.nextLine());
 		}
 		Collections.sort(currShowtimes);
-		System.out.println("New Showtimes for " + movieChosen.title + " at " + cineplexChosen.name + " " + cineplexChosen.name + " are " + currShowtimes);
-		cineplexChosen.cinemas.get(index).showtimes = currShowtimes;
+		System.out.println("New Showtimes for " + movieChosen.title + " at " + cineplexChosen.name + " " + cineplexChosen.name + " : " + currShowtimes);
+		cineplexChosen.cinemas.get(index).showtimes[dateIndex] = currShowtimes;
 	}
 
 	public void removeCinemaShowtimes(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies, User user) {
@@ -111,66 +111,26 @@ public class AdminHelper extends Helper{
 		cineplexHelper.printCineplexes(cineplexes);
 		Cineplex cineplexChosen = cineplexHelper.selectCineplex(cineplexes);
 		Movie movieChosen = movieHelper.selectMovie(user, cineplexChosen);
+		String date = movieHelper.printAndSelectMovieDates(cineplexChosen, movieChosen);
 		
 		int index = cineplexChosen.movies.indexOf(movieChosen);
-		ArrayList <String> currShowtimes = cineplexChosen.cinemas.get(index).showtimes;
+		int dateIndex = cineplexChosen.cinemas.get(index).dates.indexOf(date);
+		ArrayList <String> currShowtimes = cineplexChosen.cinemas.get(index).showtimes[dateIndex];
 		
-		System.out.println("Current Show Times for " + movieChosen.title + " are " + currShowtimes);
-		System.out.println("How many showtimes for " + movieChosen.title + " would you like to remove?");
+		System.out.println("Current Show Times for " + movieChosen.title + ": " + currShowtimes);
+		System.out.print("Number of Showtimes for " + movieChosen.title + "  to be removed: ");
 		int choice = scan.nextInt();
 		scan.nextLine();
 		for (int i=0; i<choice; i++) {
-			System.out.print("Showtime: ");
+			System.out.print("Remove Showtime: ");
 			currShowtimes.remove(scan.nextLine());
-			System.out.println("Current Show Times for " + movieChosen.title + " are " + currShowtimes);
 		}
-		System.out.println("New Showtimes for " + movieChosen.title + " at " + cineplexChosen.name + " " + cineplexChosen.name + " are " + currShowtimes);
-		cineplexChosen.cinemas.get(index).showtimes = currShowtimes;
+		System.out.println("New Showtimes for " + movieChosen.title + " at " + cineplexChosen.name + " " + cineplexChosen.name + " : " + currShowtimes);
+		cineplexChosen.cinemas.get(index).showtimes[dateIndex] = currShowtimes;
 	}
 
 	public void configureSettings() {
-		Scanner scan = new Scanner(System.in);
-		System.out.println("Which would you like to adjust?");
-		System.out.println("1. Ticket Base Price");
-		System.out.println("2. Peak Period Multiplier");
-		System.out.println("3. 3D Multiplier");
-		System.out.println("4. Gold Class Multiplier");
-		while (!scan.hasNextInt()){
-			System.out.println("Error... Please input an Integer");
-			scan.nextLine();
-		}
-		int choice = scan.nextInt();
-		float mult;
-		// after price class is finished, set multipliers from price class
-		// need to add senior citizen and child discounts 
-		// set holidays (most probably from), therefore need holiday multiplier
-		// maybe remove peak period price????
-		// weekend multiplier
-		switch (choice) {
-			case 1:
-				System.out.println("What is the new base price?");
-				choice = scan.nextInt();
-				MovieTicket.setBase(choice);
-				break;
-			case 2:
-				System.out.println("What is the new peak period multiplier?");
-				mult = scan.nextFloat();
-				MovieTicket.setPeakMult(mult);
-				break;
-			case 3:
-				System.out.println("What is the new 3D multiplier?");
-				mult = scan.nextFloat();
-				MovieTicket.set3DMult(mult);
-				break;
-			case 4:
-				System.out.println("What is the new Gold Class Multiplier?");
-				mult = scan.nextFloat();
-				MovieTicket.setGoldMult(mult);
-				break;
-			default:
-				System.out.println("Not a valid option");
-				break;
-		}
+		Price.updatePrices();
 	}
 
 	public void listTop5(Set<Movie> uniqueMovies) {

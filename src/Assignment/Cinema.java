@@ -15,17 +15,21 @@ public class Cinema {
 	
 	int ROW=0;
 	int COL=0;
-	public String[][][] floorplan; // first dimension is the index of the time
-	public ArrayList<String> showtimes = new ArrayList<String>();
+	public String[][][][] floorplan; // first dimension is the index of the time
+	public ArrayList<String>[] showtimes = new ArrayList[6];
 	public String cinema_type; // normal/gold-class/3D etc
 	public String cinema_code; //3lettercode
+	public ArrayList<String> dates;
 	
-	public Cinema(String cinema_type, String cinema_code, ArrayList<String> showtimes) { // can customise seats based on cinema_type
+	public Cinema(String cinema_type, String cinema_code, ArrayList<String> showtimes, ArrayList<String> dates) { // can customise seats based on cinema_type
 
 		this.cinema_type = cinema_type;
 		this.cinema_code = cinema_code;
-		this.showtimes = showtimes;
 		
+		for (int i=0; i<dates.size(); i++) {
+			this.showtimes[i] = showtimes;
+		}
+		this.dates = dates;
 		// dynamically generate seats
 		if (this.cinema_type.equals("3D")) {
 			this.ROW = TDROW;
@@ -39,23 +43,25 @@ public class Cinema {
 		}
 		
 		// dynamically generate floor plan;
-		int num_showtimes = showtimes.size();
-		this.floorplan = new String [num_showtimes][this.ROW][this.COL];
+		int num_showtimes = this.showtimes[0].size();
+		this.floorplan = new String [dates.size()][num_showtimes][this.ROW][this.COL];
 		
-		// initialise floorplan with 'O'
-		for (int i=0;i<num_showtimes;i++) {
-			for (int j=0;j<this.ROW;j++) {
-				for (int k=0;k<this.COL;k++) {
-					this.floorplan[i][j][k]= "O";
+		for (int date=0; date<dates.size(); date++) {
+			for (int i=0;i<num_showtimes;i++) {
+				for (int j=0;j<this.ROW;j++) {
+					for (int k=0;k<this.COL;k++) {
+						this.floorplan[date][i][j][k]= "O";
+					}
 				}
 			}
 		}
 	}
 	
 	//Show available seats for a specific show time
-	public void viewSeats(String time) {
-		int index = this.showtimes.indexOf(time);
-		String[][] seats = this.floorplan[index];
+	public void viewSeats(String time, String date) {
+		int dateIndex = this.dates.indexOf(date);
+		int index = this.showtimes[dateIndex].indexOf(time);
+		String[][] seats = this.floorplan[dateIndex][index];
 		System.out.println("-------------LEGEND-------------");
 		System.out.println("[O] - Vacant Seats");
 		System.out.println("[X] - Occupied Seats");
@@ -80,90 +86,92 @@ public class Cinema {
 		}
 	}
 	
-	public MovieTicket bookSeat(String time, Movie movie, int numTicket) {
+	public MovieTicket bookSeat(Cineplex cineplex, User user, Cinema cinema, String time, Movie movie, int numTicket, String date) {
 		Scanner scan = new Scanner(System.in);
-		int index = this.showtimes.indexOf(time);
-		String[][] seats = this.floorplan[index];
+		int dateIndex = this.dates.indexOf(date);
+		int index = this.showtimes[dateIndex].indexOf(time);
+		String[][] seats = this.floorplan[dateIndex][index];
 		
-			System.out.println("Choose your seat");
-			this.viewSeats(time);
-			System.out.println();
-			while (1==1) {
-				if (numTicket == 1) {
-					String seat = scan.next();
-					int row_index = (int)seat.charAt(0)-65;
-					int column_index = (int)seat.charAt(1)-49;
+		System.out.println("=== Seats for " + movie.title + " on " + date + " " + time + " at " + cineplex.name + " " + cineplex.location + " ===");
+		this.viewSeats(time, date);
+		System.out.println();
+		MovieTicket ticket = new MovieTicket(movie, this, time, date, 1);
+		ticket.price.generatePrice(user.getAge(), movie.type, cinema.cinema_type, date);
+		ticket.perTicketPrice = ticket.getPrice();
+		System.out.printf("Each ticket costs $%.2f\n", ticket.perTicketPrice);
+		ticket.price.printBreakdown();
+		while (true) {
+			if (numTicket == 1) {
+				System.out.print("Choose your seat: ");
+				String seat = scan.next();
+				int row_index = (int) seat.charAt(0) - 65;
+				int column_index = (int) seat.charAt(1) - 49;
+
+				if (row_index > this.ROW - 1 || column_index > this.COL - 1) {
+					System.out.println("No such seats available.");
+				} else if (seats[row_index][column_index].equals("X")) {
+					System.out.println("Seat is taken. Please choose another one.");
+				} else {
+					seats[row_index][column_index] = "+";
+					this.viewSeats(time, date);
+
 					
-					if (row_index > this.ROW-1 || column_index > this.COL-1) {
-						System.out.println("No such seats available.");
-					}else if (seats[row_index][column_index].equals("X")) {
-						System.out.println("Seat is taken. Please choose another one.");
-					}else {
-						seats[row_index][column_index] = "+";
-						this.viewSeats(time);
-						
-						MovieTicket ticket = new MovieTicket(movie, this, time, 1);
-						ticket.setPrice();
-						ticket.perTicketPrice = ticket.getPrice();
-						System.out.println("Please confirm your seat (Y/N)");
-						char reply = scan.next().charAt(0);
-						if (reply == 'Y') {
-							seats[row_index][column_index] = "X";
-							System.out.printf("Payment is done! Here is your receipt. Total price is $%.2f", ticket.getPrice());
-							movie.movieSales += ticket.getPrice();
-							return ticket;
-						}else {
-							seats[row_index][column_index] = "O";
-							System.out.println("Please choose another seat");
-						}
-					}
-				}else {
-					ArrayList<String> seatList = new ArrayList<String>();
-					for (int i=1; i<= numTicket; i++) {
-						System.out.print("Choose seat " + i + ": ");
-						String seat = scan.next();
-						seatList.add(seat);
-						int row_index = (int)seat.charAt(0)-65;
-						int column_index = (int)seat.charAt(1)-49;
-						
-						if (row_index > this.ROW-1 || column_index > this.COL-1) {
-							System.out.println("No such seats available.");
-						}else if (seats[row_index][column_index].equals("X")) {
-							System.out.println("Seat is taken. Please choose another one.");
-							i -= 1;
-						}else {
-							seats[row_index][column_index] = "+";
-						}
-					}
-					this.viewSeats(time);
-					System.out.println();
-					float totalPrice = 0;
-					MovieTicket ticket = new MovieTicket(movie, this, time, 1);
-					ticket.setPrice();
-					ticket.perTicketPrice = ticket.getPrice();
-					System.out.println("Please confirm your seat (Y/N)");
+					System.out.print("\nPlease confirm your seat (Y/N) ");
 					char reply = scan.next().charAt(0);
 					if (reply == 'Y') {
-						for (int i=0; i<seatList.size(); i++) {
-							int row_index = (int)seatList.get(i).charAt(0)-65;
-							int column_index = (int)seatList.get(i).charAt(1)-49;
-							seats[row_index][column_index] = "X";
-							totalPrice += ticket.perTicketPrice;
-						}
-						ticket.price = totalPrice;
-						System.out.printf("Payment is done! Here is your receipt. Total price is $%.2f", ticket.getPrice());
+						seats[row_index][column_index] = "X";
+						System.out.printf("Payment is done! Here is your receipt. Total price is $%.2f\n",ticket.getPrice());
 						movie.movieSales += ticket.getPrice();
-						ticket.quantityTicket = seatList.size();
 						return ticket;
-					}else {
-						for (int i=0; i<seatList.size(); i++) {
-							int row_index = (int)seatList.get(i).charAt(0)-65;
-							int column_index = (int)seatList.get(i).charAt(1)-49;
-							seats[row_index][column_index] = "O";
-						}
-						System.out.println("Please choose other seats");
+					} else {
+						seats[row_index][column_index] = "O";
+						System.out.println("Please choose another seat");
 					}
 				}
+			} else {
+				ArrayList<String> seatList = new ArrayList<String>();
+				for (int i = 1; i <= numTicket; i++) {
+					System.out.print("Choose seat " + i + ": ");
+					String seat = scan.next();
+					seatList.add(seat);
+					int row_index = (int) seat.charAt(0) - 65;
+					int column_index = (int) seat.charAt(1) - 49;
+
+					if (row_index > this.ROW - 1 || column_index > this.COL - 1) {
+						System.out.println("No such seats available.");
+					} else if (seats[row_index][column_index].equals("X")) {
+						System.out.println("Seat is taken. Please choose another one.");
+						i -= 1;
+					} else {
+						seats[row_index][column_index] = "+";
+					}
+				}
+				this.viewSeats(time, date);
+				System.out.println();
+				float totalPrice = 0;
+				System.out.println("Please confirm your seat (Y/N)");
+				char reply = scan.next().charAt(0);
+				if (reply == 'Y') {
+					for (int i = 0; i < seatList.size(); i++) {
+						int row_index = (int) seatList.get(i).charAt(0) - 65;
+						int column_index = (int) seatList.get(i).charAt(1) - 49;
+						seats[row_index][column_index] = "X";
+						totalPrice += ticket.perTicketPrice;
+					}
+					ticket.setPrice(totalPrice);
+					System.out.printf("Payment is done! Here is your receipt. Total price is $%.2f", ticket.getPrice());
+					movie.movieSales += ticket.getPrice();
+					ticket.quantityTicket = seatList.size();
+					return ticket;
+				} else {
+					for (int i = 0; i < seatList.size(); i++) {
+						int row_index = (int) seatList.get(i).charAt(0) - 65;
+						int column_index = (int) seatList.get(i).charAt(1) - 49;
+						seats[row_index][column_index] = "O";
+					}
+					System.out.println("Please choose other seats");
+				}
 			}
+		}
 	}
 }

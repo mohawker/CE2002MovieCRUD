@@ -12,12 +12,12 @@ public class ShowtimeHelper extends Helper{
 	
 	public ArrayList<String> createShowtimes(){
 		Scanner scan = new Scanner(System.in);
-		System.out.println("What is the number of showtimes for the movie");
+		System.out.print("Number of Showtimes:");
 		int numShows = scan.nextInt();
 		scan.nextLine(); // remove the space left
 		ArrayList <String> showtimes = new ArrayList <String>();
 		for (int i=0; i<numShows; i++) {
-			System.out.println("What is showtime " + (i+1) + "?");
+			System.out.print("Showtime " + (i+1) + ": ");
 			showtimes.add(scan.nextLine());
 		}
 		return showtimes;

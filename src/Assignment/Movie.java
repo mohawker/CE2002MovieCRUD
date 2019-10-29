@@ -33,14 +33,17 @@ public class Movie {
 	}
 	
 	public void printReviews() {
-		Iterator<Review> i = this.movieReviews.iterator();
-		System.out.println("The reviews for " + this.title + " are:");
-		System.out.println();
-		while (i.hasNext()) {
-			Review review_printed = i.next();
-			System.out.println("Rating of " + review_printed.rating + " out of 5");
-			System.out.println("Comment: " + review_printed.comment);
+		if (this.movieReviews.size() == 0) {
+			System.out.println("There are no reviews for " + this.title + " yet\n");
+		}else {
+			System.out.println("The reviews for " + this.title + " are:");
 			System.out.println();
+			for (int i=0; i<this.movieReviews.size(); i++) {
+				Review review_printed = this.movieReviews.get(i);
+				System.out.println("Rating of " + review_printed.rating + " out of 5");
+				System.out.println("Comment: " + review_printed.comment);
+				System.out.println();
+			}
 		}
 	}
 	
@@ -62,7 +65,7 @@ public class Movie {
 		}
 		System.out.println();
 		
-		System.out.println("Genres: " + this.type);
+		System.out.println("Type: " + this.type);
 		System.out.println("Synopsis: " + this.synopsis);
 		
 		printReviews();

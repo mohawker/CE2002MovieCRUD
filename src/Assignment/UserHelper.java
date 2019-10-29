@@ -21,11 +21,11 @@ public class UserHelper extends Helper{
 		this.cineplexHelper = new CineplexHelper(uniqueMovies, user, cineplexes);
 	}
 	
-	public void listUniqueMovies(Set<Movie> uniqueMovies) {
+	public void listUniqueMovies(Set<Movie> uniqueMovies, ArrayList<Cineplex> cineplexes) {
 		Scanner scan = new Scanner(System.in);
-		System.out.println("Movie Listings:");
+		System.out.println("=== Movie Listings ===");
 		movieHelper.printMovies(uniqueMovies);
-		System.out.println("Would you like you view the showtimes? (Y/N)");
+		System.out.print("Would you like you view the showtimes? (Y/N) ");
 		if (scan.next().equals("Y")) {
 			Movie movie_chosen = movieHelper.selectMovie(uniqueMovies);
 			movieHelper.printMovieShowings(movie_chosen, cineplexes); // for unique movies
@@ -35,7 +35,7 @@ public class UserHelper extends Helper{
 	public void viewMovieDetails(User user, Set<Movie> uniqueMovies) {
 		// print out titles of unique movie
 		Scanner scan = new Scanner(System.in);
-		System.out.println("These are the movies available:");
+		System.out.println("=== Movies Available ===");
 		movieHelper.printMovies(uniqueMovies);
 		Movie movie_chosen = movieHelper.selectMovie(uniqueMovies);
 		user.viewMovieDetail(movie_chosen);
@@ -46,8 +46,11 @@ public class UserHelper extends Helper{
 		cineplexHelper.printCineplexes(cineplexes);
 		Cineplex cineplex_chosen = cineplexHelper.selectCineplex(cineplexes);
 		Movie movie_chosen = movieHelper.selectMovie(user, cineplex_chosen);
+		String date = movieHelper.printAndSelectMovieDates(cineplex_chosen, movie_chosen);
+		
 		if (movie_chosen.status.equals("Showing")){
-			user.viewSeatAvailability(cineplex_chosen, movie_chosen);
+			user.viewSeatAvailability(cineplex_chosen, movie_chosen, date);
+			System.out.println();
 		}else {
 			System.out.println("Movie is not showing yet");
 		}
@@ -58,12 +61,12 @@ public class UserHelper extends Helper{
 		Scanner scan = new Scanner(System.in);
 		cineplexHelper.printCineplexes(cineplexes);
 		Cineplex cineplex_chosen = cineplexHelper.selectCineplex(cineplexes);
-		System.out.println("Select the movie:");
 		Movie movie_chosen = movieHelper.selectMovie(user, cineplex_chosen);
 		
-		System.out.println("Would you like to book single or multiple seats?");
-		System.out.println("1. Single Seat");
-		System.out.println("2. Multiple Seats");
+		System.out.println("\nWould you like to book single or multiple seats?");
+		System.out.println("[1] Single Seat");
+		System.out.println("[2] Multiple Seats");
+		System.out.print("Select option: ");
 		int choice=-1;
 		while (!scan.hasNextInt()){
 			System.out.println("Error... Please input an Integer");
@@ -72,12 +75,12 @@ public class UserHelper extends Helper{
 		while (choice != 1 && choice !=2) {
 			choice = scan.nextInt();
 			if (choice == 1) {
-				MovieTicket ticket = user.bookPurchaseTicket(cineplex_chosen, movie_chosen, 1);
+				MovieTicket ticket = user.bookPurchaseTicket(user, cineplex_chosen, movie_chosen, 1);
 				user.addTicket(ticket);
 			}else if (choice==2){
 				System.out.print("Number of seats: ");
 				int numTicket = scan.nextInt();
-				MovieTicket ticket = user.bookPurchaseTicket(cineplex_chosen, movie_chosen, numTicket);
+				MovieTicket ticket = user.bookPurchaseTicket(user, cineplex_chosen, movie_chosen, numTicket);
 				user.addTicket(ticket);
 			}else {
 				System.out.println("Incorrect selection please select option 1 or 2");
@@ -103,7 +106,7 @@ public class UserHelper extends Helper{
 	}
 	
 	public void addRating(Set<Movie> uniqueMovies, User user) {
-		System.out.println("Add review for:");
+		System.out.println("=== Review Movies ===");
 		movieHelper.printMovies(uniqueMovies);
 		Movie movie_chosen = movieHelper.selectMovie(uniqueMovies);
 		Review review = new Review(user, movie_chosen);

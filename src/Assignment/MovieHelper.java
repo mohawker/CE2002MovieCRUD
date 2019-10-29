@@ -17,7 +17,7 @@ public class MovieHelper extends Helper{
 		int count = 1;
 		for (Movie m : uniqueMovies) {
 			if (!m.status.equals("End of Showing")) {
-				System.out.println(count + ". " + m.title + ", Status: " + m.status);
+				System.out.println("[" + count + "] " + m.title + ", Status: " + m.status);
 				count += 1;
 			}
 		}
@@ -27,7 +27,7 @@ public class MovieHelper extends Helper{
 	public void printMovies(Cineplex cineplex) {
 		for (int i=0 ; i<cineplex.movies.size(); i++) {
 			if (!cineplex.movies.get(i).status.equals("End of Showing")) {
-				System.out.println((i+1) + ". " + cineplex.movies.get(i).title + " (" + cineplex.cinemas.get(i).cinema_type + ")");
+				System.out.println("[" + (i+1) + "] " + cineplex.movies.get(i).title + " (" + cineplex.cinemas.get(i).cinema_type + ")");
 			}
 		}
 	}
@@ -36,18 +36,21 @@ public class MovieHelper extends Helper{
 	public void printMovieShowings(Movie movie_chosen, ArrayList<Cineplex> cineplexes) {
 		if (movie_chosen.status.equals("Showing")){
 			for (int i=0; i<cineplexes.size(); i++) {
-				System.out.println("Showing for " + movie_chosen.title + " at " + cineplexes.get(i).name + " " + cineplexes.get(i).location);
-				int index = cineplexes.get(i).movies.indexOf(movie_chosen);
-				if (index != -1) {
-					ArrayList<String> showtimes = cineplexes.get(i).cinemas.get(index).showtimes;
-					Collections.sort(showtimes);
-					for (int j = 0; j<showtimes.size(); j++) {
-						System.out.println("Showtime: " + showtimes.get(j));
+				System.out.println("=== Showing for " + movie_chosen.title + " at " + cineplexes.get(i).name + " " + cineplexes.get(i).location + " ===\n");
+				int movieIndex = cineplexes.get(i).movies.indexOf(movie_chosen);
+				if (movieIndex != -1) {
+					for (int date=0; date < (cineplexes.get(i).cinemas.get(movieIndex).dates.size()); date++) {
+						int index = cineplexes.get(i).movies.indexOf(movie_chosen);
+						if (index != -1) {
+							ArrayList<String> showtimes = cineplexes.get(i).cinemas.get(index).showtimes[date];
+							Collections.sort(showtimes);
+							System.out.println("Showtimes on " + cineplexes.get(i).cinemas.get(movieIndex).dates.get(date) + " are "+ showtimes);
+						}				
 					}
+					System.out.println();
 				}else {
-					System.out.println("NO SHOWINGS");
+					System.out.println("NO SHOWINGS\n");
 				}
-				System.out.println();
 			}
 		}else {
 			System.out.println(movie_chosen.title + " is not showing yet.");
@@ -71,6 +74,7 @@ public class MovieHelper extends Helper{
 	// select a movie from a particular cineplex
 	public Movie selectMovie(User user, Cineplex cineplex) {
 		Scanner scan = new Scanner(System.in);
+		System.out.println("=== Movies ===");
 		printMovies(cineplex);
 		System.out.print("Select your movie: ");
 		int choice = -1;
@@ -116,22 +120,22 @@ public class MovieHelper extends Helper{
 	// creating a new movie
 	public Movie createMovie(Set<Movie> uniqueMovies) {
 		Scanner scan = new Scanner(System.in);
-		System.out.println("What is the name of movie?");
+		System.out.print("Name of Movie: ");
 		String title = scan.nextLine();
-		System.out.println("What is the status of movie? (Coming Soon/Preview/Showing)");
+		System.out.print("Status of Movie (Coming Soon/Preview/Showing): ");
 		String status = scan.nextLine();
-		System.out.println("What is the synopsis of the movie");
+		System.out.print("Synopsis: ");
 		String synopsis = scan.nextLine();
-		System.out.println("What is the director of the movie");
+		System.out.print("Director: ");
 		String director = scan.nextLine();
-		System.out.println("What is the type of the movie");
+		System.out.print("Type (3D/Blockbuster): ");
 		String type = scan.nextLine();
-		System.out.println("What is the number of cast members of the movie");
+		System.out.print("Number of Cast Members: ");
 		int numCast = scan.nextInt();
 		scan.nextLine();; // remove the space left
 		ArrayList <String> cast = new ArrayList <String>();
 		for (int i=0; i<numCast; i++) {
-			System.out.println("Who is cast member " + (i+1) + "?");
+			System.out.print("Cast Member " + (i+1) + ": ");
 			cast.add(scan.nextLine());
 		}
 		Movie movie = new Movie(title, status, synopsis, director, type, cast);
@@ -180,16 +184,33 @@ public class MovieHelper extends Helper{
 	}
 
 	public void replaceMovie(Cineplex cineplex_chosen, Cinema cinema_chosen, Movie movie_chosen, ArrayList<String> showtimes) {
-		System.out.println("Previous movies");
+		System.out.println("=== Previous Movies at " + cineplex_chosen.name + " " + cineplex_chosen.location + " ===");
 		printMovies(cineplex_chosen);
 		int index = cineplex_chosen.cinemas.indexOf(cinema_chosen);
 		cineplex_chosen.movies.get(index).status = "End of Showing";
-		System.out.println("Movie being replaced is " + cineplex_chosen.movies.get(index).title);
+		System.out.println("\nMovie being replaced: " + cineplex_chosen.movies.get(index).title);
 		cineplex_chosen.movies.set(index, movie_chosen);
-		System.out.println("New movie is " + cineplex_chosen.movies.get(index).title);
-		cineplex_chosen.cinemas.get(index).showtimes = showtimes;
+		System.out.println("New movie: " + cineplex_chosen.movies.get(index).title);
+		ArrayList <String>[] listOfTimes = new ArrayList[6];
+		for (int i=0; i<cineplex_chosen.cinemas.get(index).dates.size(); i++) {
+			listOfTimes[i] = showtimes;
+		}
+		cineplex_chosen.cinemas.get(index).showtimes = listOfTimes;
 		System.out.println("Movie " + movie_chosen.title + " added to " + cineplex_chosen.name + " " + cineplex_chosen.location + " in Cinema Code " + cinema_chosen.cinema_code);
-		System.out.println("New movies");
+		System.out.println("=== New Movies ===");
 		printMovies(cineplex_chosen);
+	}
+	
+	public String printAndSelectMovieDates(Cineplex cineplex, Movie movie_chosen) {
+		Scanner scan = new Scanner(System.in);
+		Cinema cinema = cineplex.cinemas.get(cineplex.movies.indexOf(movie_chosen));
+		System.out.println("===Dates available for " + movie_chosen.title + " at " + cineplex.name + " " + cineplex.location + "===");
+		for (int i=0; i<cinema.dates.size(); i++) {
+			System.out.println("[" + (i+1) + "] " + cinema.dates.get(i));
+		}
+		System.out.print("Select date: " );
+		int choice = scan.nextInt();
+		System.out.println();
+		return cinema.dates.get(choice);
 	}
 }

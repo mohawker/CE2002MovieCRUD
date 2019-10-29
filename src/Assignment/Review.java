@@ -11,10 +11,10 @@ public class Review {
 	
 	public Review(User user, Movie movie) {
 		Scanner scan = new Scanner (System.in);
-		System.out.println("What is your comment for " + movie.title + "?");
+		System.out.print("Comment for " + movie.title + ": ");
 		String comment = scan.nextLine();
 		while (1==1) {
-			System.out.println("What is your rating out of 5?");
+			System.out.print("Rating for " + movie.title + " out of 5: ");
 			float rating = scan.nextFloat();
 			if (rating<0 || rating >5) {
 				System.out.println("Only values from 0-5 are valid");

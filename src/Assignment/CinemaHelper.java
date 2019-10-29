@@ -12,9 +12,9 @@ public class CinemaHelper extends Helper{
 	
 	public Cinema printAndSelectCinema(Cineplex cineplex) {
 		Scanner scan = new Scanner(System.in);
-		System.out.println("Select the cinema:");
+		System.out.println("===Cinemas===");
 		for (int i = 0; i<cineplex.cinemas.size(); i++) {
-			System.out.println((i+1) + ". Cinema Code " + cineplex.cinemas.get(i).cinema_code + "(" + cineplex.cinemas.get(i).cinema_type + ")");
+			System.out.println("[" + (i+1) + "] " + " Cinema Code " + cineplex.cinemas.get(i).cinema_code + "(" + cineplex.cinemas.get(i).cinema_type + ")");
 		}
 		while (!scan.hasNextInt()) {
 			System.out.println("Error... Please input an Integer");
