@@ -75,7 +75,7 @@ public class User {
 		cinema_showing.viewSeats(showtime_chosen);
 	}
 	
-	public MovieTicket bookPurchaseTicket(Cineplex cineplex, Movie movie) {
+	public MovieTicket bookPurchaseTicket(Cineplex cineplex, Movie movie, int numTicket) {
 		int index = cineplex.movies.indexOf(movie);
 		Cinema cinema_showing = cineplex.cinemas.get(index);
 		System.out.println("These are the available showtimes. Please select one");
@@ -85,6 +85,7 @@ public class User {
 		Scanner scan = new Scanner(System.in);
 		int choice = scan.nextInt();
 		String showtime = cinema_showing.showtimes.get(choice-1);
+<<<<<<< Updated upstream
 		return cinema_showing.bookSeat(showtime, movie);
 	}
 	
@@ -99,6 +100,9 @@ public class User {
 		int choice = scan.nextInt();
 		String showtime = cinema_showing.showtimes.get(choice-1);
 		return cinema_showing.bookMultipleSeats(showtime, movie);
+=======
+		return cinema_showing.bookSeat(showtime, movie, numTicket);
+>>>>>>> Stashed changes
 	}
 	
 	public void addTicket(MovieTicket ticket) {
