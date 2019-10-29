@@ -1,7 +1,6 @@
 package Assignment;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Scanner;
 import java.util.Set;   
 
 public class MOBLIMA {
@@ -25,13 +24,12 @@ public class MOBLIMA {
 		System.out.println("Would you like to continue as a User or an Admin?");
 		System.out.println("1. User");
 		System.out.println("2. Admin");
-		Scanner scan = new Scanner(System.in);
-		int choice = scan.nextInt();
+		int choice = InputHandler.integerInput(1, 2);
 		if (choice == 1) {
 			System.out.println("What is your name?");
-			String userName = scan.next();
+			String userName = InputHandler.stringInput();
 			System.out.println("How old are you?");
-			int userAge = scan.nextInt();
+			int userAge = InputHandler.integerInput(1, 150);
 			User user = new User(userName, "vincentyongweijie@gmail.com", "83189252", userAge);
 			UserHelper userHelper = new UserHelper(uniqueMovies, user, cineplexes);
 			ViewHelper viewHelper = new ViewHelper(uniqueMovies, user, cineplexes);
@@ -62,11 +60,7 @@ public class MOBLIMA {
 				System.out.print("Please select (1-9) : ");
 				
 				// error checker class - checkInt , checkStr etc
-				while (!scan.hasNextInt()){
-					System.out.println("Error... Please input an Integer");
-					scan.next();
-				}
-				choice = scan.nextInt();
+				choice = InputHandler.integerInput(1, 9);
 				switch (choice){
 					case 1:{userHelper.listUniqueMovies(uniqueMovies);break;}
 					case 2:{userHelper.viewMovieDetails(user, uniqueMovies);break;}
@@ -100,13 +94,8 @@ public class MOBLIMA {
 				System.out.println("9. Logout to see User view");
 				System.out.println("10. Log Off & Shut Down");
 				System.out.println("------------------------------------------------------");
-				System.out.print("Please select (1-9) : ");
-				while (!scan.hasNextInt()){
-					System.out.println("Error... Please input an Integer");
-					scan.nextLine();
-				}
-				choice = scan.nextInt();
-				scan.nextLine();
+				System.out.print("Please select (1-10) : ");
+				choice = InputHandler.integerInput(1, 10);
 				switch (choice){
 					case 1:{adminHelper.createMovieListing(admin, cineplexes, cineplex_1, cineplex_2, cineplex_3, uniqueMovies);break;}
 					case 2:{adminHelper.updateMovieListing(cineplexes, uniqueMovies);break;}
