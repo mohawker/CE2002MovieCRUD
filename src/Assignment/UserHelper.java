@@ -21,7 +21,7 @@ public class UserHelper extends Helper{
 		this.cineplexHelper = new CineplexHelper(uniqueMovies, user, cineplexes);
 	}
 	
-	public void user_1(Set<Movie> uniqueMovies) {
+	public void listUniqueMovies(Set<Movie> uniqueMovies) {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Movie Listings:");
 		movieHelper.printMovies(uniqueMovies);
@@ -32,7 +32,7 @@ public class UserHelper extends Helper{
 		}
 	}
 
-	public void user_2(User user, Set<Movie> uniqueMovies) {
+	public void viewMovieDetails(User user, Set<Movie> uniqueMovies) {
 		// print out titles of unique movie
 		Scanner scan = new Scanner(System.in);
 		System.out.println("These are the movies available:");
@@ -41,7 +41,7 @@ public class UserHelper extends Helper{
 		user.viewMovieDetail(movie_chosen);
 	}
 
-	public void user_3(User user, ArrayList<Cineplex> cineplexes) {
+	public void checkSeatAvailability(User user, ArrayList<Cineplex> cineplexes) {
 		Scanner scan = new Scanner(System.in);
 		cineplexHelper.printCineplexes(cineplexes);
 		Cineplex cineplex_chosen = cineplexHelper.selectCineplex(cineplexes);
@@ -54,7 +54,7 @@ public class UserHelper extends Helper{
 		
 	}
 
-	public void user_4(User user, ArrayList<Cineplex> cineplexes){
+	public void bookTicket(User user, ArrayList<Cineplex> cineplexes){
 		Scanner scan = new Scanner(System.in);
 		cineplexHelper.printCineplexes(cineplexes);
 		Cineplex cineplex_chosen = cineplexHelper.selectCineplex(cineplexes);
@@ -83,11 +83,11 @@ public class UserHelper extends Helper{
 		}
 	}
 
-	public void user_5(User user) {
+	public void viewBookingHistory(User user) {
 		user.viewTicketHistory();
 	}
 
-	public void user_6(Set<Movie> uniqueMovies) {
+	public void listTop5(Set<Movie> uniqueMovies) {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Would you like to get the top 5 by:");
 		System.out.println("1. Sales");
@@ -100,7 +100,7 @@ public class UserHelper extends Helper{
 		}
 	}
 	
-	public void user_7(Set<Movie> uniqueMovies, User user) {
+	public void addRating(Set<Movie> uniqueMovies, User user) {
 		System.out.println("Add review for:");
 		movieHelper.printMovies(uniqueMovies);
 		Movie movie_chosen = movieHelper.selectMovie(uniqueMovies);

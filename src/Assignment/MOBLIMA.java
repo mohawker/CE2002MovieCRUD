@@ -21,8 +21,6 @@ public class MOBLIMA {
 		Set<Movie> uniqueMovies = new HashSet<>();
 		uniqueMovies = Initialiser.generateMovies(cineplexes);
 		
-		
-		
 		System.out.println("Welcome to MOBLIMA App");
 		System.out.println("Would you like to continue as a User or an Admin?");
 		System.out.println("1. User");
@@ -30,7 +28,6 @@ public class MOBLIMA {
 		Scanner scan = new Scanner(System.in);
 		int choice = scan.nextInt();
 		if (choice == 1) {
-		// User Login Customization (Name & Age Input)
 			System.out.println("What is your name?");
 			String userName = scan.next();
 			System.out.println("How old are you?");
@@ -60,9 +57,9 @@ public class MOBLIMA {
 				System.out.println("6. List Top 5 Movies by Ticket Sales or Overall Rating");
 				System.out.println("7. Add Rating");
 				System.out.println("8. Login as Admin");
-				System.out.println("-1. Log Off & Shut Down");
+				System.out.println("9. Log Off & Shut Down");
 				System.out.println("------------------------------------------------------");
-				System.out.print("Please select (1-8) : ");
+				System.out.print("Please select (1-9) : ");
 				
 				// error checker class - checkInt , checkStr etc
 				while (!scan.hasNextInt()){
@@ -71,39 +68,18 @@ public class MOBLIMA {
 				}
 				choice = scan.nextInt();
 				switch (choice){
-					case 1:
-						userHelper.user_1(uniqueMovies);
-						break;
-					case 2:
-						userHelper.user_2(user, uniqueMovies);
-						break;
-					case 3:
-						userHelper.user_3(user, cineplexes);
-						break;
-					case 4:
-						userHelper.user_4(user, cineplexes);
-						break;
-					case 5:
-						userHelper.user_5(user);
-						break;
-					case 6:
-						userHelper.user_6(uniqueMovies);
-						break;
-					case 7:
-						userHelper.user_7(uniqueMovies, user);
-						break;
-					case 8:
-						viewHelper.adminView(cineplexes, uniqueMovies);
-						break;
-					case -1:
-						System.out.println("Thank you for using MOBLIMA!");
-						System.out.println("System Logging Off...");
-						return;	
-					default:
-						System.out.println("Please enter a valid choice");
+					case 1:{userHelper.listUniqueMovies(uniqueMovies);break;}
+					case 2:{userHelper.viewMovieDetails(user, uniqueMovies);break;}
+					case 3:{userHelper.checkSeatAvailability(user, cineplexes);break;}
+					case 4:{userHelper.bookTicket(user, cineplexes);break;}
+					case 5:{userHelper.viewBookingHistory(user);break;}
+					case 6:{userHelper.listTop5(uniqueMovies);break;}
+					case 7:{userHelper.addRating(uniqueMovies, user);break;}
+					case 8:{viewHelper.adminView(cineplexes, uniqueMovies);break;}
+					case 9:{System.out.println("Thank you for using MOBLIMA!\nSystem Logging Off...");return;}	
+					default:{System.out.println("Please enter a valid choice");}
 				}
-				System.out.println();
-				System.out.println("What would you like to do next?");
+				System.out.println("\nWhat would you like to do next?");
 			}
 		}else if (choice == 2) {
 			Admin admin = new Admin("Admin", "tom@gmail.com", "98765432", 22, "Password123");
@@ -112,6 +88,7 @@ public class MOBLIMA {
 			admin.login();
 			System.out.println("Welcome, " + admin.getUsername());
 			while (1==1) {
+				System.out.println("------------------------------------------------------");
 				System.out.println("1. Create Movie Listing");
 				System.out.println("2. Update Movie Listing (Movie Showing Status)");
 				System.out.println("3. Remove Movie Listing");			
@@ -121,6 +98,9 @@ public class MOBLIMA {
 				System.out.println("7. Configure System Settings");
 				System.out.println("8. List Top 5 Movies by Ticket Sales or Overall Rating");
 				System.out.println("9. Logout to see User view");
+				System.out.println("10. Log Off & Shut Down");
+				System.out.println("------------------------------------------------------");
+				System.out.print("Please select (1-9) : ");
 				while (!scan.hasNextInt()){
 					System.out.println("Error... Please input an Integer");
 					scan.nextLine();
@@ -128,36 +108,20 @@ public class MOBLIMA {
 				choice = scan.nextInt();
 				scan.nextLine();
 				switch (choice){
-					case 1:
-						adminHelper.admin_1(admin, cineplexes, cineplex_1, cineplex_2, cineplex_3, uniqueMovies);
-						break;
-					case 2:
-						adminHelper.admin_2(cineplexes, uniqueMovies);
-						break;
-					case 3:
-						adminHelper.admin_3(cineplexes, uniqueMovies);
-						break;
-					case 4:
-						adminHelper.admin_4(admin, cineplexes, cineplex_1, cineplex_2, cineplex_3, uniqueMovies);
-						break;
-					case 5:
-						adminHelper.admin_5(cineplexes, uniqueMovies, admin);
-						break;
-					case 6:
-						adminHelper.admin_6(cineplexes, uniqueMovies, admin);
-						break;
-					case 7:
-						adminHelper.admin_7();
-						break;
-					case 8:
-						adminHelper.admin_8(uniqueMovies);
-						break;
-					case 9:
-						viewHelper.userView(cineplexes, uniqueMovies);
-						break;
+					case 1:{adminHelper.createMovieListing(admin, cineplexes, cineplex_1, cineplex_2, cineplex_3, uniqueMovies);break;}
+					case 2:{adminHelper.updateMovieListing(cineplexes, uniqueMovies);break;}
+					case 3:{adminHelper.removeMovieListing(cineplexes, uniqueMovies);break;}
+					case 4:{adminHelper.createCinemaShowtimes(admin, cineplexes, cineplex_1, cineplex_2, cineplex_3, uniqueMovies);break;}
+					case 5:{adminHelper.updateCinemaShowtimes(cineplexes, uniqueMovies, admin);break;}
+					case 6:{adminHelper.removeCinemaShowtimes(cineplexes, uniqueMovies, admin);break;}
+					case 7:{adminHelper.configureSettings();break;}
+					case 8:{adminHelper.listTop5(uniqueMovies);break;}
+					case 9:{viewHelper.userView(cineplexes, uniqueMovies);break;}
+					case 10:{System.out.println("Thank you for using MOBLIMA!\nSystem Logging Off...");return;}	
+					default:{System.out.println("Please enter a valid choice");}
 				}
 				System.out.println();
-				System.out.println("What would you like to do next?");
+				System.out.println("\nWhat would you like to do next?");
 			}
 		}
 	}
