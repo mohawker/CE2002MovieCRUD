@@ -72,10 +72,12 @@ public class UserHelper extends Helper{
 		while (choice != 1 && choice !=2) {
 			choice = scan.nextInt();
 			if (choice == 1) {
-				MovieTicket ticket = user.bookPurchaseTicket(cineplex_chosen, movie_chosen);
+				MovieTicket ticket = user.bookPurchaseTicket(cineplex_chosen, movie_chosen, 1);
 				user.addTicket(ticket);
 			}else if (choice==2){
-				MovieTicket ticket = user.bookPurchaseMultipleTickets(cineplex_chosen, movie_chosen);
+				System.out.print("Number of seats: ");
+				int numTicket = scan.nextInt();
+				MovieTicket ticket = user.bookPurchaseTicket(cineplex_chosen, movie_chosen, numTicket);
 				user.addTicket(ticket);
 			}else {
 				System.out.println("Incorrect selection please select option 1 or 2");

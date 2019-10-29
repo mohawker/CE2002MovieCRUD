@@ -82,7 +82,7 @@ public class User {
 		cinema_showing.viewSeats(showtime_chosen);
 	}
 	
-	public MovieTicket bookPurchaseTicket(Cineplex cineplex, Movie movie) {
+	public MovieTicket bookPurchaseTicket(Cineplex cineplex, Movie movie, int numTicket) {
 		int index = cineplex.movies.indexOf(movie);
 		Cinema cinema_showing = cineplex.cinemas.get(index);
 		System.out.println("These are the available showtimes. Please select one");
@@ -96,34 +96,7 @@ public class User {
 		}
 		int choice = scan.nextInt();
 		String showtime = cinema_showing.showtimes.get(choice-1);
-		return cinema_showing.bookSeat(showtime, movie);
-	}
-	
-	public MovieTicket bookPurchaseMultipleTickets(Cineplex cineplex, Movie movie){
-		int index = cineplex.movies.indexOf(movie);
-		Cinema cinema_showing = cineplex.cinemas.get(index);
-		System.out.println("These are the available showtimes. Please select one");
-		for (int i=0; i<cinema_showing.showtimes.size(); i++) {
-			System.out.println((i+1) + ". " + cinema_showing.showtimes.get(i));
-		}
-		Scanner scan = new Scanner(System.in);
-		int choice = -1;
-		while (!scan.hasNextInt()) {
-			System.out.println("Error... Please input an Integer");
-			scan.nextLine();	
-		}
-		while (choice <1 || choice > cinema_showing.showtimes.size()) {
-			choice = scan.nextInt();
-			if (choice >= 1 && choice <= cinema_showing.showtimes.size()) {
-				String showtime = cinema_showing.showtimes.get(choice-1);
-				return cinema_showing.bookMultipleSeats(showtime, movie);
-			}
-			else {
-				System.out.println("Please enter a valid selection from 1-"+cinema_showing.showtimes.size());
-			}
-		}	
-		String showtime = cinema_showing.showtimes.get(choice-1);
-		return cinema_showing.bookMultipleSeats(showtime, movie);
+		return cinema_showing.bookSeat(showtime, movie, numTicket);
 	}
 	
 	public void addTicket(MovieTicket ticket) {
