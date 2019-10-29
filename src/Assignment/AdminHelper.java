@@ -6,28 +6,39 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class AdminHelper extends Helper{
-
+	
+	MovieHelper movieHelper;
+	CinemaHelper cinemaHelper;
+	ShowtimeHelper showtimeHelper;
+	ViewHelper viewHelper;
+	CineplexHelper cineplexHelper;
+	
 	public AdminHelper(Set<Movie> uniqueMovies, User user, ArrayList<Cineplex> cineplexes) {
 		super(uniqueMovies, user, cineplexes);
+		this.movieHelper = new MovieHelper(uniqueMovies, user, cineplexes);
+		this.cinemaHelper = new CinemaHelper(uniqueMovies, user, cineplexes);
+		this.showtimeHelper = new ShowtimeHelper(uniqueMovies, user, cineplexes);
+		this.viewHelper = new ViewHelper(uniqueMovies, user, cineplexes);
+		this.cineplexHelper = new CineplexHelper(uniqueMovies, user, cineplexes);
 	}
 
 	public Movie admin_1(Admin admin, ArrayList<Cineplex> cineplexes, Cineplex cineplex_1, Cineplex cineplex_2, Cineplex cineplex_3, Set<Movie> uniqueMovies) {
-		Movie movie = createMovie(uniqueMovies);
+		Movie movie = movieHelper.createMovie(uniqueMovies);
 		if (movie.status.equals("Showing")) {
 			System.out.println("Where would you like to show this movie in?");
-			printCineplexes(cineplexes);
-			Cineplex cineplex_chosen = selectCineplex(cineplexes);
-			ArrayList <String> showtimes = createShowtimes();
-			Cinema cinema_chosen = selectCinema(cineplex_chosen);
-			replaceMovie(cineplex_chosen, cinema_chosen, movie, showtimes);
+			cineplexHelper.printCineplexes(cineplexes);
+			Cineplex cineplex_chosen = cineplexHelper.selectCineplex(cineplexes);
+			ArrayList <String> showtimes = showtimeHelper.createShowtimes();
+			Cinema cinema_chosen = cinemaHelper.printAndSelectCinema(cineplex_chosen);
+			movieHelper.replaceMovie(cineplex_chosen, cinema_chosen, movie, showtimes);
 		}
-		printMovies(uniqueMovies);
+		movieHelper.printMovies(uniqueMovies);
 		return movie;
 	}
 	
 	public void admin_2(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
-		printMovies(uniqueMovies);
-		Movie movie_chosen = selectMovie(uniqueMovies);
+		movieHelper.printMovies(uniqueMovies);
+		Movie movie_chosen = movieHelper.selectMovie(uniqueMovies);
 		System.out.println("What is the new showing status of " + movie_chosen.title + "? (Showing/End of Showing)");
 		Scanner scan = new Scanner(System.in);
 		String newStatus = scan.nextLine();
@@ -36,11 +47,11 @@ public class AdminHelper extends Helper{
 			System.out.println("Shall not update movie status");
 		}else if (newStatus.equals("Showing")){
 			movie_chosen.status = newStatus;
-			printCineplexes(cineplexes);
-			Cineplex cineplex_chosen = selectCineplex(cineplexes);
-			ArrayList <String> showtimes = createShowtimes();
-			Cinema cinema_chosen = selectCinema(cineplex_chosen);
-			replaceMovie(cineplex_chosen, cinema_chosen, movie_chosen, showtimes);			
+			cineplexHelper.printCineplexes(cineplexes);
+			Cineplex cineplex_chosen = cineplexHelper.selectCineplex(cineplexes);
+			ArrayList <String> showtimes = showtimeHelper.createShowtimes();
+			Cinema cinema_chosen = cinemaHelper.printAndSelectCinema(cineplex_chosen);
+			movieHelper.replaceMovie(cineplex_chosen, cinema_chosen, movie_chosen, showtimes);			
 		}else if (newStatus.equals("End of Showing")) {
 			movie_chosen.status = newStatus;
 			uniqueMovies.remove(movie_chosen);
@@ -48,30 +59,30 @@ public class AdminHelper extends Helper{
 	}
 
 	public void admin_3(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
-		printMovies(uniqueMovies);
-		Movie movie_chosen = selectMovie(uniqueMovies);
+		movieHelper.printMovies(uniqueMovies);
+		Movie movie_chosen = movieHelper.selectMovie(uniqueMovies);
 		System.out.println(movie_chosen.title + " will be set to End of Showing");
 		movie_chosen.status = "End of Showing";
 		uniqueMovies.remove(movie_chosen);
-		printMovies(uniqueMovies);
+		movieHelper.printMovies(uniqueMovies);
 	}
 	
 	public void admin_4(Admin admin, ArrayList<Cineplex> cineplexes, Cineplex cineplex_1, Cineplex cineplex_2, Cineplex cineplex_3, Set<Movie> uniqueMovies) {
-		Movie movie_chosen = printAndSelectFromUnshownMovies(uniqueMovies);
+		Movie movie_chosen = movieHelper.printAndSelectFromUnshownMovies(uniqueMovies);
 		movie_chosen.status = "Showing";
 		System.out.println("Where would you like to show this movie in?");
-		printCineplexes(cineplexes);
-		Cineplex cineplex_chosen = selectCineplex(cineplexes);
-		ArrayList <String> showtimes = createShowtimes();
-		Cinema cinema_chosen = selectCinema(cineplex_chosen);
-		replaceMovie(cineplex_chosen, cinema_chosen, movie_chosen, showtimes);
+		cineplexHelper.printCineplexes(cineplexes);
+		Cineplex cineplex_chosen = cineplexHelper.selectCineplex(cineplexes);
+		ArrayList <String> showtimes = showtimeHelper.createShowtimes();
+		Cinema cinema_chosen = cinemaHelper.printAndSelectCinema(cineplex_chosen);
+		movieHelper.replaceMovie(cineplex_chosen, cinema_chosen, movie_chosen, showtimes);
 	}
 	
 	public void admin_5(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies, User user) {
 		Scanner scan = new Scanner(System.in);
-		printCineplexes(cineplexes);
-		Cineplex cineplexChosen = selectCineplex(cineplexes);
-		Movie movieChosen = selectMovie(user, cineplexChosen);
+		cineplexHelper.printCineplexes(cineplexes);
+		Cineplex cineplexChosen = cineplexHelper.selectCineplex(cineplexes);
+		Movie movieChosen = movieHelper.selectMovie(user, cineplexChosen);
 		
 		int index = cineplexChosen.movies.indexOf(movieChosen);
 		ArrayList <String> currShowtimes = cineplexChosen.cinemas.get(index).showtimes;
@@ -97,9 +108,9 @@ public class AdminHelper extends Helper{
 
 	public void admin_6(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies, User user) {
 		Scanner scan = new Scanner(System.in);
-		printCineplexes(cineplexes);
-		Cineplex cineplexChosen = selectCineplex(cineplexes);
-		Movie movieChosen = selectMovie(user, cineplexChosen);
+		cineplexHelper.printCineplexes(cineplexes);
+		Cineplex cineplexChosen = cineplexHelper.selectCineplex(cineplexes);
+		Movie movieChosen = movieHelper.selectMovie(user, cineplexChosen);
 		
 		int index = cineplexChosen.movies.indexOf(movieChosen);
 		ArrayList <String> currShowtimes = cineplexChosen.cinemas.get(index).showtimes;
@@ -130,6 +141,11 @@ public class AdminHelper extends Helper{
 		}
 		int choice = scan.nextInt();
 		float mult;
+		// after price class is finished, set multipliers from price class
+		// need to add senior citizen and child discounts 
+		// set holidays (most probably from), therefore need holiday multiplier
+		// maybe remove peak period price????
+		// weekend multiplier
 		switch (choice) {
 			case 1:
 				System.out.println("What is the new base price?");
@@ -164,9 +180,9 @@ public class AdminHelper extends Helper{
 		System.out.println("2. Overall Rating");
 		int choice = scan.nextInt();
 		if (choice == 1) {
-			sortMovies(uniqueMovies, true);
+			movieHelper.sortMovies(uniqueMovies, true);
 		}else {
-			sortMovies(uniqueMovies, false);
+			movieHelper.sortMovies(uniqueMovies, false);
 		}
 	}
 }

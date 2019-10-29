@@ -1,6 +1,8 @@
 package Assignment;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Initialiser {
 	
@@ -136,5 +138,18 @@ public class Initialiser {
 		ArrayList<Cineplex> cineplexes = new ArrayList<Cineplex>();
 		cineplexes.add(cineplex_1);cineplexes.add(cineplex_2);cineplexes.add(cineplex_3);
 		return cineplexes;
+	}
+
+	public static Set<Movie> generateMovies(ArrayList<Cineplex> cineplexes){
+		Cineplex cineplex_1 = cineplexes.get(0);
+		Cineplex cineplex_2 = cineplexes.get(1);
+		Cineplex cineplex_3 = cineplexes.get(2);
+		
+		// get unique movies
+		Set<Movie> uniqueMovies = new HashSet<>();
+		uniqueMovies.addAll(cineplex_1.movies);
+		uniqueMovies.addAll(cineplex_2.movies);
+		uniqueMovies.addAll(cineplex_3.movies);
+		return uniqueMovies;
 	}
 }

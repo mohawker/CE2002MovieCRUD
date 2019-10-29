@@ -23,7 +23,6 @@ public class MovieTicket {
 	public float price = BASE_PRICE; // set base price
 	boolean isPeak;
 	public String currentDateTime;
-	//public User user;
 	
 	// For time of ticket 
 	DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");

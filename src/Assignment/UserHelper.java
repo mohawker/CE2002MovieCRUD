@@ -6,18 +6,29 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class UserHelper extends Helper{
-	public UserHelper(Set<Movie> uniqueMovies, User user, ArrayList<Cineplex> cineplexes){
+	MovieHelper movieHelper;
+	CinemaHelper cinemaHelper;
+	ShowtimeHelper showtimeHelper;
+	ViewHelper viewHelper;
+	CineplexHelper cineplexHelper;
+	
+	public UserHelper(Set<Movie> uniqueMovies, User user, ArrayList<Cineplex> cineplexes) {
 		super(uniqueMovies, user, cineplexes);
+		this.movieHelper = new MovieHelper(uniqueMovies, user, cineplexes);
+		this.cinemaHelper = new CinemaHelper(uniqueMovies, user, cineplexes);
+		this.showtimeHelper = new ShowtimeHelper(uniqueMovies, user, cineplexes);
+		this.viewHelper = new ViewHelper(uniqueMovies, user, cineplexes);
+		this.cineplexHelper = new CineplexHelper(uniqueMovies, user, cineplexes);
 	}
 	
-	public void user_1(Set<Movie> uniqueMovies, ArrayList<Cineplex> cineplexes) {
+	public void user_1(Set<Movie> uniqueMovies) {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Movie Listings:");
-		printMovies(uniqueMovies);
+		movieHelper.printMovies(uniqueMovies);
 		System.out.println("Would you like you view the showtimes? (Y/N)");
 		if (scan.next().equals("Y")) {
-			Movie movie_chosen = selectMovie(uniqueMovies);
-			printMovies(movie_chosen, cineplexes); // for unique movies
+			Movie movie_chosen = movieHelper.selectMovie(uniqueMovies);
+			movieHelper.printMovieShowings(movie_chosen, cineplexes); // for unique movies
 		}
 	}
 
@@ -25,16 +36,16 @@ public class UserHelper extends Helper{
 		// print out titles of unique movie
 		Scanner scan = new Scanner(System.in);
 		System.out.println("These are the movies available:");
-		printMovies(uniqueMovies);
-		Movie movie_chosen = selectMovie(uniqueMovies);
+		movieHelper.printMovies(uniqueMovies);
+		Movie movie_chosen = movieHelper.selectMovie(uniqueMovies);
 		user.viewMovieDetail(movie_chosen);
 	}
 
 	public void user_3(User user, ArrayList<Cineplex> cineplexes) {
 		Scanner scan = new Scanner(System.in);
-		printCineplexes(cineplexes);
-		Cineplex cineplex_chosen = selectCineplex(cineplexes);
-		Movie movie_chosen = selectMovie(user, cineplex_chosen);
+		cineplexHelper.printCineplexes(cineplexes);
+		Cineplex cineplex_chosen = cineplexHelper.selectCineplex(cineplexes);
+		Movie movie_chosen = movieHelper.selectMovie(user, cineplex_chosen);
 		if (movie_chosen.status.equals("Showing")){
 			user.viewSeatAvailability(cineplex_chosen, movie_chosen);
 		}else {
@@ -45,10 +56,10 @@ public class UserHelper extends Helper{
 
 	public void user_4(User user, ArrayList<Cineplex> cineplexes){
 		Scanner scan = new Scanner(System.in);
-		printCineplexes(cineplexes);
-		Cineplex cineplex_chosen = selectCineplex(cineplexes);
+		cineplexHelper.printCineplexes(cineplexes);
+		Cineplex cineplex_chosen = cineplexHelper.selectCineplex(cineplexes);
 		System.out.println("Select the movie:");
-		Movie movie_chosen = selectMovie(user, cineplex_chosen);
+		Movie movie_chosen = movieHelper.selectMovie(user, cineplex_chosen);
 		
 		System.out.println("Would you like to book single or multiple seats?");
 		System.out.println("1. Single Seat");
@@ -83,16 +94,16 @@ public class UserHelper extends Helper{
 		System.out.println("2. Overall Rating");
 		int choice = scan.nextInt();
 		if (choice == 1) {
-			sortMovies(uniqueMovies, true);
+			movieHelper.sortMovies(uniqueMovies, true);
 		}else {
-			sortMovies(uniqueMovies, false);
+			movieHelper.sortMovies(uniqueMovies, false);
 		}
 	}
 	
 	public void user_7(Set<Movie> uniqueMovies, User user) {
 		System.out.println("Add review for:");
-		printMovies(uniqueMovies);
-		Movie movie_chosen = selectMovie(uniqueMovies);
+		movieHelper.printMovies(uniqueMovies);
+		Movie movie_chosen = movieHelper.selectMovie(uniqueMovies);
 		Review review = new Review(user, movie_chosen);
 		movie_chosen.addReview(review);
 	}

@@ -4,29 +4,24 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;   
 
-public class MOBLIMA extends Initialiser{
+public class MOBLIMA {
 
 	public static void main(String[] args) {
 		
-		// need 15 cinemas
-		Cinema[] cinemas = new Cinema[15];
-		cinemas = generateCinemas();
-		
-		// creating movies
-		Movie[] movies = new Movie[10];
-		movies = generateMovies();
-		
-		// load cineplex with cinemas and movies
-		ArrayList<Cineplex> cineplexes = generateCineplexes(cinemas, movies);
+		Cinema[] cinemas;
+		Movie[] movies;
+		cinemas = Initialiser.generateCinemas();
+		movies = Initialiser.generateMovies();
+			
+		ArrayList<Cineplex> cineplexes = Initialiser.generateCineplexes(cinemas, movies);
 		Cineplex cineplex_1 = cineplexes.get(0);
 		Cineplex cineplex_2 = cineplexes.get(1);
 		Cineplex cineplex_3 = cineplexes.get(2);
 		
-		// get unique movies
 		Set<Movie> uniqueMovies = new HashSet<>();
-		uniqueMovies.addAll(cineplex_1.movies);
-		uniqueMovies.addAll(cineplex_2.movies);
-		uniqueMovies.addAll(cineplex_3.movies);
+		uniqueMovies = Initialiser.generateMovies(cineplexes);
+		
+		
 		
 		System.out.println("Welcome to MOBLIMA App");
 		System.out.println("Would you like to continue as a User or an Admin?");
@@ -40,18 +35,22 @@ public class MOBLIMA extends Initialiser{
 			String userName = scan.next();
 			System.out.println("How old are you?");
 			int userAge = scan.nextInt();
-		// Constructor for User Called
 			User user = new User(userName, "vincentyongweijie@gmail.com", "83189252", userAge);
-		// UserHelper is created - Enables user functions
 			UserHelper userHelper = new UserHelper(uniqueMovies, user, cineplexes);
+			ViewHelper viewHelper = new ViewHelper(uniqueMovies, user, cineplexes);
 			System.out.println("------------------------------------------------------");
 			System.out.println("Welcome, " + user.getUsername());
 			System.out.printf("The date is: %s\n", java.time.LocalDate.now());
-			System.out.println("Pricing Today for 2D Tickets: Regular Weekday ($8)");
+			
+			
+			// date class to create and add holidays
+			// add pricing class to do this dynamically - put this at seat booking
+			System.out.println("Pricing Today for 2D Tickets: Regular Weekday (" + MovieTicket.BASE_PRICE + ")");
 			if (user.getAge()>=55) {
 				System.out.println("Please note that you are eligible for senior citizen discounts!");
 			}
-			while (1==1) {
+			// change all user_1 and admin_1 etc names
+			while (true) {
 				System.out.println("------------------------------------------------------");
 				System.out.println("1. List Movie");
 				System.out.println("2. View Movie Details");
@@ -63,7 +62,9 @@ public class MOBLIMA extends Initialiser{
 				System.out.println("8. Login as Admin");
 				System.out.println("-1. Log Off & Shut Down");
 				System.out.println("------------------------------------------------------");
-				System.out.println("Please select (1-8) : ");
+				System.out.print("Please select (1-8) : ");
+				
+				// error checker class - checkInt , checkStr etc
 				while (!scan.hasNextInt()){
 					System.out.println("Error... Please input an Integer");
 					scan.next();
@@ -71,7 +72,7 @@ public class MOBLIMA extends Initialiser{
 				choice = scan.nextInt();
 				switch (choice){
 					case 1:
-						userHelper.user_1(uniqueMovies, cineplexes);
+						userHelper.user_1(uniqueMovies);
 						break;
 					case 2:
 						userHelper.user_2(user, uniqueMovies);
@@ -92,7 +93,7 @@ public class MOBLIMA extends Initialiser{
 						userHelper.user_7(uniqueMovies, user);
 						break;
 					case 8:
-						userHelper.adminView(cineplexes, uniqueMovies);
+						viewHelper.adminView(cineplexes, uniqueMovies);
 						break;
 					case -1:
 						System.out.println("Thank you for using MOBLIMA!");
@@ -107,6 +108,7 @@ public class MOBLIMA extends Initialiser{
 		}else if (choice == 2) {
 			Admin admin = new Admin("Admin", "tom@gmail.com", "98765432", 22, "Password123");
 			AdminHelper adminHelper = new AdminHelper(uniqueMovies, admin, cineplexes);
+			ViewHelper viewHelper = new ViewHelper(uniqueMovies, admin, cineplexes);
 			admin.login();
 			System.out.println("Welcome, " + admin.getUsername());
 			while (1==1) {
@@ -151,7 +153,7 @@ public class MOBLIMA extends Initialiser{
 						adminHelper.admin_8(uniqueMovies);
 						break;
 					case 9:
-						adminHelper.userView(cineplexes, uniqueMovies);
+						viewHelper.userView(cineplexes, uniqueMovies);
 						break;
 				}
 				System.out.println();
