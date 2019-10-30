@@ -27,5 +27,27 @@ public class InputHandler {
 		String input = scan.next();
 		return input;
 	}
+	
+	public static float priceInput(int lowRange, int highRange) {
+		
+		float input = 0;
+		Scanner scan = new Scanner(System.in);
+		if (scan.hasNextInt()) {
+			input = (float) scan.nextInt();
+
+		} else if(scan.hasNextFloat()) {
+			input = scan.nextFloat();
+
+		} else {
+			scan.next(); 
+		}
+		if (input < (float)lowRange || input > (float)highRange) {
+			System.err.printf("Error... Please input an Integer between %d-%d:\n",lowRange,highRange);
+			return priceInput(lowRange,highRange);
+		}
+		else {
+			return input;
+		}
+	}
 
 }
