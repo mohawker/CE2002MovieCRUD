@@ -78,49 +78,49 @@ public class Price {
 		System.out.println("[6] Ticket Base Price");
 		System.out.print("Select option: ");
 		Scanner scan = new Scanner(System.in);
-		int choice = scan.nextInt();
+		int choice = InputHandler.integerInput(1, 6);
 		System.out.println();
 		switch(choice) {
 			case 1:
 				System.out.println("=== Multiplier for 3D Movies ===");
 				System.out.printf("Current Multiplier: %.2f\n", Price.mult3D);
 				System.out.print("Input New Multiplier for 3D Movies: ");
-				Price.mult3D = scan.nextFloat();
+				Price.mult3D = InputHandler.priceInput(1, 3);
 				System.out.printf("New rate: %.2f\n", Price.mult3D);
 				break;
 			case 2:
 				System.out.println("=== Surcharge for Blockbuster Movies ===");
 				System.out.printf("Current Surcharge: %.2f\n", Price.surBlockbuster);
 				System.out.print("Input New Surcharge: ");
-				Price.surBlockbuster = scan.nextFloat();
+				Price.surBlockbuster =InputHandler.priceInput(1, 8);
 				System.out.printf("New surcharge: %.2f\n", Price.surBlockbuster);
 				break;
 			case 3:
 				System.out.println("=== Multipler for GoldClass Cinemas ===");
 				System.out.printf("Current rate: %.2f\n", Price.multGC);
 				System.out.print("Input new rate for Gold Class Cinema: ");
-				Price.multGC = scan.nextFloat();
+				Price.multGC = InputHandler.priceInput(3, 7);
 				System.out.printf("New rate: %.2f\n"+Price.multGC);
 				break;
 			case 4:
 				System.out.println("=== Child & Senior Citizen Discount ===");
 				System.out.printf("Current discount: %.2f\n", Price.multAge);
 				System.out.print("Input new discount from (0.00-1.00): ");
-				Price.multAge = scan.nextFloat();
+				Price.multAge = InputHandler.priceInput(0, 1);
 				System.out.printf("New discount: %.2f\n", Price.multAge);
 				break;
 			case 5:
 				System.out.println("=== Weekend & Public Holiday Surcharge ===");
 				System.out.printf("Current surcharge: %.2f\n", Price.surPHWeekend);
 				System.out.print("Input new weekend/public holiday surcharge: ");
-				Price.surPHWeekend = scan.nextFloat();
+				Price.surPHWeekend = InputHandler.priceInput(2, 5);
 				System.out.printf("New surcharge: %.2f\n", Price.surPHWeekend);
 				break;
 			case 6:
 				System.out.println("=== Ticket Base Price ===");
 				System.out.printf("Current base price: $%.2f\n", Price.basePrice);
 				System.out.print("Input new base price for tickets: ");
-				Price.basePrice = scan.nextFloat();
+				Price.basePrice = InputHandler.priceInput(5, 10);
 				System.out.printf("New base price: $%.2f\\n"+ Price.basePrice);
 				break;
 				
