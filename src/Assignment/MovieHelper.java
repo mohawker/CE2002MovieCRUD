@@ -33,14 +33,14 @@ public class MovieHelper extends Helper{
 	}
 	
 	// print movie showtimes for a movie in all cineplex
-	public void printMovieShowings(Movie movie_chosen, ArrayList<Cineplex> cineplexes) {
-		if (movie_chosen.status.equals("Showing")){
+	public void printMovieShowings(Movie movieChosen, ArrayList<Cineplex> cineplexes) {
+		if (movieChosen.status.equals("Showing")){
 			for (int i=0; i<cineplexes.size(); i++) {
-				System.out.println("=== Showing for " + movie_chosen.title + " at " + cineplexes.get(i).name + " " + cineplexes.get(i).location + " ===\n");
-				int movieIndex = cineplexes.get(i).movies.indexOf(movie_chosen);
+				System.out.println("=== Showing for " + movieChosen.title + " at " + cineplexes.get(i).name + " " + cineplexes.get(i).location + " ===\n");
+				int movieIndex = cineplexes.get(i).movies.indexOf(movieChosen);
 				if (movieIndex != -1) {
 					for (int date=0; date < (cineplexes.get(i).cinemas.get(movieIndex).dates.size()); date++) {
-						int index = cineplexes.get(i).movies.indexOf(movie_chosen);
+						int index = cineplexes.get(i).movies.indexOf(movieChosen);
 						if (index != -1) {
 							ArrayList<String> showtimes = cineplexes.get(i).cinemas.get(index).showtimes[date];
 							Collections.sort(showtimes);
@@ -53,7 +53,7 @@ public class MovieHelper extends Helper{
 				}
 			}
 		}else {
-			System.out.println(movie_chosen.title + " is not showing yet.");
+			System.out.println(movieChosen.title + " is not showing yet.");
 		}
 	}
 	
@@ -161,8 +161,8 @@ public class MovieHelper extends Helper{
 				}
 			}
 			for (int i=0; i<5; i++) {
-				Movie movie_chosen = sortedMoviesList.get(i);
-				System.out.println(movie_chosen.title + " has total sales of $" + movie_chosen.movieSales);
+				Movie movieChosen = sortedMoviesList.get(i);
+				System.out.println(movieChosen.title + " has total sales of $" + movieChosen.movieSales);
 			}
 		}else {
 			for (int i=1; i<uniqueMoviesList.size(); i++) {
@@ -177,34 +177,34 @@ public class MovieHelper extends Helper{
 				}
 			}
 			for (int i=0; i<5; i++) {
-				Movie movie_chosen = sortedMoviesList.get(i);
-				System.out.println(movie_chosen.title + " has overall rating of " + movie_chosen.getAverageRating() + " out of 5.0");
+				Movie movieChosen = sortedMoviesList.get(i);
+				System.out.println(movieChosen.title + " has overall rating of " + movieChosen.getAverageRating() + " out of 5.0");
 			}
 		}
 	}
 
-	public void replaceMovie(Cineplex cineplex_chosen, Cinema cinema_chosen, Movie movie_chosen, ArrayList<String> showtimes) {
-		System.out.println("=== Previous Movies at " + cineplex_chosen.name + " " + cineplex_chosen.location + " ===");
-		printMovies(cineplex_chosen);
-		int index = cineplex_chosen.cinemas.indexOf(cinema_chosen);
-		cineplex_chosen.movies.get(index).status = "End of Showing";
-		System.out.println("\nMovie being replaced: " + cineplex_chosen.movies.get(index).title);
-		cineplex_chosen.movies.set(index, movie_chosen);
-		System.out.println("New movie: " + cineplex_chosen.movies.get(index).title);
+	public void replaceMovie(Cineplex cineplexChosen, Cinema cinemaChosen, Movie movieChosen, ArrayList<String> showtimes) {
+		System.out.println("=== Previous Movies at " + cineplexChosen.name + " " + cineplexChosen.location + " ===");
+		printMovies(cineplexChosen);
+		int index = cineplexChosen.cinemas.indexOf(cinemaChosen);
+		cineplexChosen.movies.get(index).status = "End of Showing";
+		System.out.println("\nMovie being replaced: " + cineplexChosen.movies.get(index).title);
+		cineplexChosen.movies.set(index, movieChosen);
+		System.out.println("New movie: " + cineplexChosen.movies.get(index).title);
 		ArrayList <String>[] listOfTimes = new ArrayList[6];
-		for (int i=0; i<cineplex_chosen.cinemas.get(index).dates.size(); i++) {
+		for (int i=0; i<cineplexChosen.cinemas.get(index).dates.size(); i++) {
 			listOfTimes[i] = showtimes;
 		}
-		cineplex_chosen.cinemas.get(index).showtimes = listOfTimes;
-		System.out.println("Movie " + movie_chosen.title + " added to " + cineplex_chosen.name + " " + cineplex_chosen.location + " in Cinema Code " + cinema_chosen.cinema_code);
+		cineplexChosen.cinemas.get(index).showtimes = listOfTimes;
+		System.out.println("Movie " + movieChosen.title + " added to " + cineplexChosen.name + " " + cineplexChosen.location + " in Cinema Code " + cinemaChosen.cinema_code);
 		System.out.println("=== New Movies ===");
-		printMovies(cineplex_chosen);
+		printMovies(cineplexChosen);
 	}
 	
-	public String printAndSelectMovieDates(Cineplex cineplex, Movie movie_chosen) {
+	public String printAndSelectMovieDates(Cineplex cineplex, Movie movieChosen) {
 		Scanner scan = new Scanner(System.in);
-		Cinema cinema = cineplex.cinemas.get(cineplex.movies.indexOf(movie_chosen));
-		System.out.println("===Dates available for " + movie_chosen.title + " at " + cineplex.name + " " + cineplex.location + "===");
+		Cinema cinema = cineplex.cinemas.get(cineplex.movies.indexOf(movieChosen));
+		System.out.println("===Dates available for " + movieChosen.title + " at " + cineplex.name + " " + cineplex.location + "===");
 		for (int i=0; i<cinema.dates.size(); i++) {
 			System.out.println("[" + (i+1) + "] " + cinema.dates.get(i));
 		}
