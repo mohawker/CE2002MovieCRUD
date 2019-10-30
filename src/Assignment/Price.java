@@ -100,7 +100,7 @@ public class Price {
 				System.out.printf("Current rate: %.2f\n", Price.multGC);
 				System.out.print("Input new rate for Gold Class Cinema: ");
 				Price.multGC = scan.nextFloat();
-				System.out.printf("New rate: %.2f\n"+Price.multGC);
+				System.out.printf("New rate: %.2f\n", Price.multGC);
 				break;
 			case 4:
 				System.out.println("=== Child & Senior Citizen Discount ===");
