@@ -57,47 +57,64 @@ public class MovieHelper extends Helper{
 		}
 	}
 	
+	
 	// select a movie from all unique movies
 	public Movie selectMovie(Set<Movie> uniqueMovies) {
-		Scanner scan = new Scanner(System.in);
 		List<Movie> uniqueMoviesList = new ArrayList<Movie>(uniqueMovies);
 		System.out.print("Select your movie: ");
-		while (!scan.hasNextInt()) {
-			System.out.println("Error... Please input an Integer");
-			scan.nextLine();	
-		}
-		System.out.println();
-		int choice = scan.nextInt();
+		int choice = InputHandler.integerInput(1, uniqueMoviesList.size());
 		return uniqueMoviesList.get(choice-1);
 	}
 	
 	// select a movie from a particular cineplex
 	public Movie selectMovie(User user, Cineplex cineplex) {
-		Scanner scan = new Scanner(System.in);
 		System.out.println("=== Movies ===");
 		printMovies(cineplex);
 		System.out.print("Select your movie: ");
-		int choice = -1;
-		while (!scan.hasNextInt()) {
-			System.out.println("Error... Please input an Integer");
-			scan.nextLine();	
-		}
-		while (choice<1 || choice > cineplex.movies.size()) {
-			choice = scan.nextInt();
-			if (!(choice>=1 && choice <= cineplex.movies.size())) {
-				System.out.println("Please enter a valid selection from 1-"+ cineplex.movies.size());
-			}
-			else {
-				System.out.println();
-				user.viewMovieDetail(cineplex.movies.get(choice-1));
-			}
-		}
+		int choice = InputHandler.integerInput(1, cineplex.movies.size());
+		System.out.println();
+		user.viewMovieDetail(cineplex.movies.get(choice-1));
 		return cineplex.movies.get(choice-1);
 	}
 	
+	// for ensuring there are UnshownMovies
+	public int ensureUnshownMovies(Set<Movie> uniqueMovies) {
+		List<Movie> unshownMoviesList = new ArrayList<Movie>(uniqueMovies);
+		int count = 1;
+		for (Movie m : uniqueMovies) {
+			if (!m.status.equals("End of Showing") && !m.status.equals("Showing")) {
+				count += 1;
+			}else {
+				unshownMoviesList.remove(m);
+			}
+		}
+		if (count==1) {
+			return 0;
+		}
+		else {
+			return 1;
+		}
+	}
+	
+	// for adding showtimes to movies which are now showing
+//	public Movie printAndSelectNowShowingMovies(Set<Movie> uniqueMovies) {
+//		List<Movie> showingMoviesList = new ArrayList<Movie>(uniqueMovies);
+//		int count = 1;
+//		for (Movie m : uniqueMovies) {
+//			if (!m.status.equals("End of Showing") && !m.status.equals("Coming Soon")) {
+//				System.out.println(count + ". " + m.title + ", Status: " + m.status);
+//				count += 1;
+//			}else {
+//				showingMoviesList.remove(m);
+//			}
+//		}
+//		System.out.print("Select your movie: ");
+//		int choice = InputHandler.integerInput(1, showingMoviesList.size());
+//		return showingMoviesList.get(choice-1);
+//	}
+	
 	// for adding showtimes to movies which are coming soon/preview
 	public Movie printAndSelectFromUnshownMovies(Set<Movie> uniqueMovies) {
-		Scanner scan = new Scanner(System.in);
 		List<Movie> unshownMoviesList = new ArrayList<Movie>(uniqueMovies);
 		int count = 1;
 		for (Movie m : uniqueMovies) {
@@ -109,11 +126,7 @@ public class MovieHelper extends Helper{
 			}
 		}
 		System.out.print("Select your movie: ");
-		while (!scan.hasNextInt()) {
-			System.out.println("Error... Please input an Integer");
-			scan.nextLine();	
-		}
-		int choice = scan.nextInt();
+		int choice = InputHandler.integerInput(1, unshownMoviesList.size());
 		return unshownMoviesList.get(choice-1);
 	}
 
@@ -121,18 +134,17 @@ public class MovieHelper extends Helper{
 	public Movie createMovie(Set<Movie> uniqueMovies) {
 		Scanner scan = new Scanner(System.in);
 		System.out.print("Name of Movie: ");
-		String title = scan.nextLine();
+		String title = InputHandler.stringInput();
 		System.out.print("Status of Movie (Coming Soon/Preview/Showing): ");
-		String status = scan.nextLine();
+		String status = InputHandler.stringInput();
 		System.out.print("Synopsis: ");
-		String synopsis = scan.nextLine();
+		String synopsis = InputHandler.stringInput();
 		System.out.print("Director: ");
-		String director = scan.nextLine();
+		String director = InputHandler.stringInput();
 		System.out.print("Type (3D/Blockbuster): ");
-		String type = scan.nextLine();
+		String type = InputHandler.stringInput();
 		System.out.print("Number of Cast Members: ");
-		int numCast = scan.nextInt();
-		scan.nextLine();; // remove the space left
+		int numCast = InputHandler.integerInput(2, 999);
 		ArrayList <String> cast = new ArrayList <String>();
 		for (int i=0; i<numCast; i++) {
 			System.out.print("Cast Member " + (i+1) + ": ");
@@ -202,14 +214,13 @@ public class MovieHelper extends Helper{
 	}
 	
 	public String printAndSelectMovieDates(Cineplex cineplex, Movie movieChosen) {
-		Scanner scan = new Scanner(System.in);
 		Cinema cinema = cineplex.cinemas.get(cineplex.movies.indexOf(movieChosen));
 		System.out.println("===Dates available for " + movieChosen.title + " at " + cineplex.name + " " + cineplex.location + "===");
 		for (int i=0; i<cinema.dates.size(); i++) {
 			System.out.println("[" + (i+1) + "] " + cinema.dates.get(i));
 		}
 		System.out.print("Select date: " );
-		int choice = scan.nextInt();
+		int choice = InputHandler.integerInput(1, cinema.dates.size());
 		System.out.println();
 		return cinema.dates.get(choice);
 	}

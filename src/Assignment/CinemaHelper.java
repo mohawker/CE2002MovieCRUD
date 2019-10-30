@@ -16,11 +16,7 @@ public class CinemaHelper extends Helper{
 		for (int i = 0; i<cineplex.cinemas.size(); i++) {
 			System.out.println("[" + (i+1) + "] " + " Cinema Code " + cineplex.cinemas.get(i).cinema_code + "(" + cineplex.cinemas.get(i).cinema_type + ")");
 		}
-		while (!scan.hasNextInt()) {
-			System.out.println("Error... Please input an Integer");
-			scan.nextLine();	
-		}
-		int choice = scan.nextInt();
+		int choice = InputHandler.integerInput(1, cineplex.cinemas.size());
 		System.out.println();
 		return cineplex.cinemas.get(choice-1);
 	}

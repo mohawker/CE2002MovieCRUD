@@ -27,55 +27,64 @@ public class AdminHelper extends Helper{
 		if (movie.status.equals("Showing")) {
 			System.out.println("Where would you like to show this movie in?");
 			cineplexHelper.printCineplexes(cineplexes);
-			Cineplex cineplex_chosen = cineplexHelper.selectCineplex(cineplexes);
+			Cineplex cineplexChosen = cineplexHelper.selectCineplex(cineplexes);
 			ArrayList <String> showtimes = showtimeHelper.createShowtimes();
-			Cinema cinema_chosen = cinemaHelper.printAndSelectCinema(cineplex_chosen);
-			movieHelper.replaceMovie(cineplex_chosen, cinema_chosen, movie, showtimes);
+			Cinema cinemaChosen = cinemaHelper.printAndSelectCinema(cineplexChosen);
+			movieHelper.replaceMovie(cineplexChosen, cinemaChosen, movie, showtimes);
 		}
 		return movie;
 	}
 	
 	public void updateMovieListing(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
 		movieHelper.printMovies(uniqueMovies);
-		Movie movie_chosen = movieHelper.selectMovie(uniqueMovies);
-		System.out.print("New Showing Status of " + movie_chosen.title + "(Showing/End of Showing): ");
+		Movie movieChosen = movieHelper.selectMovie(uniqueMovies);
+		System.out.print("New Showing Status of " + movieChosen.title + "(Showing/End of Showing): ");
 		Scanner scan = new Scanner(System.in);
 		String newStatus = scan.nextLine();
-		if (movie_chosen.status.equals(newStatus)) {
+		if (movieChosen.status.equals(newStatus)) {
 			System.out.println("New status same as previous status");
 			System.out.println("Shall not update movie status");
 		}else if (newStatus.equals("Showing")){
-			movie_chosen.status = newStatus;
+			movieChosen.status = newStatus;
 			cineplexHelper.printCineplexes(cineplexes);
-			Cineplex cineplex_chosen = cineplexHelper.selectCineplex(cineplexes);
+			Cineplex cineplexChosen = cineplexHelper.selectCineplex(cineplexes);
 			ArrayList <String> showtimes = showtimeHelper.createShowtimes();
-			Cinema cinema_chosen = cinemaHelper.printAndSelectCinema(cineplex_chosen);
-			movieHelper.replaceMovie(cineplex_chosen, cinema_chosen, movie_chosen, showtimes);			
+			Cinema cinemaChosen = cinemaHelper.printAndSelectCinema(cineplexChosen);
+			movieHelper.replaceMovie(cineplexChosen, cinemaChosen, movieChosen, showtimes);			
 		}else if (newStatus.equals("End of Showing")) {
-			movie_chosen.status = newStatus;
-			uniqueMovies.remove(movie_chosen);
+			movieChosen.status = newStatus;
+			uniqueMovies.remove(movieChosen);
 		}
 	}
 
 	public void removeMovieListing(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
 		movieHelper.printMovies(uniqueMovies);
-		Movie movie_chosen = movieHelper.selectMovie(uniqueMovies);
-		System.out.println(movie_chosen.title + " will be set to End of Showing");
-		movie_chosen.status = "End of Showing";
-		uniqueMovies.remove(movie_chosen);
+		Movie movieChosen = movieHelper.selectMovie(uniqueMovies);
+		System.out.println(movieChosen.title + " will be set to End of Showing");
+		movieChosen.status = "End of Showing";
+		uniqueMovies.remove(movieChosen);
 		movieHelper.printMovies(uniqueMovies);
 	}
 	
+	// Has issues
 	public void createCinemaShowtimes(Admin admin, ArrayList<Cineplex> cineplexes, Cineplex cineplex_1, Cineplex cineplex_2, Cineplex cineplex_3, Set<Movie> uniqueMovies) {
-		Movie movie_chosen = movieHelper.printAndSelectFromUnshownMovies(uniqueMovies);
-		movie_chosen.status = "Showing";
+		int valid = movieHelper.ensureUnshownMovies(uniqueMovies);
+		if (valid == 0) {
+			System.out.println("There are no movies listed as 'Coming Soon'. Please create a new movie listing first before creating showtimes.");
+			return;
+		}
+		else {
+		Movie movieChosen = movieHelper.printAndSelectFromUnshownMovies(uniqueMovies);
+		movieChosen.status = "Showing";
 		System.out.println("Choose Cineplex to be shown in:");
 		cineplexHelper.printCineplexes(cineplexes);
-		Cineplex cineplex_chosen = cineplexHelper.selectCineplex(cineplexes);
+		Cineplex cineplexChosen = cineplexHelper.selectCineplex(cineplexes);
 		ArrayList <String> showtimes = showtimeHelper.createShowtimes();
-		Cinema cinema_chosen = cinemaHelper.printAndSelectCinema(cineplex_chosen);
-		movieHelper.replaceMovie(cineplex_chosen, cinema_chosen, movie_chosen, showtimes);
+		Cinema cinemaChosen = cinemaHelper.printAndSelectCinema(cineplexChosen);
+		movieHelper.replaceMovie(cineplexChosen, cinemaChosen, movieChosen, showtimes);
+		}
 	}
+
 	
 	public void updateCinemaShowtimes(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies, User user) {
 		Scanner scan = new Scanner(System.in);
@@ -89,11 +98,7 @@ public class AdminHelper extends Helper{
 		
 		System.out.println("Current Showtimes : " + currShowtimes);
 		System.out.print("Number of Showtimes for " + movieChosen.title + " to be updated: ");
-		while (!scan.hasNextInt()){
-			System.out.println("Error... Please input an Integer");
-			scan.nextLine();
-		}
-		int choice = scan.nextInt();
+		int choice = InputHandler.integerInput(1, currShowtimes.size());
 		scan.nextLine();
 		for (int i=0; i<choice; i++) {
 			System.out.print("Remove Showtime: ");
