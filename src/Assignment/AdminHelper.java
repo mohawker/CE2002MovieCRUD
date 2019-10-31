@@ -92,18 +92,49 @@ public class AdminHelper extends Helper{
 		Cineplex cineplexChosen = cineplexHelper.selectCineplex(cineplexes);
 		Movie movieChosen = movieHelper.selectMovie(user, cineplexChosen);
 		String date = movieHelper.printAndSelectMovieDates(cineplexChosen, movieChosen);
+		
 		int index = cineplexChosen.movies.indexOf(movieChosen);
 		int dateIndex = cineplexChosen.cinemas.get(index).dates.indexOf(date);
 		ArrayList <String> currShowtimes = cineplexChosen.cinemas.get(index).showtimes[dateIndex];
 		
-		System.out.println("Current Showtimes : " + currShowtimes);
-		System.out.print("Number of Showtimes for " + movieChosen.title + " to be updated: ");
-		int choice = InputHandler.integerInput(1, currShowtimes.size());
+		System.out.println("Current Show Times for " + movieChosen.title + ": " + currShowtimes);
+		System.out.print("Number of Showtimes for " + movieChosen.title + "  to be removed: ");
+		int choice = scan.nextInt();
 		scan.nextLine();
 		for (int i=0; i<choice; i++) {
 			System.out.print("Remove Showtime: ");
 			currShowtimes.remove(scan.nextLine());
-			System.out.print("Add Showtime:");
+		}
+		
+		System.out.print("Number of Showtimes for " + movieChosen.title + "  to be added: ");
+		choice = scan.nextInt();
+		scan.nextLine();
+		for (int i=0; i<choice; i++) {
+			System.out.print("Add Showtime: ");
+			currShowtimes.add(scan.nextLine());
+		}
+		Collections.sort(currShowtimes);
+		System.out.println("New Showtimes for " + movieChosen.title + " at " + cineplexChosen.name + " " + cineplexChosen.name + " : " + currShowtimes);
+		cineplexChosen.cinemas.get(index).showtimes[dateIndex] = currShowtimes;
+	}
+	
+	public void addCinemaShowtimes(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies, User user) {
+		Scanner scan = new Scanner(System.in);
+		cineplexHelper.printCineplexes(cineplexes);
+		Cineplex cineplexChosen = cineplexHelper.selectCineplex(cineplexes);
+		Movie movieChosen = movieHelper.selectMovie(user, cineplexChosen);
+		String date = movieHelper.printAndSelectMovieDates(cineplexChosen, movieChosen);
+		
+		int index = cineplexChosen.movies.indexOf(movieChosen);
+		int dateIndex = cineplexChosen.cinemas.get(index).dates.indexOf(date);
+		ArrayList <String> currShowtimes = cineplexChosen.cinemas.get(index).showtimes[dateIndex];
+		
+		System.out.println("Current Show Times for " + movieChosen.title + ": " + currShowtimes);
+		System.out.print("Number of Showtimes for " + movieChosen.title + "  to be added: ");
+		int choice = scan.nextInt();
+		scan.nextLine();
+		for (int i=0; i<choice; i++) {
+			System.out.print("Add Showtime: ");
 			currShowtimes.add(scan.nextLine());
 		}
 		Collections.sort(currShowtimes);

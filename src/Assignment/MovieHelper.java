@@ -1,10 +1,18 @@
 package Assignment;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 public class MovieHelper extends Helper{
 
@@ -194,16 +202,46 @@ public class MovieHelper extends Helper{
 			}
 		}
 	}
-
+	
+	public int daysBetween(Date d1, Date d2){
+        return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+	}
+	
 	public void replaceMovie(Cineplex cineplexChosen, Cinema cinemaChosen, Movie movieChosen, ArrayList<String> showtimes) {
+		Scanner scan = new Scanner(System.in);
 		System.out.println("=== Previous Movies at " + cineplexChosen.name + " " + cineplexChosen.location + " ===");
 		printMovies(cineplexChosen);
 		int index = cineplexChosen.cinemas.indexOf(cinemaChosen);
 		cineplexChosen.movies.get(index).status = "End of Showing";
 		System.out.println("\nMovie being replaced: " + cineplexChosen.movies.get(index).title);
 		cineplexChosen.movies.set(index, movieChosen);
-		System.out.println("New movie: " + cineplexChosen.movies.get(index).title);
-		ArrayList <String>[] listOfTimes = new ArrayList[6];
+		System.out.println("New Movie: " + cineplexChosen.movies.get(index).title);
+		
+	    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+	    
+	    long days=0;
+	    Date currentDate = new Date();
+		Date firstDate = new Date(currentDate.getTime() + (1000 * 60 * 60 * 24));
+		try {
+			System.out.print("End Date of Movie (DD/MM/YYYY): ");
+		    Date endDate = sdf.parse(scan.next());
+		    long diffInMillies = Math.abs(endDate.getTime() - firstDate.getTime());
+			days = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+		}catch (ParseException e) {
+            e.printStackTrace();
+        }
+		
+
+		ArrayList<String> dates = new ArrayList<String>();
+		
+		for(int i=1;i<=days+2;i++){
+			Date newDate = new Date(currentDate.getTime() + i*(1000 * 60 * 60 * 24));
+			dates.add(sdf.format(newDate));
+		}
+		
+		System.out.println(movieChosen.title + " will be shown from " + dates.get(0) + " to " + dates.get(dates.size()-1));		
+		cineplexChosen.cinemas.get(index).dates = dates;
+		ArrayList <String>[] listOfTimes = new ArrayList[dates.size()];
 		for (int i=0; i<cineplexChosen.cinemas.get(index).dates.size(); i++) {
 			listOfTimes[i] = showtimes;
 		}

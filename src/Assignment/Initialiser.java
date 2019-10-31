@@ -17,7 +17,6 @@ public class Initialiser {
 		// current date and next 5 dates
 		ArrayList<String> dates = new ArrayList<String>();
 		Date currentDate = new Date();
-		Calendar c = Calendar.getInstance(); 
 		dates.add(dateFormat.format(currentDate));
 		for (int i=1; i<=5; i++) {
 			Date newDate = new Date(currentDate.getTime() + i*(1000 * 60 * 60 * 24));
