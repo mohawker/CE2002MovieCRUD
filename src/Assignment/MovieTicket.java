@@ -32,7 +32,7 @@ public class MovieTicket {
 		this.movieDate = movieDate;
 		this.quantityTicket = quantityTicket;
 		this.currentDateTime = dateFormat.format(date) + " (YYYYMMDD) " + timeFormat.format(date) + " (HHmm) ";
-		this.TID = this.cinema.cinema_code + dateFormat.format(date) + timeFormat.format(date);
+		this.TID = this.cinema.getCinemaCode() + dateFormat.format(date) + timeFormat.format(date);
 		this.price = new Price();
 	}
 

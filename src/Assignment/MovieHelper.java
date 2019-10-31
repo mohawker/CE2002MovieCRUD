@@ -35,7 +35,7 @@ public class MovieHelper extends Helper{
 	public void printMovies(Cineplex cineplex) {
 		for (int i=0 ; i<cineplex.movies.size(); i++) {
 			if (!cineplex.movies.get(i).status.equals("End of Showing")) {
-				System.out.println("[" + (i+1) + "] " + cineplex.movies.get(i).title + " (" + cineplex.cinemas.get(i).cinema_type + ")");
+				System.out.println("[" + (i+1) + "] " + cineplex.movies.get(i).title + " (" + cineplex.cinemas.get(i).getCinemaType() + ")");
 			}
 		}
 	}
@@ -246,7 +246,7 @@ public class MovieHelper extends Helper{
 			listOfTimes[i] = showtimes;
 		}
 		cineplexChosen.cinemas.get(index).showtimes = listOfTimes;
-		System.out.println("Movie " + movieChosen.title + " added to " + cineplexChosen.name + " " + cineplexChosen.location + " in Cinema Code " + cinemaChosen.cinema_code);
+		System.out.println("Movie " + movieChosen.title + " added to " + cineplexChosen.name + " " + cineplexChosen.location + " in Cinema Code " + cinemaChosen.getCinemaCode());
 		System.out.println("=== New Movies ===");
 		printMovies(cineplexChosen);
 	}

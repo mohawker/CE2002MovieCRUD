@@ -26,63 +26,64 @@ public class Initialiser {
 		Cinema[] cinemas = new Cinema[15];
 		ArrayList<String> showtimes_1 = new ArrayList<String>();
 		showtimes_1.add("0130");showtimes_1.add("0300");showtimes_1.add("1000");showtimes_1.add("1500");showtimes_1.add("1800");
-		cinemas[0] = new Cinema("Normal", "101", showtimes_1, dates);
+		cinemas[0] = Cinema.generateCinema("Imax", "101", showtimes_1, dates);
+		
 		
 		ArrayList<String> showtimes_2 = new ArrayList<String>();
 		showtimes_2.add("0000");showtimes_2.add("0800");showtimes_2.add("1100");showtimes_2.add("1400");showtimes_2.add("1800");
-		cinemas[1] = new Cinema("Normal", "102", showtimes_2, dates);
+		cinemas[1] = Cinema.generateCinema("Normal", "102", showtimes_2, dates);
 		
 		ArrayList<String> showtimes_3 = new ArrayList<String>();
 		showtimes_3.add("1200");showtimes_3.add("1400");showtimes_3.add("1600");
-		cinemas[2] = new Cinema("GoldClass", "103", showtimes_3, dates);
+		cinemas[2] = Cinema.generateCinema("GoldClass", "103", showtimes_3, dates);
 		
 		ArrayList<String> showtimes_4 = new ArrayList<String>();
 		showtimes_4.add("1000");showtimes_4.add("1400");showtimes_4.add("1900");showtimes_4.add("2000");showtimes_4.add("2130");
-		cinemas[3] = new Cinema("Normal", "104", showtimes_4, dates);
+		cinemas[3] = Cinema.generateCinema("Normal", "104", showtimes_4, dates);
 		
 		ArrayList<String> showtimes_5 = new ArrayList<String>();
 		showtimes_5.add("1100");showtimes_5.add("1300");showtimes_5.add("1600");showtimes_5.add("1900");
-		cinemas[4] = new Cinema("GoldClass", "105", showtimes_5, dates);
+		cinemas[4] = Cinema.generateCinema("GoldClass", "105", showtimes_5, dates);
 		
 		ArrayList<String> showtimes_6 = new ArrayList<String>();
 		showtimes_6.add("0130");showtimes_6.add("0300");showtimes_6.add("0500");showtimes_6.add("0900");showtimes_6.add("1100");
-		cinemas[5] = new Cinema("Normal", "201", showtimes_6, dates);
+		cinemas[5] = Cinema.generateCinema("Normal", "201", showtimes_6, dates);
 		
 		ArrayList<String> showtimes_7 = new ArrayList<String>();
 		showtimes_7.add("0000");showtimes_7.add("0800");showtimes_7.add("1100");showtimes_7.add("1400");
-		cinemas[6] = new Cinema("Normal", "202", showtimes_7, dates);
+		cinemas[6] = Cinema.generateCinema("Normal", "202", showtimes_7, dates);
 		
 		ArrayList<String> showtimes_8 = new ArrayList<String>();
 		showtimes_8.add("1200");showtimes_8.add("1400");showtimes_8.add("1600");
-		cinemas[7] = new Cinema("GoldClass", "203", showtimes_8, dates);
+		cinemas[7] = Cinema.generateCinema("GoldClass", "203", showtimes_8, dates);
 		
 		ArrayList<String> showtimes_9 = new ArrayList<String>();
 		showtimes_9.add("1000");showtimes_9.add("1400");showtimes_9.add("1900");showtimes_9.add("2000");showtimes_9.add("2130");
-		cinemas[8] = new Cinema("Normal", "204", showtimes_9, dates);
+		cinemas[8] = Cinema.generateCinema("Normal", "204", showtimes_9, dates);
 		
 		ArrayList<String> showtimes_10 = new ArrayList<String>();
 		showtimes_10.add("1100");showtimes_10.add("1100");showtimes_10.add("1600");showtimes_10.add("1800");showtimes_10.add("2200");
-		cinemas[9] = new Cinema("GoldClass", "205", showtimes_10, dates);
+		cinemas[9] = Cinema.generateCinema("GoldClass", "205", showtimes_10, dates);
 		
 		ArrayList<String> showtimes_11 = new ArrayList<String>();
 		showtimes_11.add("0130");showtimes_11.add("0300");showtimes_11.add("0700");showtimes_11.add("0900");showtimes_11.add("1500");
-		cinemas[10] = new Cinema("GoldClass", "301", showtimes_11, dates);
+		cinemas[10] = Cinema.generateCinema("GoldClass", "301", showtimes_11, dates);
 		
 		ArrayList<String> showtimes_12 = new ArrayList<String>();
 		showtimes_12.add("0000");showtimes_12.add("0600");showtimes_12.add("1200");showtimes_12.add("1700");
-		cinemas[11] = new Cinema("Normal", "302", showtimes_12, dates);
+		cinemas[11] = Cinema.generateCinema("Normal", "302", showtimes_12, dates);
 		
 		ArrayList<String> showtimes_13 = new ArrayList<String>();
 		showtimes_13.add("1200");showtimes_13.add("1200");showtimes_13.add("1600");
-		cinemas[12] = new Cinema("GoldClass", "303", showtimes_13, dates);
+		cinemas[12] = Cinema.generateCinema("GoldClass", "303", showtimes_13, dates);
 		
 		ArrayList<String> showtimes_14 = new ArrayList<String>();
 		showtimes_14.add("1000");showtimes_14.add("1400");showtimes_14.add("1900");showtimes_14.add("2200");showtimes_14.add("2330");
-		cinemas[13] = new Cinema("GoldClass", "304", showtimes_14, dates);
+		cinemas[13] = Cinema.generateCinema("GoldClass", "304", showtimes_14, dates);
 		
 		ArrayList<String> showtimes_15 = new ArrayList<String>();
 		showtimes_15.add("1100");showtimes_15.add("0900");showtimes_15.add("1200");showtimes_15.add("1800");showtimes_15.add("2000");
-		cinemas[14] = new Cinema("Normal", "305", showtimes_15, dates);
+		cinemas[14] = Cinema.generateCinema("Normal", "305", showtimes_15, dates);
 		return cinemas;
 	}
 	
