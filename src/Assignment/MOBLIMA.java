@@ -85,12 +85,13 @@ public class MOBLIMA {
 				System.out.println("[6] Add Cinema Showtimes (For Movie with status 'Showing')");
 				System.out.println("[7] Remove Cinema Showtimes (For Movie with status 'Showing')");
 				System.out.println("[8] Configure System Settings");
-				System.out.println("[9] List Top 5 Movies by Ticket Sales or Overall Rating");
-				System.out.println("[10] Logout to see User View");
-				System.out.println("[11] Log Off & Shut Down");
+				System.out.println("[9] Add a Public Holiday");
+				System.out.println("[10] List Top 5 Movies by Ticket Sales or Overall Rating");
+				System.out.println("[11] Logout to see User View");
+				System.out.println("[12] Log Off & Shut Down");
 				System.out.println("------------------------------------------------------");
-				System.out.print("Please select (1-10) : ");
-				choice = InputControl.integerInput(1, 10);
+				System.out.print("Please select (1-12) : ");
+				choice = InputControl.integerInput(1, 12);
 				switch (choice){
 					case 1:{adminHelper.createMovieListing(admin, cineplexes, cineplex_1, cineplex_2, cineplex_3, uniqueMovies);break;}
 					case 2:{adminHelper.updateMovieListing(cineplexes, uniqueMovies);break;}
@@ -100,9 +101,10 @@ public class MOBLIMA {
 					case 6:{adminHelper.addCinemaShowtimes(cineplexes, uniqueMovies, admin); break;}
 					case 7:{adminHelper.removeCinemaShowtimes(cineplexes, uniqueMovies, admin);break;}
 					case 8:{adminHelper.configureSettings();break;}
-					case 9:{adminHelper.listTop5(uniqueMovies);break;}
-					case 10:{viewHelper.userView(cineplexes, uniqueMovies);break;}
-					case 11:{System.out.println("Thank you for using MOBLIMA!\nSystem Logging Off...");return;}	
+					case 9:{adminHelper.addNewHoliday();break;}
+					case 10:{adminHelper.listTop5(uniqueMovies);break;}
+					case 11:{viewHelper.userView(cineplexes, uniqueMovies);break;}
+					case 12:{System.out.println("Thank you for using MOBLIMA!\nSystem Logging Off...");return;}	
 					default:{System.out.println("Please enter a valid choice");}
 				}
 				System.out.println();
