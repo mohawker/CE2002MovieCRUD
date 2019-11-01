@@ -31,8 +31,9 @@ public class MOBLIMA {
 			System.out.print("Enter your age: ");
 			int userAge = InputControl.integerInput(1, 150);
 			User user = new User(userName, "vincentyongweijie@gmail.com", "83189252", userAge);
-			UserControl userHelper = new UserControl(uniqueMovies, user, cineplexes);
+			UserControl userControl = new UserControl(uniqueMovies, user, cineplexes);
 			ViewControl viewHelper = new ViewControl(uniqueMovies, user, cineplexes);
+			BookingManager bookingManager = new BookingManager(uniqueMovies, user, cineplexes);
 			System.out.println("------------------------------------------------------");
 			System.out.println("Welcome, " + user.getUsername());
 			System.out.printf("The date is: %s\n", java.time.LocalDate.now());
@@ -55,14 +56,14 @@ public class MOBLIMA {
 				choice = InputControl.integerInput(0, 9);
 				System.out.println();
 				switch (choice){
-					case 0:{userHelper.searchUniqueMovies(uniqueMovies, cineplexes);break;}
-					case 1:{userHelper.listUniqueMovies(uniqueMovies, cineplexes);break;}
-					case 2:{userHelper.viewMovieDetails(user, uniqueMovies);break;}
-					case 3:{userHelper.checkSeatAvailability(user, cineplexes);break;}
-					case 4:{userHelper.bookTicket(user, cineplexes);break;}
-					case 5:{userHelper.viewBookingHistory(user);break;}
-					case 6:{userHelper.listTop5(uniqueMovies);break;}
-					case 7:{userHelper.addRating(uniqueMovies, user);break;}
+					case 0:{userControl.searchUniqueMovies(uniqueMovies, cineplexes);break;}
+					case 1:{userControl.listUniqueMovies(uniqueMovies, cineplexes);break;}
+					case 2:{userControl.viewMovieDetails(user, uniqueMovies);break;}
+					case 3:{userControl.checkSeatAvailability(user, cineplexes);break;}
+					case 4:{bookingManager.bookTicket(user, cineplexes);break;}
+					case 5:{userControl.viewBookingHistory(user);break;}
+					case 6:{userControl.listTop5(uniqueMovies);break;}
+					case 7:{userControl.addRating(uniqueMovies, user);break;}
 					case 8:{viewHelper.adminView(cineplexes, uniqueMovies);break;}
 					case 9:{System.out.println("Thank you for using MOBLIMA!\nSystem Logging Off...");return;}	
 					default:{System.out.println("Please enter a valid choice");}

@@ -92,31 +92,6 @@ public class User {
 		cinema_showing.viewSeats(showtime_chosen, cinema_showing.dates.get(dateIndex));
 	}
 	
-	public MovieTicket bookPurchaseTicket(User user, Cineplex cineplex, Movie movie, int numTicket) {
-		int index = cineplex.movies.indexOf(movie);
-		
-		Cinema cinema_showing = cineplex.cinemas.get(index);
-		Scanner scan = new Scanner(System.in);
-		System.out.println("\n=== Dates for " + movie.title + " at " + cineplex.name + " " + cineplex.location + " ===");
-		for (int i=0; i<cinema_showing.dates.size(); i++) {
-			System.out.println("[" + (i+1) + "] " + cinema_showing.dates.get(i));
-		}
-		System.out.print("Select date: ");
-		int dateIndex = scan.nextInt()-1;
-		System.out.println("\n=== Available showtimes ===");
-		for (int i=0; i<cinema_showing.showtimes[dateIndex].size(); i++) {
-			System.out.println("[" + (i+1) + "] " + cinema_showing.showtimes[dateIndex].get(i));
-		}
-		System.out.print("Select showtime: ");
-		while (!scan.hasNextInt()) {
-			System.out.println("Error... Please input an Integer");
-			scan.nextLine();	
-		}
-		int choice = scan.nextInt();
-		System.out.println();
-		String showtime = cinema_showing.showtimes[dateIndex].get(choice-1);
-		return cinema_showing.bookSeat(cineplex, user, cinema_showing, showtime, movie, numTicket, cinema_showing.dates.get(dateIndex));
-	}
 	
 	public void addTicket(MovieTicket ticket) {
 		this.ticket_history.add(ticket);

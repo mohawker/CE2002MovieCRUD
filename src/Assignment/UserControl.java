@@ -51,8 +51,8 @@ public class UserControl extends Control{
 		movieControl.printMovies(uniqueMovies);
 		System.out.print("Would you like you view the showtimes? (Y/N) ");
 		if (scan.next().equals("Y")) {
-			Movie movie_chosen = movieControl.selectMovie(uniqueMovies);
-			movieControl.printMovieShowings(movie_chosen, cineplexes); // for unique movies
+			Movie movieChosen = movieControl.selectMovie(uniqueMovies);
+			movieControl.printMovieShowings(movieChosen, cineplexes); // for unique movies
 		}
 	}
 
@@ -61,57 +61,26 @@ public class UserControl extends Control{
 		Scanner scan = new Scanner(System.in);
 		System.out.println("=== Movies Available ===");
 		movieControl.printMovies(uniqueMovies);
-		Movie movie_chosen = movieControl.selectMovie(uniqueMovies);
-		user.viewMovieDetail(movie_chosen);
+		Movie movieChosen = movieControl.selectMovie(uniqueMovies);
+		user.viewMovieDetail(movieChosen);
 	}
 
 	public void checkSeatAvailability(User user, ArrayList<Cineplex> cineplexes) {
 		Scanner scan = new Scanner(System.in);
 		cineplexControl.printCineplexes(cineplexes);
 		Cineplex cineplex_chosen = cineplexControl.selectCineplex(cineplexes);
-		Movie movie_chosen = movieControl.selectMovie(user, cineplex_chosen);
-		String date = movieControl.printAndSelectMovieDates(cineplex_chosen, movie_chosen);
+		Movie movieChosen = movieControl.selectMovie(user, cineplex_chosen);
+		String date = movieControl.printAndSelectMovieDates(cineplex_chosen, movieChosen);
 		
-		if (movie_chosen.status.equals("Showing")){
-			user.viewSeatAvailability(cineplex_chosen, movie_chosen, date);
+		if (movieChosen.status.equals("Showing")){
+			user.viewSeatAvailability(cineplex_chosen, movieChosen, date);
 			System.out.println();
 		}else {
 			System.out.println("Movie is not showing yet");
 		}
 		
 	}
-
-	public void bookTicket(User user, ArrayList<Cineplex> cineplexes){
-		Scanner scan = new Scanner(System.in);
-		cineplexControl.printCineplexes(cineplexes);
-		Cineplex cineplex_chosen = cineplexControl.selectCineplex(cineplexes);
-		Movie movie_chosen = movieControl.selectMovie(user, cineplex_chosen);
-		
-		System.out.println("\nWould you like to book single or multiple seats?");
-		System.out.println("[1] Single Seat");
-		System.out.println("[2] Multiple Seats");
-		System.out.print("Select option: ");
-		int choice=-1;
-		while (!scan.hasNextInt()){
-			System.out.println("Error... Please input an Integer");
-			scan.nextLine();
-		}
-		while (choice != 1 && choice !=2) {
-			choice = scan.nextInt();
-			if (choice == 1) {
-				MovieTicket ticket = user.bookPurchaseTicket(user, cineplex_chosen, movie_chosen, 1);
-				user.addTicket(ticket);
-			}else if (choice==2){
-				System.out.print("Number of seats: ");
-				int numTicket = scan.nextInt();
-				MovieTicket ticket = user.bookPurchaseTicket(user, cineplex_chosen, movie_chosen, numTicket);
-				user.addTicket(ticket);
-			}else {
-				System.out.println("Incorrect selection please select option 1 or 2");
-			}
-		}
-	}
-
+	
 	public void viewBookingHistory(User user) {
 		user.viewTicketHistory();
 	}
@@ -132,8 +101,8 @@ public class UserControl extends Control{
 	public void addRating(Set<Movie> uniqueMovies, User user) {
 		System.out.println("=== Review Movies ===");
 		movieControl.printMovies(uniqueMovies);
-		Movie movie_chosen = movieControl.selectMovie(uniqueMovies);
-		Review review = new Review(user, movie_chosen);
-		movie_chosen.addReview(review);
+		Movie movieChosen = movieControl.selectMovie(uniqueMovies);
+		Review review = new Review(user, movieChosen);
+		movieChosen.addReview(review);
 	}
 }
