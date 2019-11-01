@@ -24,15 +24,15 @@ public class MOBLIMA {
 		System.out.println("Would you like to continue as a User or an Admin?");
 		System.out.println("[1] User");
 		System.out.println("[2] Admin");
-		int choice = InputHandler.integerInput(1, 2);
+		int choice = InputControl.integerInput(1, 2);
 		if (choice == 1) {
 			System.out.print("Enter your name: ");
-			String userName = InputHandler.stringInput();
+			String userName = InputControl.stringInput();
 			System.out.print("Enter your age: ");
-			int userAge = InputHandler.integerInput(1, 150);
+			int userAge = InputControl.integerInput(1, 150);
 			User user = new User(userName, "vincentyongweijie@gmail.com", "83189252", userAge);
-			UserHelper userHelper = new UserHelper(uniqueMovies, user, cineplexes);
-			ViewHelper viewHelper = new ViewHelper(uniqueMovies, user, cineplexes);
+			UserControl userHelper = new UserControl(uniqueMovies, user, cineplexes);
+			ViewControl viewHelper = new ViewControl(uniqueMovies, user, cineplexes);
 			System.out.println("------------------------------------------------------");
 			System.out.println("Welcome, " + user.getUsername());
 			System.out.printf("The date is: %s\n", java.time.LocalDate.now());
@@ -52,7 +52,7 @@ public class MOBLIMA {
 				System.out.print("Please select (0-9) : ");
 				
 				// error checker class - checkInt , checkStr etc
-				choice = InputHandler.integerInput(0, 9);
+				choice = InputControl.integerInput(0, 9);
 				System.out.println();
 				switch (choice){
 					case 0:{userHelper.searchUniqueMovies(uniqueMovies, cineplexes);break;}
@@ -71,8 +71,8 @@ public class MOBLIMA {
 			}
 		}else if (choice == 2) {
 			Admin admin = new Admin("Admin", "tom@gmail.com", "98765432", 22, "Password123");
-			AdminHelper adminHelper = new AdminHelper(uniqueMovies, admin, cineplexes);
-			ViewHelper viewHelper = new ViewHelper(uniqueMovies, admin, cineplexes);
+			AdminControl adminHelper = new AdminControl(uniqueMovies, admin, cineplexes);
+			ViewControl viewHelper = new ViewControl(uniqueMovies, admin, cineplexes);
 			admin.login();
 			System.out.println("Welcome, " + admin.getUsername());
 			while (1==1) {
@@ -90,7 +90,7 @@ public class MOBLIMA {
 				System.out.println("[11] Log Off & Shut Down");
 				System.out.println("------------------------------------------------------");
 				System.out.print("Please select (1-10) : ");
-				choice = InputHandler.integerInput(1, 10);
+				choice = InputControl.integerInput(1, 10);
 				switch (choice){
 					case 1:{adminHelper.createMovieListing(admin, cineplexes, cineplex_1, cineplex_2, cineplex_3, uniqueMovies);break;}
 					case 2:{adminHelper.updateMovieListing(cineplexes, uniqueMovies);break;}
