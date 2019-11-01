@@ -57,4 +57,29 @@ public class DateChecker {
 	    }
 	    return specialDate;
 	}
+	
+	@SuppressWarnings("deprecation")
+	static public void addSpecialDate(String date) {
+		//Fixed year 2019
+		int def_year = Calendar.getInstance().get(Calendar.YEAR) - 1900;
+		String[] dateSplit = date.split("/"); //Split based on /
+		int day = 0, month=0;
+		try{
+			day = Integer.parseInt(dateSplit[0].trim());
+			month = Integer.parseInt(dateSplit[1].trim());
+		} catch(NumberFormatException nfe) {
+			System.out.println("NumberFormatException: " + nfe.getMessage());
+			return;
+		}
+		
+		System.out.printf("Day: %d Month: %d\n", day, month);
+		if ((day>=1 && day<=31) && (month>=1 && month <= 12)) {
+			publicHoliday.add(new Date(def_year,month-1,day-1));//account for range of day month
+			System.out.printf("Updated Specials Date for %s\n", date);
+		}
+		else {
+			System.out.println("Error please input valid date");
+			return;
+		}
+	}
 }
