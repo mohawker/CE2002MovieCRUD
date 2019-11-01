@@ -168,6 +168,14 @@ public class AdminControl extends Control{
 	public void configureSettings() {
 		Price.updatePrices();
 	}
+	
+	public void addNewHoliday() {
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Please enter date in the format DD/MM");
+		String date = scan.next();
+		DateChecker.addSpecialDate(date);
+		
+	}
 
 	public void listTop5(Set<Movie> uniqueMovies) {
 		Scanner scan = new Scanner(System.in);
