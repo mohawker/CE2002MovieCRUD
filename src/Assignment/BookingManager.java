@@ -29,13 +29,23 @@ public class BookingManager extends Control{
 		int choice = InputControl.integerInput(1, 2);
 			if (choice == 1) {
 				MovieTicket ticket = this.bookPurchaseTicket(user, cineplexChosen, movieChosen, 1);
-				user.addTicket(ticket);
+				if (new Payment().authenticatePayment(ticket) == true) {
+					user.addTicket(ticket);
 				}
+				else {
+					return;
+				}
+			}
 			else if (choice==2){
 				System.out.print("Number of seats: ");
 				int numTicket = scan.nextInt();
 				MovieTicket ticket = this.bookPurchaseTicket(user, cineplexChosen, movieChosen, numTicket);
-				user.addTicket(ticket);
+				if (new Payment().authenticatePayment(ticket) == true) {
+					user.addTicket(ticket);
+				}
+				else {
+					return;
+				}
 			}
 	}
 	
@@ -94,15 +104,8 @@ public class BookingManager extends Control{
 					char reply = scan.next().charAt(0);
 					if (reply == 'Y') {
 						seats[row_index][column_index] = "X";
-						if (new Payment().authenticatePayment(ticket) == true) {
-							System.out.printf("Payment is done! Here is your receipt. Total price is $%.2f\n",ticket.getPrice());
 							movie.movieSales += ticket.getPrice();
 							return ticket;
-							}
-						else {
-							// still very buggy - would like to get back to main page
-								System.out.println("Transaction failed!");
-							}
 						} 
 					else {
 						seats[row_index][column_index] = "O";
@@ -143,17 +146,10 @@ public class BookingManager extends Control{
 						totalPrice += ticket.perTicketPrice;
 					}
 					ticket.setPrice(totalPrice);
-					if (new Payment().authenticatePayment(ticket) == true) {
-					System.out.printf("Payment is done! Here is your receipt. Total price is $%.2f", ticket.getPrice());
 					movie.movieSales += ticket.getPrice();
 					ticket.quantityTicket = seatList.size();
 					return ticket;
-					}
-					else {
-						// still very buggy
-						System.out.println("Transaction failed!");
-					}
-				} else {
+					} else {
 					for (int i = 0; i < seatList.size(); i++) {
 						int row_index = (int) seatList.get(i).charAt(0) - 65;
 						int column_index = (int) seatList.get(i).charAt(1) - 49;
