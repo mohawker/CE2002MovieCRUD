@@ -23,22 +23,24 @@ public class Price {
 		this.weekendPH = DateChecker.checkSpecialDate(date);
 		this.movieType = movieType;
 		this.cinemaType = cinemaType;		
+		float currPrice = Price.basePrice;
 		
 		if ( this.age<=6 || this.age >= 55) {
-			this.price = Price.basePrice*Price.multAge;
+			currPrice = currPrice*(1-Price.multAge);
 		}
 		if (this.movieType.equals("3D")) {
-			this.price = Price.basePrice*Price.mult3D;
+			currPrice = currPrice*(Price.mult3D+1);
 		}
 		if (this.movieType.equals("Blockbuster")) {
-			this.price = Price.basePrice + Price.surBlockbuster;
+			currPrice += Price.surBlockbuster;
 		}
 		if(this.cinemaType.equals("GoldClass")) {
-			this.price = Price.basePrice*Price.multGC;
+			currPrice = currPrice*(Price.multGC+1);
 		}
 		if (this.weekendPH == true) {
-			this.price = Price.basePrice + Price.surPHWeekend;
+			currPrice += Price.surPHWeekend;
 		}
+		this.price = currPrice;
 	}
 	
 	public void printBreakdown() {
