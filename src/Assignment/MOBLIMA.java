@@ -32,7 +32,7 @@ public class MOBLIMA {
 			int userAge = InputControl.integerInput(1, 150);
 			User user = new User(userName, "vincentyongweijie@gmail.com", "83189252", userAge);
 			UserControl userControl = new UserControl(uniqueMovies, user, cineplexes);
-			ViewControl viewHelper = new ViewControl(uniqueMovies, user, cineplexes);
+			ViewControl viewControl = new ViewControl(uniqueMovies, user, cineplexes);
 			BookingManager bookingManager = new BookingManager(uniqueMovies, user, cineplexes);
 			ReviewManager reviewManager = new ReviewManager(uniqueMovies, user, cineplexes);
 			System.out.println("------------------------------------------------------");
@@ -65,7 +65,7 @@ public class MOBLIMA {
 					case 5:{userControl.viewBookingHistory(user);break;}
 					case 6:{userControl.listTop5(uniqueMovies);break;}
 					case 7:{reviewManager.addRating(uniqueMovies, user);break;}
-					case 8:{viewHelper.adminView(cineplexes, uniqueMovies);break;}
+					case 8:{viewControl.adminView(cineplexes, uniqueMovies);break;}
 					case 9:{System.out.println("Thank you for using MOBLIMA!\nSystem Logging Off...");return;}	
 					default:{System.out.println("Please enter a valid choice");}
 				}
@@ -73,8 +73,8 @@ public class MOBLIMA {
 			}
 		}else if (choice == 2) {
 			Admin admin = new Admin("Admin", "tom@gmail.com", "98765432", 22, "Password123");
-			AdminControl adminHelper = new AdminControl(uniqueMovies, admin, cineplexes);
-			ViewControl viewHelper = new ViewControl(uniqueMovies, admin, cineplexes);
+			AdminControl adminControl = new AdminControl(uniqueMovies, admin, cineplexes);
+			ViewControl viewControl = new ViewControl(uniqueMovies, admin, cineplexes);
 			admin.login();
 			System.out.println("Welcome, " + admin.getUsername());
 			while (1==1) {
@@ -95,17 +95,17 @@ public class MOBLIMA {
 				System.out.print("Please select (1-12) : ");
 				choice = InputControl.integerInput(1, 12);
 				switch (choice){
-					case 1:{adminHelper.createMovieListing(admin, cineplexes, cineplex_1, cineplex_2, cineplex_3, uniqueMovies);break;}
-					case 2:{adminHelper.updateMovieListing(cineplexes, uniqueMovies);break;}
-					case 3:{adminHelper.removeMovieListing(cineplexes, uniqueMovies);break;}
-					case 4:{adminHelper.createCinemaShowtimes(admin, cineplexes, cineplex_1, cineplex_2, cineplex_3, uniqueMovies);break;}
-					case 5:{adminHelper.updateCinemaShowtimes(cineplexes, uniqueMovies, admin);break;}
-					case 6:{adminHelper.addCinemaShowtimes(cineplexes, uniqueMovies, admin); break;}
-					case 7:{adminHelper.removeCinemaShowtimes(cineplexes, uniqueMovies, admin);break;}
-					case 8:{adminHelper.configureSettings();break;}
-					case 9:{adminHelper.addNewHoliday();break;}
-					case 10:{adminHelper.listTop5(uniqueMovies);break;}
-					case 11:{viewHelper.userView(cineplexes, uniqueMovies);break;}
+					case 1:{adminControl.createMovieListing(admin, cineplexes, cineplex_1, cineplex_2, cineplex_3, uniqueMovies);break;}
+					case 2:{adminControl.updateMovieListing(cineplexes, uniqueMovies);break;}
+					case 3:{adminControl.removeMovieListing(cineplexes, uniqueMovies);break;}
+					case 4:{adminControl.createCinemaShowtimes(admin, cineplexes, cineplex_1, cineplex_2, cineplex_3, uniqueMovies);break;}
+					case 5:{adminControl.updateCinemaShowtimes(cineplexes, uniqueMovies, admin);break;}
+					case 6:{adminControl.addCinemaShowtimes(cineplexes, uniqueMovies, admin); break;}
+					case 7:{adminControl.removeCinemaShowtimes(cineplexes, uniqueMovies, admin);break;}
+					case 8:{adminControl.configureSettings();break;}
+					case 9:{adminControl.addNewHoliday();break;}
+					case 10:{adminControl.listTop5(uniqueMovies);break;}
+					case 11:{viewControl.userView(cineplexes, uniqueMovies);break;}
 					case 12:{System.out.println("Thank you for using MOBLIMA!\nSystem Logging Off...");return;}	
 					default:{System.out.println("Please enter a valid choice");}
 				}

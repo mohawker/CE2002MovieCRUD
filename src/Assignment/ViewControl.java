@@ -61,7 +61,7 @@ public class ViewControl extends Control{
 		int userAge = InputControl.integerInput(1, 150);
 		User user = new User(userName, "vincentyongweijie@gmail.com", "83189252", userAge);
 		UserControl userControl = new UserControl(uniqueMovies, user, cineplexes);
-		ViewControl viewHelper = new ViewControl(uniqueMovies, user, cineplexes);
+		ViewControl viewControl = new ViewControl(uniqueMovies, user, cineplexes);
 		BookingManager bookingManager = new BookingManager(uniqueMovies, user, cineplexes);
 		ReviewManager reviewManager = new ReviewManager(uniqueMovies, user, cineplexes);
 		System.out.println("------------------------------------------------------");
@@ -92,7 +92,7 @@ public class ViewControl extends Control{
 				case 5:{userControl.viewBookingHistory(user);break;}
 				case 6:{userControl.listTop5(uniqueMovies);break;}
 				case 7:{reviewManager.addRating(uniqueMovies, user);break;}
-				case 8:{viewHelper.adminView(cineplexes, uniqueMovies);break;}
+				case 8:{viewControl.adminView(cineplexes, uniqueMovies);break;}
 				case 9:{System.out.println("Thank you for using MOBLIMA!\nSystem Logging Off...");return;}	
 				default:{System.out.println("Please enter a valid choice");}
 			}
