@@ -27,19 +27,22 @@ public class UserControl extends Control{
 		String userInput = scan.nextLine();
 		List<Movie> uniqueMoviesList = new ArrayList<Movie>(uniqueMovies);
 		boolean found = false; //assume not found
-		Movie movieChosen = null;
+		ArrayList<Movie> moviesChosen = new ArrayList<Movie>();
 		for (int i = 0; i < uniqueMovies.size(); i++) {
 			//make all titles lower case, remove left and right space. 
 			if (uniqueMoviesList.get(i).title.toLowerCase().contains(userInput.trim().toLowerCase())) {
 				found = true;
-				movieChosen = uniqueMoviesList.get(i);
+				moviesChosen.add(uniqueMoviesList.get(i));
 			};			
 		}
 		if (found) {
-			movieControl.printMovieShowings(movieChosen, cineplexes);
+			for (Movie currMovie: moviesChosen) {
+				movieControl.printMovieShowings(currMovie, cineplexes);
+			}
+			
 		}
 		else {
-			System.out.print("Movie not found!");
+			System.out.print("=== Movie not found! === ");
 		}
 	}
 	
