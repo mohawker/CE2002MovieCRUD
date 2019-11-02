@@ -1,8 +1,10 @@
 package Assignment;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Cineplex {
+
+public class Cineplex implements Serializable{
 	public String name;
 	public String location;
 	public ArrayList<Cinema> cinemas;

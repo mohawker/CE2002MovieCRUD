@@ -1,9 +1,10 @@
 package Assignment;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Movie {
+public class Movie implements Serializable{
 	public String title;
 	public String status;
 	public String synopsis;

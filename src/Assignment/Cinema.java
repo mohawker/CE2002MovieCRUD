@@ -1,8 +1,10 @@
 package Assignment;
 
 import java.util.Scanner;
+import java.io.Serializable;
 import java.util.ArrayList;
-public abstract class Cinema {
+
+public abstract class Cinema implements Serializable{
 		
 	private int ROW=0;
 	private int COL=0;

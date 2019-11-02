@@ -1,12 +1,13 @@
 package Assignment;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-public class MovieTicket {
+public class MovieTicket implements Serializable{
 	
 	public float perTicketPrice;
 	public int quantityTicket;

@@ -1,8 +1,9 @@
 package Assignment;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Price {
+public class Price implements Serializable{
 	private int age;
 	private String cinemaType;
 	private boolean weekendPH = false;
