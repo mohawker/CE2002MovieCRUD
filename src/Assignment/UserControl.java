@@ -10,7 +10,6 @@ public class UserControl extends Control{
 	MovieControl movieControl;
 	CinemaControl cinemaControl;
 	ShowtimeControl showtimeControl;
-	ViewControl viewControl;
 	CineplexControl cineplexControl;
 	
 	public UserControl(Set<Movie> uniqueMovies, User user, ArrayList<Cineplex> cineplexes) {
@@ -18,7 +17,6 @@ public class UserControl extends Control{
 		this.movieControl = new MovieControl(uniqueMovies, user, cineplexes);
 		this.cinemaControl = new CinemaControl(uniqueMovies, user, cineplexes);
 		this.showtimeControl = new ShowtimeControl(uniqueMovies, user, cineplexes);
-		this.viewControl = new ViewControl(uniqueMovies, user, cineplexes);
 		this.cineplexControl = new CineplexControl(uniqueMovies, user, cineplexes);
 	}
 	
