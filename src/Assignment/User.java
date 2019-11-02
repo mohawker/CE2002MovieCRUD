@@ -62,34 +62,29 @@ public class User {
 	
 	public void viewSeatAvailability(Cineplex cineplex, Movie movie, String date) {
 		int index = cineplex.movies.indexOf(movie);
-		Cinema cinema_showing = cineplex.cinemas.get(index);
+		Cinema cinemaShowing = cineplex.cinemas.get(index);
 		Scanner scan = new Scanner(System.in);
 		int movieIndex = cineplex.movies.indexOf(movie);
 		int dateIndex = cineplex.cinemas.get(movieIndex).dates.indexOf(date);
 		System.out.println("=== Available Showtimes ===");
-		for (int i=0; i<cinema_showing.showtimes[dateIndex].size(); i++) {
-			System.out.println("[" + (i+1) + "] " + cinema_showing.showtimes[dateIndex].get(i));
+		for (int i=0; i<cinemaShowing.showtimes[dateIndex].size(); i++) {
+			System.out.println("[" + (i+1) + "] " + cinemaShowing.showtimes[dateIndex].get(i));
 		}
 		System.out.print("Select showtime: ");
-		
-		while (!scan.hasNextInt()) {
-			System.out.println("Error... Please input an Integer");
-			scan.nextLine();	
-		}
-		int choice = scan.nextInt();
+		int choice = InputControl.integerInput(1, cinemaShowing.showtimes.length);
 		
 		
 		String showtime_chosen;
 		while (1==1) {
-			if (choice < 1 && choice > cinema_showing.showtimes[dateIndex].size()) {
+			if (choice < 1 && choice > cinemaShowing.showtimes[dateIndex].size()) {
 				System.out.println("Invalid option. Please try again");
 			}else {
-				showtime_chosen = cinema_showing.showtimes[dateIndex].get(choice-1);
+				showtime_chosen = cinemaShowing.showtimes[dateIndex].get(choice-1);
 				System.out.println("=== Seats for " + movie.title + " on " + date + " " + showtime_chosen + " at " + cineplex.name + " " + cineplex.location + " ===");
 				break;
 			}
 		}
-		cinema_showing.viewSeats(showtime_chosen, cinema_showing.dates.get(dateIndex));
+		cinemaShowing.viewSeats(showtime_chosen, cinemaShowing.dates.get(dateIndex));
 	}
 	
 	

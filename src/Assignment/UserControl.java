@@ -97,12 +97,4 @@ public class UserControl extends Control{
 			movieControl.sortMovies(uniqueMovies, false);
 		}
 	}
-	
-	public void addRating(Set<Movie> uniqueMovies, User user) {
-		System.out.println("=== Review Movies ===");
-		movieControl.printMovies(uniqueMovies);
-		Movie movieChosen = movieControl.selectMovie(uniqueMovies);
-		Review review = new Review(user, movieChosen);
-		movieChosen.addReview(review);
-	}
 }

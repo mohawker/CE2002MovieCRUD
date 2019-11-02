@@ -23,14 +23,6 @@ public class Movie {
 		this.cast = cast;
 	}
 	
-	public void addReview(Review review) {
-		boolean result = this.movieReviews.add(review);
-		if (result == true) {
-			System.out.println("Movie review for " + this.title + " added successfully");
-		}else {
-			System.out.println("Movie review for " + this.title + " not added successfully");
-		}
-	}
 	
 	public void printReviews() {
 		if (this.movieReviews.size() == 0) {

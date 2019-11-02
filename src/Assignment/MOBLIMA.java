@@ -34,6 +34,7 @@ public class MOBLIMA {
 			UserControl userControl = new UserControl(uniqueMovies, user, cineplexes);
 			ViewControl viewHelper = new ViewControl(uniqueMovies, user, cineplexes);
 			BookingManager bookingManager = new BookingManager(uniqueMovies, user, cineplexes);
+			ReviewManager reviewManager = new ReviewManager(uniqueMovies, user, cineplexes);
 			System.out.println("------------------------------------------------------");
 			System.out.println("Welcome, " + user.getUsername());
 			System.out.printf("The date is: %s\n", java.time.LocalDate.now());
@@ -63,7 +64,7 @@ public class MOBLIMA {
 					case 4:{bookingManager.bookTicket(user, cineplexes);break;}
 					case 5:{userControl.viewBookingHistory(user);break;}
 					case 6:{userControl.listTop5(uniqueMovies);break;}
-					case 7:{userControl.addRating(uniqueMovies, user);break;}
+					case 7:{reviewManager.addRating(uniqueMovies, user);break;}
 					case 8:{viewHelper.adminView(cineplexes, uniqueMovies);break;}
 					case 9:{System.out.println("Thank you for using MOBLIMA!\nSystem Logging Off...");return;}	
 					default:{System.out.println("Please enter a valid choice");}
