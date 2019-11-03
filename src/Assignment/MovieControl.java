@@ -75,13 +75,13 @@ public class MovieControl extends Control{
 	}
 	
 	// select a movie from a particular cineplex
-	public Movie selectMovie(User user, Cineplex cineplex) {
+	public Movie selectMovie(Cineplex cineplex) {
 		System.out.println("=== Movies ===");
 		printMovies(cineplex);
 		System.out.print("Select your movie: ");
 		int choice = InputControl.integerInput(1, cineplex.movies.size());
 		System.out.println();
-		user.viewMovieDetail(cineplex.movies.get(choice-1));
+		cineplex.movies.get(choice-1).printMovie();
 		return cineplex.movies.get(choice-1);
 	}
 	

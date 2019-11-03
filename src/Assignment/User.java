@@ -57,7 +57,6 @@ public class User implements Serializable{
 	}
 	
 	public void viewMovieDetail(Movie movie) {
-		System.out.println("=== Movie Details of " + movie.title + " ===");
 		movie.printMovie();
 	}
 	
@@ -73,8 +72,6 @@ public class User implements Serializable{
 		}
 		System.out.print("Select showtime: ");
 		int choice = InputControl.integerInput(1, cinemaShowing.showtimes.length);
-		
-		
 		String showtime_chosen;
 		while (1==1) {
 			if (choice < 1 && choice > cinemaShowing.showtimes[dateIndex].size()) {

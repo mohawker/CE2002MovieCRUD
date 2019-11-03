@@ -57,20 +57,20 @@ public class UserControl extends Control{
 		}
 	}
 
-	public void viewMovieDetails(User user, Set<Movie> uniqueMovies) {
+	public void viewMovieDetails(Set<Movie> uniqueMovies) {
 		// print out titles of unique movie
 		Scanner scan = new Scanner(System.in);
 		System.out.println("=== Movies Available ===");
 		movieControl.printMovies(uniqueMovies);
 		Movie movieChosen = movieControl.selectMovie(uniqueMovies);
-		user.viewMovieDetail(movieChosen);
+		movieChosen.printMovie();
 	}
 
-	public void checkSeatAvailability(User user, ArrayList<Cineplex> cineplexes) {
+	public void checkSeatAvailability(ArrayList<Cineplex> cineplexes) {
 		Scanner scan = new Scanner(System.in);
 		cineplexControl.printCineplexes(cineplexes);
 		Cineplex cineplex_chosen = cineplexControl.selectCineplex(cineplexes);
-		Movie movieChosen = movieControl.selectMovie(user, cineplex_chosen);
+		Movie movieChosen = movieControl.selectMovie(cineplex_chosen);
 		String date = movieControl.printAndSelectMovieDates(cineplex_chosen, movieChosen);
 		
 		if (movieChosen.status.equals("Showing")){

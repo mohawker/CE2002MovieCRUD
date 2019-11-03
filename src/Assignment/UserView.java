@@ -55,8 +55,8 @@ public class UserView extends View{
 			switch (choice){
 				case 0:{userControl.searchUniqueMovies(app.uniqueMovies, app.cineplexes);break;}
 				case 1:{userControl.listUniqueMovies(app.uniqueMovies, app.cineplexes);break;}
-				case 2:{userControl.viewMovieDetails(user, app.uniqueMovies);break;}
-				case 3:{userControl.checkSeatAvailability(user, app.cineplexes);break;}
+				case 2:{userControl.viewMovieDetails(app.uniqueMovies);break;}
+				case 3:{userControl.checkSeatAvailability(app.cineplexes);break;}
 				case 4:{bookingManager.bookTicket(user, app.cineplexes);break;}
 				case 5:{userControl.viewBookingHistory(user);break;}
 				case 6:{userControl.listTop5(app.uniqueMovies);break;}

@@ -4,14 +4,14 @@ import java.util.Scanner;
 
 public class Admin extends User{
 	
-	String password;
+	private String password;
 	public Admin(String username, String email, String telno, int age, String password) {
 		super(username, email, telno, age);
 		this.password = password;
 	}
 	
 	public void login() {
-		System.out.println("Please enter the password: ");
+		System.out.print("Please enter the password: ");
 		Scanner scan = new Scanner(System.in);
 		int tries = 3;
 		while(tries!=0) {

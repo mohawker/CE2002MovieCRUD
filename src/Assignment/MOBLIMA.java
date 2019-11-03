@@ -15,7 +15,6 @@ public class MOBLIMA implements Serializable {
 	Set<Movie> uniqueMovies = new HashSet<>();
 	ArrayList<User> users = new ArrayList<User>();
 	
-	
 	public void initialiseApp(){
 		cinemas = Initialiser.generateCinemas();
 		movies = Initialiser.generateMovies();
@@ -29,8 +28,8 @@ public class MOBLIMA implements Serializable {
 	public static MOBLIMA loadApp() {
 		System.out.println("Welcome to MOBLIMA App");
 		System.out.println("Would you like to continue to load previous save or start anew?");
-		System.out.println("[1] load");
-		System.out.println("[2] new");
+		System.out.println("[1] Load");
+		System.out.println("[2] New");
 		int choice = InputControl.integerInput(1, 2);
 		if (choice == 1) {
 			try	{
@@ -44,7 +43,6 @@ public class MOBLIMA implements Serializable {
 				MOBLIMA newMoblimaApp = new MOBLIMA();
 				newMoblimaApp.initialiseApp();
 				return newMoblimaApp;
-				
 			}
 		}
 		else {
@@ -52,30 +50,25 @@ public class MOBLIMA implements Serializable {
 			newMoblimaApp.initialiseApp();
 			return newMoblimaApp;
 		}
-		
-		
 	}
+	
 	public void writeApp() {
 		String path = System.getProperty("user.dir")+ "/src/" + this.getClass().getPackage().getName() +"/moblima.dat";
 		SerializeDB.writeSerializedObject(path, this);
 	}
 
-	
-	public MOBLIMA() {
-	}
+	public MOBLIMA() {}
 
-	
 	public void MOBLIMAMainLoop() {
 		System.out.println("Would you like to be a user or admin?");
-		System.out.println("[1] user");
-		System.out.println("[2] admin");
+		System.out.println("[1] User");
+		System.out.println("[2] Admin");
 		int choice = InputControl.integerInput(1, 2);
 		//end 0, user 1 , admin 2
 		while (true) {
 			if (choice == 1) {
 				UserView myUserView = new UserView(this);
 				choice = myUserView.printView();
-
 			}
 			else if (choice == 2){
 				AdminView myAdminView = new AdminView(this);
@@ -84,9 +77,7 @@ public class MOBLIMA implements Serializable {
 			else {
 				break;
 			}
-			
 		}
-		
 	}
 
 	public static void main(String[] args) {

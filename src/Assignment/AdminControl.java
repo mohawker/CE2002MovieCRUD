@@ -12,15 +12,15 @@ public class AdminControl extends Control{
 	ShowtimeControl showtimeControl;
 	CineplexControl cineplexControl;
 	
-	public AdminControl(Set<Movie> uniqueMovies, User user, ArrayList<Cineplex> cineplexes) {
-		super(uniqueMovies, user, cineplexes);
-		this.movieControl = new MovieControl(uniqueMovies, user, cineplexes);
-		this.cinemaControl = new CinemaControl(uniqueMovies, user, cineplexes);
-		this.showtimeControl = new ShowtimeControl(uniqueMovies, user, cineplexes);
-		this.cineplexControl = new CineplexControl(uniqueMovies, user, cineplexes);
+	public AdminControl(Set<Movie> uniqueMovies, Admin admin, ArrayList<Cineplex> cineplexes) {
+		super(uniqueMovies, admin, cineplexes);
+		this.movieControl = new MovieControl(uniqueMovies, admin, cineplexes);
+		this.cinemaControl = new CinemaControl(uniqueMovies, admin, cineplexes);
+		this.showtimeControl = new ShowtimeControl(uniqueMovies, admin, cineplexes);
+		this.cineplexControl = new CineplexControl(uniqueMovies, admin, cineplexes);
 	}
 
-	public Movie createMovieListing(Admin admin, ArrayList<Cineplex> cineplexes, Cineplex cineplex_1, Cineplex cineplex_2, Cineplex cineplex_3, Set<Movie> uniqueMovies) {
+	public Movie createMovieListing(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
 		Movie movie = movieControl.createMovie(uniqueMovies);
 		if (movie.status.equals("Showing")) {
 			System.out.println("Where would you like to show this movie in?");
@@ -65,7 +65,7 @@ public class AdminControl extends Control{
 	}
 	
 	// Has issues
-	public void createCinemaShowtimes(Admin admin, ArrayList<Cineplex> cineplexes, Cineplex cineplex_1, Cineplex cineplex_2, Cineplex cineplex_3, Set<Movie> uniqueMovies) {
+	public void createCinemaShowtimes(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
 		int valid = movieControl.ensureUnshownMovies(uniqueMovies);
 		if (valid == 0) {
 			System.out.println("There are no movies listed as 'Coming Soon'. Please create a new movie listing first before creating showtimes.");
@@ -84,11 +84,11 @@ public class AdminControl extends Control{
 	}
 
 	
-	public void updateCinemaShowtimes(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies, User user) {
+	public void updateCinemaShowtimes(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
 		Scanner scan = new Scanner(System.in);
 		cineplexControl.printCineplexes(cineplexes);
 		Cineplex cineplexChosen = cineplexControl.selectCineplex(cineplexes);
-		Movie movieChosen = movieControl.selectMovie(user, cineplexChosen);
+		Movie movieChosen = movieControl.selectMovie(cineplexChosen);
 		String date = movieControl.printAndSelectMovieDates(cineplexChosen, movieChosen);
 		
 		int index = cineplexChosen.movies.indexOf(movieChosen);
@@ -116,11 +116,11 @@ public class AdminControl extends Control{
 		cineplexChosen.cinemas.get(index).showtimes[dateIndex] = currShowtimes;
 	}
 	
-	public void addCinemaShowtimes(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies, User user) {
+	public void addCinemaShowtimes(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
 		Scanner scan = new Scanner(System.in);
 		cineplexControl.printCineplexes(cineplexes);
 		Cineplex cineplexChosen = cineplexControl.selectCineplex(cineplexes);
-		Movie movieChosen = movieControl.selectMovie(user, cineplexChosen);
+		Movie movieChosen = movieControl.selectMovie(cineplexChosen);
 		String date = movieControl.printAndSelectMovieDates(cineplexChosen, movieChosen);
 		
 		int index = cineplexChosen.movies.indexOf(movieChosen);
@@ -140,11 +140,11 @@ public class AdminControl extends Control{
 		cineplexChosen.cinemas.get(index).showtimes[dateIndex] = currShowtimes;
 	}
 
-	public void removeCinemaShowtimes(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies, User user) {
+	public void removeCinemaShowtimes(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
 		Scanner scan = new Scanner(System.in);
 		cineplexControl.printCineplexes(cineplexes);
 		Cineplex cineplexChosen = cineplexControl.selectCineplex(cineplexes);
-		Movie movieChosen = movieControl.selectMovie(user, cineplexChosen);
+		Movie movieChosen = movieControl.selectMovie(cineplexChosen);
 		String date = movieControl.printAndSelectMovieDates(cineplexChosen, movieChosen);
 		
 		int index = cineplexChosen.movies.indexOf(movieChosen);

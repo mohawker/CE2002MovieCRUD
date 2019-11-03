@@ -41,6 +41,7 @@ public class Movie implements Serializable{
 	}
 	
 	public void printMovie() {
+		System.out.println("=== Movie Details of " + this.title + " ===");
 		System.out.println("Title: " + this.title);
 		System.out.println("Director: " + this.director);
 		

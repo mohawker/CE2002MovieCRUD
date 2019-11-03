@@ -11,6 +11,7 @@ public  class AdminView extends View{
 		admin.login();
 		System.out.println("Welcome, " + admin.getUsername());
 	}
+	
 	public int printView() {
 		while (true) {
 			System.out.println("------------------------------------------------------");
@@ -32,13 +33,13 @@ public  class AdminView extends View{
 			int choice = InputControl.integerInput(0, 12);
 			switch (choice){
 				case 0:{app.writeApp(); break;}
-				case 1:{adminControl.createMovieListing(admin, app.cineplexes, app.cineplex_1, app.cineplex_2, app.cineplex_3, app.uniqueMovies);break;}
+				case 1:{adminControl.createMovieListing(app.cineplexes, app.uniqueMovies);break;}
 				case 2:{adminControl.updateMovieListing(app.cineplexes, app.uniqueMovies);break;}
 				case 3:{adminControl.removeMovieListing(app.cineplexes, app.uniqueMovies);break;}
-				case 4:{adminControl.createCinemaShowtimes(admin, app.cineplexes, app.cineplex_1, app.cineplex_2, app.cineplex_3, app.uniqueMovies);break;}
-				case 5:{adminControl.updateCinemaShowtimes(app.cineplexes, app.uniqueMovies, admin);break;}
-				case 6:{adminControl.addCinemaShowtimes(app.cineplexes, app.uniqueMovies, admin); break;}
-				case 7:{adminControl.removeCinemaShowtimes(app.cineplexes, app.uniqueMovies, admin);break;}
+				case 4:{adminControl.createCinemaShowtimes(app.cineplexes, app.uniqueMovies);break;}
+				case 5:{adminControl.updateCinemaShowtimes(app.cineplexes, app.uniqueMovies);break;}
+				case 6:{adminControl.addCinemaShowtimes(app.cineplexes, app.uniqueMovies); break;}
+				case 7:{adminControl.removeCinemaShowtimes(app.cineplexes, app.uniqueMovies);break;}
 				case 8:{adminControl.configureSettings();break;}
 				case 9:{adminControl.addNewHoliday();break;}
 				case 10:{adminControl.listTop5(app.uniqueMovies);break;}
