@@ -20,7 +20,7 @@ public class BookingManager extends Control{
 		Scanner scan = new Scanner(System.in);
 		cineplexControl.printCineplexes(cineplexes);
 		Cineplex cineplexChosen = cineplexControl.selectCineplex(cineplexes);
-		Movie movieChosen = movieControl.selectMovie(user, cineplexChosen);
+		Movie movieChosen = movieControl.selectMovie(cineplexChosen);
 		
 		System.out.println("\nWould you like to book single or multiple seats?");
 		System.out.println("[1] Single Seat");
