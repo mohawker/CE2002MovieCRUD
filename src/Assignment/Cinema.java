@@ -16,9 +16,9 @@ public abstract class Cinema implements Serializable{
 	public ArrayList<String>[] showtimes = new ArrayList[6];
 	public ArrayList<String> dates;
 	
-	public Cinema(String cinema_type, String cinema_code, ArrayList<String> showtimes, ArrayList<String> dates) { // can customise seats based on cinema_type
-		this.cinemaType = cinema_type;
-		this.cinemaCode = cinema_code;
+	public Cinema(String cinemaType, String cinemaCode, ArrayList<String> showtimes, ArrayList<String> dates) { // can customise seats based on cinemaType
+		this.cinemaType = cinemaType;
+		this.cinemaCode = cinemaCode;
 		for (int i=0; i<dates.size(); i++) {
 			this.showtimes[i] = showtimes;
 		}
@@ -27,18 +27,18 @@ public abstract class Cinema implements Serializable{
 	}
 	
 	
-	public static Cinema generateCinema(String cinema_type, String cinema_code, ArrayList<String> showtimes, ArrayList<String> dates) {
+	public static Cinema generateCinema(String cinemaType, String cinemaCode, ArrayList<String> showtimes, ArrayList<String> dates) {
 		// dynamically generate seats
 		// For seating, different cinema types have different number of seats
-		if (cinema_type.equals("3D")) {
-			return new TDCinema(cinema_type, cinema_code, showtimes, dates);
-		}else if (cinema_type.equals("GoldClass")) {
-			return new GCCinema(cinema_type, cinema_code, showtimes, dates);
-		}else if (cinema_type.equals("Normal")) {
-			return new NormalCinema(cinema_type, cinema_code, showtimes, dates);
+		if (cinemaType.equals("3D")) {
+			return new TDCinema(cinemaType, cinemaCode, showtimes, dates);
+		}else if (cinemaType.equals("GoldClass")) {
+			return new GCCinema(cinemaType, cinemaCode, showtimes, dates);
+		}else if (cinemaType.equals("Normal")) {
+			return new NormalCinema(cinemaType, cinemaCode, showtimes, dates);
 		}
 		else {
-			return new ImaxCinema(cinema_type, cinema_code, showtimes, dates);
+			return new ImaxCinema(cinemaType, cinemaCode, showtimes, dates);
 		} 
 		
 	}
