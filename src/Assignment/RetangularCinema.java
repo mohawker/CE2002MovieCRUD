@@ -3,17 +3,17 @@ package Assignment;
 import java.util.ArrayList;
 
 public abstract class RetangularCinema extends Cinema {
-	
+	private String[][][][] floorplan;
 	public RetangularCinema(String cinema_type, String cinema_code, ArrayList<String> showtimes, ArrayList<String> dates) { // can customise seats based on cinema_type
 		super(cinema_type, cinema_code, showtimes, dates);
 	}
 	
 	public void generateFloorPlan() {
 		// dynamically generate floor plan;
-		int num_showtimes = this.showtimes[0].size();
-		this.floorplan = new String [dates.size()][num_showtimes][getROW()][getCOL()];
+		int num_showtimes = super.getShowtime().length;
+		this.floorplan = new String [getShowtime().length][num_showtimes][getROW()][getCOL()];
 		
-		for (int date=0; date<dates.size(); date++) {
+		for (int date=0; date<super.getDates().size(); date++) {
 			for (int i=0;i<num_showtimes;i++) {
 				for (int j=0;j<getROW();j++) {
 					for (int k=0;k<getCOL();k++) {
@@ -25,8 +25,8 @@ public abstract class RetangularCinema extends Cinema {
 	}
 	
 	public void viewSeats(String time, String date) {
-		int dateIndex = this.dates.indexOf(date);
-		int index = this.showtimes[dateIndex].indexOf(time);
+		int dateIndex = super.getDates().indexOf(date);
+		int index = super.getShowtime()[dateIndex].indexOf(time);
 		String[][] seats = this.floorplan[dateIndex][index];
 		System.out.println("-------------LEGEND-------------");
 		System.out.println("[O] - Vacant Seats");

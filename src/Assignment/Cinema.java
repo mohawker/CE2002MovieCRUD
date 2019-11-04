@@ -12,9 +12,9 @@ public abstract class Cinema implements Serializable{
 	private String cinemaCode; //3lettercode
 	
 	
-	public String[][][][] floorplan; // first 2 dimension is the index of the time, date then show time
-	public ArrayList<String>[] showtimes = new ArrayList[6];
-	public ArrayList<String> dates;
+	private String[][][][] floorplan; // first 2 dimension is the index of the time, date then show time
+	private ArrayList<String>[] showtimes = new ArrayList[6];
+	private ArrayList<String> dates;
 	
 	public Cinema(String cinemaType, String cinemaCode, ArrayList<String> showtimes, ArrayList<String> dates) { // can customise seats based on cinemaType
 		this.cinemaType = cinemaType;
@@ -47,52 +47,28 @@ public abstract class Cinema implements Serializable{
 	//Show available seats for a specific show time
 	public abstract void viewSeats(String time, String date);
 	
-	public String[][][][] getFloorplan(){
-		return this.floorplan;
-	};
-	public void setFloorplan(String[][][][] myFloorPlan) {
-		this.floorplan = myFloorPlan;
-	};
-	public ArrayList<String>[] getShowtime(){
-		return this.showtimes;
-	};
-	public void setShowtime(ArrayList<String>[] myShowtimes) {
-		this.showtimes = myShowtimes;
-	};
+	public String[][][][] getFloorplan(){return this.floorplan;	}
+	public void setFloorplan(String[][][][] myFloorPlan) {this.floorplan = myFloorPlan;	}
 	
-	public ArrayList<String> getDates(){
-		return this.dates;
-	};
-	public void setDates(ArrayList<String> myDates) {
-		this.dates = myDates;
-	};
+	public ArrayList<String>[] getShowtime(){return this.showtimes;	}
+	public void setShowtime(ArrayList<String>[] myShowtimes) {this.showtimes = myShowtimes;	}
+	
+	public ArrayList<String> getDates(){return this.dates;}
+	public void setDates(ArrayList<String> myDates) {this.dates = myDates;}
 	
 
-	public int getROW() {
-		return this.ROW;
-	};
-	public void setROW(int myRow) {
-		this.ROW = myRow;
-	};
+	public int getROW() {return this.ROW;}
+	public void setROW(int myRow) {this.ROW = myRow;}
 	
-	public int getCOL() {
-		return this.COL;
-	};
-	public void setCOL(int myCOL) {
-		this.COL = myCOL;
-	};
+	public int getCOL() {return this.COL;}
+	public void setCOL(int myCOL) {this.COL = myCOL;}
 	
-	public String getCinemaType() {
-		return this.cinemaType;
-	};
-	public void setCinemaType(String myType) {
-		this.cinemaType = myType;
-	};
+	public String getCinemaType() {return this.cinemaType;
+	}
+	public void setCinemaType(String myType) {this.cinemaType = myType;}
 	
-	public String getCinemaCode() {
-		return this.cinemaCode;
-	};
-	public void setCinemaCode(String myType) {
-		this.cinemaCode = myType;
-	};
+	public String getCinemaCode() {	return this.cinemaCode;}
+	
+
+	public void setCinemaCode(String myType) {this.cinemaCode = myType;}
 }

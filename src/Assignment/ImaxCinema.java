@@ -56,8 +56,8 @@ public final class ImaxCinema extends Cinema {
 	
 
 	public void viewSeats(String time, String date) {
-		int dateIndex = this.dates.indexOf(date);
-		int index = this.showtimes[dateIndex].indexOf(time);
+		int dateIndex = this.getDates().indexOf(date);
+		int index = getShowtime()[dateIndex].indexOf(time);
 		String[][] seats = this.getFloorplan()[dateIndex][index];
 		System.out.println("-------------LEGEND-------------");
 		System.out.println("[O] - Vacant Seats");

@@ -13,7 +13,7 @@ public class CineplexControl extends Control{
 	public void printCineplexes(ArrayList<Cineplex> cineplexes) {
 		System.out.println("=== Cineplexes ===");
 		for (int i = 0; i<cineplexes.size(); i++) {
-			System.out.println("[" + (i+1) + "] " + cineplexes.get(i).name + " " + cineplexes.get(i).location);
+			System.out.println("[" + (i+1) + "] " + cineplexes.get(i).getName() + " " + cineplexes.get(i).getLocation());
 		}
 	}
 

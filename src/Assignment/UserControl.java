@@ -31,7 +31,7 @@ public class UserControl extends Control{
 		ArrayList<Movie> moviesChosen = new ArrayList<Movie>();
 		for (int i = 0; i < uniqueMovies.size(); i++) {
 			//make all titles lower case, remove left and right space. 
-			if (uniqueMoviesList.get(i).title.toLowerCase().contains(userInput.trim().toLowerCase())) {
+			if (uniqueMoviesList.get(i).getTitle().toLowerCase().contains(userInput.trim().toLowerCase())) {
 				found = true;
 				moviesChosen.add(uniqueMoviesList.get(i));
 			};			
@@ -77,7 +77,7 @@ public class UserControl extends Control{
 		Movie movieChosen = movieControl.selectMovie(cineplex_chosen);
 		String date = movieControl.printAndSelectMovieDates(cineplex_chosen, movieChosen);
 		
-		if (movieChosen.status.equals("Showing")){
+		if (movieChosen.getStatus().equals("Showing")){
 			cinemaControl.viewSeatAvailability(cineplex_chosen, movieChosen, date);
 			System.out.println();
 		}else {
@@ -101,5 +101,13 @@ public class UserControl extends Control{
 		}else {
 			movieControl.sortMovies(uniqueMovies, false);
 		}
+	}
+
+	public void viewTrailer(Set<Movie> uniqueMovies) {
+		System.out.println("=== Movies Available ===");
+		movieControl.printMovies(uniqueMovies);
+		Movie movieChosen = movieControl.selectMovie(uniqueMovies);
+		VideoPlayer player = new VideoPlayer();
+		player.play(movieChosen);
 	}
 }

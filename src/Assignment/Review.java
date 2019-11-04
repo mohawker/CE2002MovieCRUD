@@ -4,15 +4,15 @@ import java.util.Scanner;
 import java.io.Serializable;
 
 public class Review implements Serializable{
-	public String comment;
-	public float rating;
-	public String userID;
-	public String title;
-	public Movie movie;
+	private String comment;
+	private float rating;
+	private String userID;
+	private String title;
+	private Movie movie;
 	
 	public Review(User user, Movie movie) {
 		Scanner scan = new Scanner (System.in);
-		System.out.println("\n=== Review for " + movie.title + " ===");
+		System.out.println("\n=== Review for " + movie.getTitle() + " ===");
 		System.out.print("Comment: ");
 		String comment = scan.nextLine();
 		while (1==1) {
@@ -33,10 +33,19 @@ public class Review implements Serializable{
 		System.out.println();
 	}
 	
+	//setMethods
+	public void setComment(String comment) {this.comment = comment;}
+	public void setRating(float rating) {this.rating = rating;}
+	public void setUserID(String userID) {this.userID = userID;}
+	public void setTitle(String title) {this.title = title;}
+	public void setMovie(Movie movie) {this.movie = movie;}
+	
 	//getMethods
 	public String getComment() {return this.comment;}
 	public String getRating() {return this.getRating();}
 	public String getUserID() {return userID;}
-	public String getMovieTitle() {return this.movie.title;}
-	public String getTitle() {return title;}
+	public String getMovieTitle() {return this.movie.getTitle();}
+	public Movie getMovieR() {return this.movie;}
+	public String getTitle() {return this.title;}
+	public float getRRating() {return this.rating;}
 }

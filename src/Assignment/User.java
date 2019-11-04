@@ -40,11 +40,11 @@ public class User implements Serializable{
 		}else {
 			for (int i = 0; i < ticket_history.size(); i++) {
 				MovieTicket ticket = ticket_history.get(i);
-				System.out.println("Transation ID is " + ticket.TID);
-				System.out.println(ticket.quantityTicket + " Ticket(s) for " + ticket.movie.title + " on " + ticket.movieDate + " at " + ticket.time);
-				System.out.printf("Each ticket is $%.2f\n", ticket.perTicketPrice);
+				System.out.println("Transation ID is " + ticket.getTID());
+				System.out.println(ticket.getQuantityTickets() + " Ticket(s) for " + ticket.getTMovie().getTitle() + " on " + ticket.getMovieDate() + " at " + ticket.getTTime());
+				System.out.printf("Each ticket is $%.2f\n", ticket.getPerTicketPrice());
 				System.out.printf("Total price is $%.2f\n", ticket.getPrice());
-				System.out.println("Purchased on " + ticket.currentDateTime);
+				System.out.println("Purchased on " + ticket.getCurrentDateTime());
 				System.out.println();
 			}
 		}

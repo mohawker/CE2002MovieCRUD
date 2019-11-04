@@ -52,41 +52,41 @@ public class BookingManager extends Control{
 	}
 	
 	public MovieTicket bookPurchaseTicket(User user, Cineplex cineplex, Movie movie, int numTicket, DateChecker dateChecker) {
-		int index = cineplex.movies.indexOf(movie);
+		int index = cineplex.getMovies().indexOf(movie);
 		
-		Cinema cinemaShowing = cineplex.cinemas.get(index);
+		Cinema cinemaShowing = cineplex.getCinemas().get(index);
 		Scanner scan = new Scanner(System.in);
-		System.out.println("\n=== Dates for " + movie.title + " at " + cineplex.name + " " + cineplex.location + " ===");
-		for (int i=0; i<cinemaShowing.dates.size(); i++) {
-			System.out.println("[" + (i+1) + "] " + cinemaShowing.dates.get(i));
+		System.out.println("\n=== Dates for " + movie.getTitle() + " at " + cineplex.getName() + " " + cineplex.getLocation() + " ===");
+		for (int i=0; i<cinemaShowing.getDates().size(); i++) {
+			System.out.println("[" + (i+1) + "] " + cinemaShowing.getDates().get(i));
 		}
 		System.out.print("Select Date: ");
-		int dateIndex = InputControl.integerInput(1, cinemaShowing.dates.size()) - 1;
+		int dateIndex = InputControl.integerInput(1, cinemaShowing.getDates().size()) - 1;
 		System.out.println("\n=== Available showtimes ===");
-		for (int i=0; i<cinemaShowing.showtimes[dateIndex].size(); i++) {
-			System.out.println("[" + (i+1) + "] " + cinemaShowing.showtimes[dateIndex].get(i));
+		for (int i=0; i<cinemaShowing.getShowtime()[dateIndex].size(); i++) {
+			System.out.println("[" + (i+1) + "] " + cinemaShowing.getShowtime()[dateIndex].get(i));
 		}
 		System.out.print("Select Showtime: ");
-		int choice = InputControl.integerInput(1, cinemaShowing.showtimes.length);
+		int choice = InputControl.integerInput(1, cinemaShowing.getShowtime().length);
 		System.out.println();
-		String showtime = cinemaShowing.showtimes[dateIndex].get(choice-1);
-		return this.bookSeat(cineplex, user, cinemaShowing, showtime, movie, numTicket, cinemaShowing.dates.get(dateIndex), dateChecker);
+		String showtime = cinemaShowing.getShowtime()[dateIndex].get(choice-1);
+		return this.bookSeat(cineplex, user, cinemaShowing, showtime, movie, numTicket, cinemaShowing.getDates().get(dateIndex), dateChecker);
 	}
 	
 	public MovieTicket bookSeat(Cineplex cineplex, User user, Cinema cinema, String time, Movie movie, int numTicket, String date, DateChecker dateChecker) {
 		Scanner scan = new Scanner(System.in);
-		int dateIndex = cinema.dates.indexOf(date);
-		int index = cinema.showtimes[dateIndex].indexOf(time);
+		int dateIndex = cinema.getDates().indexOf(date);
+		int index = cinema.getShowtime()[dateIndex].indexOf(time);
 		String[][] seats = cinema.getFloorplan()[dateIndex][index];
 		
-		System.out.println("=== Seats for " + movie.title + " on " + date + " " + time + " at " + cineplex.name + " " + cineplex.location + " ===");
+		System.out.println("=== Seats for " + movie.getTitle() + " on " + date + " " + time + " at " + cineplex.getName() + " " + cineplex.getLocation() + " ===");
 		cinema.viewSeats(time, date);
 		System.out.println();
 		MovieTicket ticket = new MovieTicket(movie, cinema, time, date, 1);
-		ticket.price.generatePrice(user.getAge(), movie.type, cinema.getCinemaType(), date, dateChecker);
-		ticket.perTicketPrice = ticket.getPrice();
-		System.out.printf("Each ticket costs $%.2f\n", ticket.perTicketPrice);
-		ticket.price.printBreakdown();
+		ticket.getTPrice().generatePrice(user.getAge(), movie.getType(), cinema.getCinemaType(), date, dateChecker);
+		ticket.setPerTicketPrice(ticket.getPrice());
+		System.out.printf("Each ticket costs $%.2f\n", ticket.getPerTicketPrice());
+		ticket.getTPrice().printBreakdown();
 		while (true) {
 			if (numTicket == 1) {
 				System.out.print("\nChoose your seat (e.g. A2): ");
@@ -106,7 +106,7 @@ public class BookingManager extends Control{
 					char reply = scan.next().charAt(0);
 					if (reply == 'Y') {
 						seats[row_index][column_index] = "X";
-							movie.movieSales += ticket.getPrice();
+							movie.setMovieSales(getMovieSales()+ticket.getPrice());
 							return ticket;
 						} 
 					else {
@@ -145,11 +145,11 @@ public class BookingManager extends Control{
 						int row_index = (int) seatList.get(i).charAt(0) - 65;
 						int column_index = (int) seatList.get(i).charAt(1) - 49;
 						seats[row_index][column_index] = "X";
-						totalPrice += ticket.perTicketPrice;
+						totalPrice += ticket.getPerTicketPrice();
 					}
 					ticket.setPrice(totalPrice);
-					movie.movieSales += ticket.getPrice();
-					ticket.quantityTicket = seatList.size();
+					movie.setMovieSales(getMovieSales()+ticket.getPrice());
+					ticket.setQuantityTickets(seatList.size());
 					return ticket;
 					} else {
 					for (int i = 0; i < seatList.size(); i++) {
@@ -161,5 +161,10 @@ public class BookingManager extends Control{
 				}
 			}
 		}
+	}
+
+	private float getMovieSales() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

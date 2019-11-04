@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Movie implements Serializable{
-	public String title;
-	public String status;
-	public String synopsis;
-	public String director;
-	public String type;
-	public int movieSales=0;
-	public float averageRating = 0;
-	public ArrayList <String> cast;
-	public ArrayList <Review> movieReviews=new ArrayList <Review>(); // When creating a new movie, there are no reviews
+	private String title;
+	private String status;
+	private String synopsis;
+	private String director;
+	private String type;
+	private float movieSales=0;
+	//private float averageRating = 0;
+	private ArrayList <String> cast;
+	private ArrayList <Review> movieReviews=new ArrayList <Review>(); // When creating a new movie, there are no reviews
 	
 	public Movie(String title, String status, String synopsis, String director, String type, ArrayList <String> cast) {
 		this.title = title;
@@ -33,8 +33,8 @@ public class Movie implements Serializable{
 			System.out.println();
 			for (int i=0; i<this.movieReviews.size(); i++) {
 				Review review_printed = this.movieReviews.get(i);
-				System.out.println("Rating of " + review_printed.rating + " out of 5");
-				System.out.println("Comment: " + review_printed.comment);
+				System.out.println("Rating of " + review_printed.getRating() + " out of 5");
+				System.out.println("Comment: " + review_printed.getComment());
 				System.out.println();
 			}
 		}
@@ -72,6 +72,9 @@ public class Movie implements Serializable{
 	public void setDirector(String director) {this.director = director;}
 	public void setType(String type) {this.type = type;}
 	public void setCast(ArrayList <String> cast) {this.cast = cast;}
+	public void setMovieSales(float movieSales) {this.movieSales = movieSales;}
+	//public void setAverageRating(float averageRating) {this.averageRating = averageRating;}
+	public void setReview(ArrayList<Review> movieReviews) {this.movieReviews = movieReviews;}
 	
 	//getMethods
 	public String getTitle() {return title;}
@@ -79,15 +82,18 @@ public class Movie implements Serializable{
 	public String getSynopsis() {return synopsis;}
 	public String getDirector() {return director;}
 	public String getType() {return type;}
+	public float getMovieSales() {return movieSales;}
+	public ArrayList <String> getCast(){return this.cast;}
+	public ArrayList<Review> getMovieReviews(){return this.movieReviews;}
 	
-	public int getMovieSales() {return movieSales;}
+	
 	public float getAverageRating() {
 		float totalRating = 0;
 		if (this.movieReviews.size()==0) {
 			return (float)0;
 		}else {
 			for (int i=0; i<this.movieReviews.size(); i++) {
-				totalRating += this.movieReviews.get(i).rating;
+				totalRating += this.movieReviews.get(i).getRRating();
 			}
 			return totalRating/(this.movieReviews.size());
 		}

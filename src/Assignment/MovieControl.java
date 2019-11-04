@@ -24,8 +24,8 @@ public class MovieControl extends Control{
 	public void printMovies(Set<Movie> uniqueMovies) {
 		int count = 1;
 		for (Movie m : uniqueMovies) {
-			if (!m.status.equals("End of Showing")) {
-				System.out.println("[" + count + "] " + m.title + ", Status: " + m.status);
+			if (!m.getStatus().equals("End of Showing")) {
+				System.out.println("[" + count + "] " + m.getTitle() + ", Status: " + m.getStatus());
 				count += 1;
 			}
 		}
@@ -33,26 +33,26 @@ public class MovieControl extends Control{
 	
 	// print all movies in a cineplex
 	public void printMovies(Cineplex cineplex) {
-		for (int i=0 ; i<cineplex.movies.size(); i++) {
-			if (!cineplex.movies.get(i).status.equals("End of Showing")) {
-				System.out.println("[" + (i+1) + "] " + cineplex.movies.get(i).title + " (" + cineplex.cinemas.get(i).getCinemaType() + ")");
+		for (int i=0 ; i<cineplex.getMovies().size(); i++) {
+			if (!cineplex.getMovies().get(i).getStatus().equals("End of Showing")) {
+				System.out.println("[" + (i+1) + "] " + cineplex.getMovies().get(i).getTitle() + " (" + cineplex.getMovies().get(i).getType() + ")");
 			}
 		}
 	}
 	
 	// print movie showtimes for a movie in all cineplex
 	public void printMovieShowings(Movie movieChosen, ArrayList<Cineplex> cineplexes) {
-		if (movieChosen.status.equals("Showing")){
+		if (movieChosen.getStatus().equals("Showing")){
 			for (int i=0; i<cineplexes.size(); i++) {
-				System.out.println("=== Showing for " + movieChosen.title + " at " + cineplexes.get(i).name + " " + cineplexes.get(i).location + " ===\n");
-				int movieIndex = cineplexes.get(i).movies.indexOf(movieChosen);
+				System.out.println("=== Showing for " + movieChosen.getTitle() + " at " + cineplexes.get(i).getName() + " " + cineplexes.get(i).getLocation() + " ===\n");
+				int movieIndex = cineplexes.get(i).getMovies().indexOf(movieChosen);
 				if (movieIndex != -1) {
-					for (int date=0; date < (cineplexes.get(i).cinemas.get(movieIndex).dates.size()); date++) {
-						int index = cineplexes.get(i).movies.indexOf(movieChosen);
+					for (int date=0; date < (cineplexes.get(i).getCinemas().get(movieIndex).getDates().size()); date++) {
+						int index = cineplexes.get(i).getMovies().indexOf(movieChosen);
 						if (index != -1) {
-							ArrayList<String> showtimes = cineplexes.get(i).cinemas.get(index).showtimes[date];
+							ArrayList<String> showtimes = cineplexes.get(i).getCinemas().get(index).getShowtime()[date];
 							Collections.sort(showtimes);
-							System.out.println("Showtimes on " + cineplexes.get(i).cinemas.get(movieIndex).dates.get(date) + " are "+ showtimes);
+							System.out.println("Showtimes on " + cineplexes.get(i).getCinemas().get(movieIndex).getDates().get(date) + " are "+ showtimes);
 						}				
 					}
 					System.out.println();
@@ -61,7 +61,7 @@ public class MovieControl extends Control{
 				}
 			}
 		}else {
-			System.out.println(movieChosen.title + " is not showing yet.");
+			System.out.println(movieChosen.getTitle() + " is not showing yet.");
 		}
 	}
 	
@@ -79,10 +79,10 @@ public class MovieControl extends Control{
 		System.out.println("=== Movies ===");
 		printMovies(cineplex);
 		System.out.print("Select your movie: ");
-		int choice = InputControl.integerInput(1, cineplex.movies.size());
+		int choice = InputControl.integerInput(1, cineplex.getMovies().size());
 		System.out.println();
-		cineplex.movies.get(choice-1).printMovie();
-		return cineplex.movies.get(choice-1);
+		cineplex.getMovies().get(choice-1).printMovie();
+		return cineplex.getMovies().get(choice-1);
 	}
 	
 	// for ensuring there are UnshownMovies
@@ -90,7 +90,7 @@ public class MovieControl extends Control{
 		List<Movie> unshownMoviesList = new ArrayList<Movie>(uniqueMovies);
 		int count = 1;
 		for (Movie m : uniqueMovies) {
-			if (!m.status.equals("End of Showing") && !m.status.equals("Showing")) {
+			if (!m.getStatus().equals("End of Showing") && !m.getStatus().equals("Showing")) {
 				count += 1;
 			}else {
 				unshownMoviesList.remove(m);
@@ -126,8 +126,8 @@ public class MovieControl extends Control{
 		List<Movie> unshownMoviesList = new ArrayList<Movie>(uniqueMovies);
 		int count = 1;
 		for (Movie m : uniqueMovies) {
-			if (!m.status.equals("End of Showing") && !m.status.equals("Showing")) {
-				System.out.println("[" + count + "] " + m.title + ", Status: " + m.status);
+			if (!m.getStatus().equals("End of Showing") && !m.getStatus().equals("Showing")) {
+				System.out.println("[" + count + "] " + m.getTitle() + ", Status: " + m.getStatus());
 				count += 1;
 			}else {
 				unshownMoviesList.remove(m);
@@ -171,7 +171,7 @@ public class MovieControl extends Control{
 		if (bySales) {
 			for (int i=1; i<uniqueMoviesList.size(); i++) {
 				for (int j=0; j<sortedMoviesList.size(); j++) {
-					if (uniqueMoviesList.get(i).movieSales>sortedMoviesList.get(j).movieSales) {
+					if (uniqueMoviesList.get(i).getMovieSales()>sortedMoviesList.get(j).getMovieSales()) {
 						sortedMoviesList.add(j, uniqueMoviesList.get(i));
 						break;
 					}else if (j == sortedMoviesList.size()-1) {
@@ -183,7 +183,7 @@ public class MovieControl extends Control{
 			System.out.println("\n=== Top 5 Movies by Sales ===");
 			for (int i=0; i<5; i++) {
 				Movie movieChosen = sortedMoviesList.get(i);
-				System.out.println("[" + (i+1) + "] " + movieChosen.title + " has total sales of $" + movieChosen.movieSales);
+				System.out.println("[" + (i+1) + "] " + movieChosen.getTitle() + " has total sales of $" + movieChosen.getMovieSales());
 			}
 		}else {
 			for (int i=1; i<uniqueMoviesList.size(); i++) {
@@ -200,7 +200,7 @@ public class MovieControl extends Control{
 			System.out.println("\n=== Top 5 Movies by Ratings ===");
 			for (int i=0; i<5; i++) {
 				Movie movieChosen = sortedMoviesList.get(i);
-				System.out.println("[" + (i+1) + "] " + movieChosen.title + " has overall rating of " + movieChosen.getAverageRating() + " out of 5.0");
+				System.out.println("[" + (i+1) + "] " + movieChosen.getTitle() + " has overall rating of " + movieChosen.getAverageRating() + " out of 5.0");
 			}
 		}
 	}
@@ -211,13 +211,13 @@ public class MovieControl extends Control{
 	
 	public void replaceMovie(Cineplex cineplexChosen, Cinema cinemaChosen, Movie movieChosen, ArrayList<String> showtimes) {
 		Scanner scan = new Scanner(System.in);
-		System.out.println("=== Previous Movies at " + cineplexChosen.name + " " + cineplexChosen.location + " ===");
+		System.out.println("=== Previous Movies at " + cineplexChosen.getName() + " " + cineplexChosen.getLocation() + " ===");
 		printMovies(cineplexChosen);
-		int index = cineplexChosen.cinemas.indexOf(cinemaChosen);
-		cineplexChosen.movies.get(index).status = "End of Showing";
-		System.out.println("\nMovie being replaced: " + cineplexChosen.movies.get(index).title);
-		cineplexChosen.movies.set(index, movieChosen);
-		System.out.println("New Movie: " + cineplexChosen.movies.get(index).title);
+		int index = cineplexChosen.getCinemas().indexOf(cinemaChosen);
+		cineplexChosen.getMovies().get(index).setStatus("End of Showing");
+		System.out.println("\nMovie being replaced: " + cineplexChosen.getMovies().get(index).getTitle());
+		cineplexChosen.getMovies().set(index, movieChosen);
+		System.out.println("New Movie: " + cineplexChosen.getMovies().get(index).getTitle());
 		
 	    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 	    
@@ -241,27 +241,27 @@ public class MovieControl extends Control{
 			dates.add(sdf.format(newDate));
 		}
 		
-		System.out.println(movieChosen.title + " will be shown from " + dates.get(0) + " to " + dates.get(dates.size()-1));		
-		cineplexChosen.cinemas.get(index).dates = dates;
+		System.out.println(movieChosen.getTitle() + " will be shown from " + dates.get(0) + " to " + dates.get(dates.size()-1));		
+		cineplexChosen.getCinemas().get(index).setDates(dates);
 		ArrayList <String>[] listOfTimes = new ArrayList[dates.size()];
-		for (int i=0; i<cineplexChosen.cinemas.get(index).dates.size(); i++) {
+		for (int i=0; i<cineplexChosen.getCinemas().get(index).getDates().size(); i++) {
 			listOfTimes[i] = showtimes;
 		}
-		cineplexChosen.cinemas.get(index).showtimes = listOfTimes;
-		System.out.println("Movie " + movieChosen.title + " added to " + cineplexChosen.name + " " + cineplexChosen.location + " in Cinema Code " + cinemaChosen.getCinemaCode());
+		cineplexChosen.getCinemas().get(index).setShowtime(listOfTimes);
+		System.out.println("Movie " + movieChosen.getTitle() + " added to " + cineplexChosen.getName() + " " + cineplexChosen.getLocation() + " in Cinema Code " + cinemaChosen.getCinemaCode());
 		System.out.println("\n=== New Movies ===");
 		printMovies(cineplexChosen);
 	}
 	
 	public String printAndSelectMovieDates(Cineplex cineplex, Movie movieChosen) {
-		Cinema cinema = cineplex.cinemas.get(cineplex.movies.indexOf(movieChosen));
-		System.out.println("=== Dates available for " + movieChosen.title + " at " + cineplex.name + " " + cineplex.location + " ===");
+		Cinema cinema = cineplex.getCinemas().get(cineplex.getMovies().indexOf(movieChosen));
+		System.out.println("=== Dates available for " + movieChosen.getTitle() + " at " + cineplex.getName() + " " + cineplex.getLocation() + " ===");
 		for (int i=0; i<5; i++) {
-			System.out.println("[" + (i+1) + "] " + cinema.dates.get(i));
+			System.out.println("[" + (i+1) + "] " + cinema.getDates().get(i));
 		}
 		System.out.print("Select Date: " );
-		int choice = InputControl.integerInput(1, cinema.dates.size());
+		int choice = InputControl.integerInput(1, cinema.getDates().size());
 		System.out.println();
-		return cinema.dates.get(choice);
+		return cinema.getDates().get(choice);
 	}
 }

@@ -164,9 +164,9 @@ public class Initialiser {
 		
 		// get unique movies
 		Set<Movie> uniqueMovies = new HashSet<>();
-		uniqueMovies.addAll(cineplex_1.movies);
-		uniqueMovies.addAll(cineplex_2.movies);
-		uniqueMovies.addAll(cineplex_3.movies);
+		uniqueMovies.addAll(cineplex_1.getMovies());
+		uniqueMovies.addAll(cineplex_2.getMovies());
+		uniqueMovies.addAll(cineplex_3.getMovies());
 		return uniqueMovies;
 	}
 }

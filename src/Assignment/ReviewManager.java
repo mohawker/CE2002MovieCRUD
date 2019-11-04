@@ -22,11 +22,11 @@ public class ReviewManager extends Control{
 	}
 	
 	public void addReview(Movie movieChosen, Review review) {
-		boolean result = movieChosen.movieReviews.add(review);
+		boolean result = movieChosen.getMovieReviews().add(review);
 		if (result == true) {
-			System.out.println("Movie review for " + movieChosen.title + " added successfully");
+			System.out.println("Movie review for " + movieChosen.getTitle() + " added successfully");
 		}else {
-			System.out.println("Movie review for " + movieChosen.title + " not added successfully");
+			System.out.println("Movie review for " + movieChosen.getTitle() + " not added successfully");
 		}
 	}
 }
