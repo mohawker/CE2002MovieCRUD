@@ -72,7 +72,7 @@ public class Price implements Serializable{
 	}
 	
 	public static void updatePrices() {
-		System.out.println("=== Prices & Surcharges & Multiplers ===");
+		System.out.println("\n=== Prices & Surcharges & Multiplers ===");
 		System.out.println("[1] Multiplier for 3D Movies");
 		System.out.println("[2] Surcharge for Blockbuster Movies");
 		System.out.println("[3] Multipler for GoldClass Cinemas");

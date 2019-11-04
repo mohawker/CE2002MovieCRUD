@@ -10,10 +10,14 @@ public  class AdminView extends View{
 		adminControl = new AdminControl(app.uniqueMovies, admin, app.cineplexes);
 		admin.login();
 		System.out.println("Welcome, " + admin.getUsername());
+		System.out.println("------------------------------------------------------");
+		System.out.printf("The date is: %s\n", java.time.LocalDate.now());
+		
 	}
 	
 	public int printView() {
 		while (true) {
+			System.out.println("What would you like to do next?");
 			System.out.println("------------------------------------------------------");
 			System.out.println("[0] Save");
 			System.out.println("[1] Create Movie Listing");
@@ -48,6 +52,7 @@ public  class AdminView extends View{
 				default:{System.out.println("Please enter a valid choice");}
 			}
 			System.out.println();	
+			
 		}
 	}
 }

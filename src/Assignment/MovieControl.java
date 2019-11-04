@@ -127,7 +127,7 @@ public class MovieControl extends Control{
 		int count = 1;
 		for (Movie m : uniqueMovies) {
 			if (!m.status.equals("End of Showing") && !m.status.equals("Showing")) {
-				System.out.println(count + ". " + m.title + ", Status: " + m.status);
+				System.out.println("[" + count + "] " + m.title + ", Status: " + m.status);
 				count += 1;
 			}else {
 				unshownMoviesList.remove(m);
@@ -180,9 +180,10 @@ public class MovieControl extends Control{
 					}
 				}
 			}
+			System.out.println("\n=== Top 5 Movies by Sales ===");
 			for (int i=0; i<5; i++) {
 				Movie movieChosen = sortedMoviesList.get(i);
-				System.out.println(movieChosen.title + " has total sales of $" + movieChosen.movieSales);
+				System.out.println("[" + (i+1) + "] " + movieChosen.title + " has total sales of $" + movieChosen.movieSales);
 			}
 		}else {
 			for (int i=1; i<uniqueMoviesList.size(); i++) {
@@ -196,9 +197,10 @@ public class MovieControl extends Control{
 					}
 				}
 			}
+			System.out.println("\n=== Top 5 Movies by Ratings ===");
 			for (int i=0; i<5; i++) {
 				Movie movieChosen = sortedMoviesList.get(i);
-				System.out.println(movieChosen.title + " has overall rating of " + movieChosen.getAverageRating() + " out of 5.0");
+				System.out.println("[" + (i+1) + "] " + movieChosen.title + " has overall rating of " + movieChosen.getAverageRating() + " out of 5.0");
 			}
 		}
 	}
@@ -247,17 +249,17 @@ public class MovieControl extends Control{
 		}
 		cineplexChosen.cinemas.get(index).showtimes = listOfTimes;
 		System.out.println("Movie " + movieChosen.title + " added to " + cineplexChosen.name + " " + cineplexChosen.location + " in Cinema Code " + cinemaChosen.getCinemaCode());
-		System.out.println("=== New Movies ===");
+		System.out.println("\n=== New Movies ===");
 		printMovies(cineplexChosen);
 	}
 	
 	public String printAndSelectMovieDates(Cineplex cineplex, Movie movieChosen) {
 		Cinema cinema = cineplex.cinemas.get(cineplex.movies.indexOf(movieChosen));
-		System.out.println("===Dates available for " + movieChosen.title + " at " + cineplex.name + " " + cineplex.location + "===");
-		for (int i=0; i<cinema.dates.size(); i++) {
+		System.out.println("=== Dates available for " + movieChosen.title + " at " + cineplex.name + " " + cineplex.location + " ===");
+		for (int i=0; i<5; i++) {
 			System.out.println("[" + (i+1) + "] " + cinema.dates.get(i));
 		}
-		System.out.print("Select date: " );
+		System.out.print("Select Date: " );
 		int choice = InputControl.integerInput(1, cinema.dates.size());
 		System.out.println();
 		return cinema.dates.get(choice);

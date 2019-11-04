@@ -25,6 +25,7 @@ public class UserControl extends Control{
 		System.out.println("=== Movie Search ===");
 		System.out.print("Enter movie title to search: ");
 		String userInput = scan.nextLine();
+		System.out.println();
 		List<Movie> uniqueMoviesList = new ArrayList<Movie>(uniqueMovies);
 		boolean found = false; //assume not found
 		ArrayList<Movie> moviesChosen = new ArrayList<Movie>();
@@ -50,9 +51,10 @@ public class UserControl extends Control{
 		Scanner scan = new Scanner(System.in);
 		System.out.println("=== Movie Listings ===");
 		movieControl.printMovies(uniqueMovies);
-		System.out.print("Would you like you view the showtimes? (Y/N) ");
+		System.out.print("\nWould you like you view the showtimes? (Y/N) ");
 		if (scan.next().equals("Y")) {
 			Movie movieChosen = movieControl.selectMovie(uniqueMovies);
+			System.out.println();
 			movieControl.printMovieShowings(movieChosen, cineplexes); // for unique movies
 		}
 	}
@@ -63,6 +65,7 @@ public class UserControl extends Control{
 		System.out.println("=== Movies Available ===");
 		movieControl.printMovies(uniqueMovies);
 		Movie movieChosen = movieControl.selectMovie(uniqueMovies);
+		System.out.println();
 		movieChosen.printMovie();
 	}
 
@@ -70,6 +73,7 @@ public class UserControl extends Control{
 		Scanner scan = new Scanner(System.in);
 		cineplexControl.printCineplexes(cineplexes);
 		Cineplex cineplex_chosen = cineplexControl.selectCineplex(cineplexes);
+		System.out.println();
 		Movie movieChosen = movieControl.selectMovie(cineplex_chosen);
 		String date = movieControl.printAndSelectMovieDates(cineplex_chosen, movieChosen);
 		
@@ -89,8 +93,8 @@ public class UserControl extends Control{
 	public void listTop5(Set<Movie> uniqueMovies) {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Would you like to get the top 5 by:");
-		System.out.println("1. Sales");
-		System.out.println("2. Overall Rating");
+		System.out.println("[1] Sales");
+		System.out.println("[2] Overall Rating");
 		int choice = scan.nextInt();
 		if (choice == 1) {
 			movieControl.sortMovies(uniqueMovies, true);

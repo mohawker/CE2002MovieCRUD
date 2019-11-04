@@ -35,6 +35,7 @@ public class UserView extends View{
 	
 	public int printView() {
 		while (true){
+			System.out.println("What would you like to do next?");
 			System.out.println("------------------------------------------------------");
 			System.out.println("[0] Search Movie");
 			System.out.println("[1] List Movie");
@@ -65,7 +66,7 @@ public class UserView extends View{
 				case 9:{System.out.println("Thank you for using MOBLIMA!\nSystem Logging Off...");return 0;}	
 				default:{System.out.println("Please enter a valid choice");}
 			}
-			System.out.println("\nWhat would you like to do next?");
+			
 		}
 			
 	}

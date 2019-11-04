@@ -70,8 +70,9 @@ public class User implements Serializable{
 		for (int i=0; i<cinemaShowing.showtimes[dateIndex].size(); i++) {
 			System.out.println("[" + (i+1) + "] " + cinemaShowing.showtimes[dateIndex].get(i));
 		}
-		System.out.print("Select showtime: ");
+		System.out.print("Select Showtime: ");
 		int choice = InputControl.integerInput(1, cinemaShowing.showtimes.length);
+		System.out.println();
 		String showtime_chosen;
 		while (1==1) {
 			if (choice < 1 && choice > cinemaShowing.showtimes[dateIndex].size()) {

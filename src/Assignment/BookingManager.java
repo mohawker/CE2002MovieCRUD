@@ -20,12 +20,14 @@ public class BookingManager extends Control{
 		Scanner scan = new Scanner(System.in);
 		cineplexControl.printCineplexes(cineplexes);
 		Cineplex cineplexChosen = cineplexControl.selectCineplex(cineplexes);
+		System.out.println();
 		Movie movieChosen = movieControl.selectMovie(cineplexChosen);
+		System.out.println();
 		
 		System.out.println("\nWould you like to book single or multiple seats?");
 		System.out.println("[1] Single Seat");
 		System.out.println("[2] Multiple Seats");
-		System.out.print("Select option: ");
+		System.out.print("Select Option: ");
 		int choice = InputControl.integerInput(1, 2);
 			if (choice == 1) {
 				MovieTicket ticket = this.bookPurchaseTicket(user, cineplexChosen, movieChosen, 1);
@@ -58,13 +60,13 @@ public class BookingManager extends Control{
 		for (int i=0; i<cinemaShowing.dates.size(); i++) {
 			System.out.println("[" + (i+1) + "] " + cinemaShowing.dates.get(i));
 		}
-		System.out.print("Select date: ");
+		System.out.print("Select Date: ");
 		int dateIndex = InputControl.integerInput(1, cinemaShowing.dates.size()) - 1;
 		System.out.println("\n=== Available showtimes ===");
 		for (int i=0; i<cinemaShowing.showtimes[dateIndex].size(); i++) {
 			System.out.println("[" + (i+1) + "] " + cinemaShowing.showtimes[dateIndex].get(i));
 		}
-		System.out.print("Select showtime: ");
+		System.out.print("Select Showtime: ");
 		int choice = InputControl.integerInput(1, cinemaShowing.showtimes.length);
 		System.out.println();
 		String showtime = cinemaShowing.showtimes[dateIndex].get(choice-1);
@@ -87,7 +89,7 @@ public class BookingManager extends Control{
 		ticket.price.printBreakdown();
 		while (true) {
 			if (numTicket == 1) {
-				System.out.print("Choose your seat: ");
+				System.out.print("\nChoose your seat (e.g. A2): ");
 				String seat = scan.next();
 				int row_index = (int) seat.charAt(0) - 65;
 				int column_index = (int) seat.charAt(1) - 49;
@@ -115,7 +117,7 @@ public class BookingManager extends Control{
 			} else {
 				ArrayList<String> seatList = new ArrayList<String>();
 				for (int i = 1; i <= numTicket; i++) {
-					System.out.print("Choose seat " + i + ": ");
+					System.out.print("\nChoose seat " + i + ": ");
 					String seat = scan.next();
 					seatList.add(seat);
 					int row_index = (int) seat.charAt(0) - 65;

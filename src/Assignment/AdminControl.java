@@ -34,19 +34,24 @@ public class AdminControl extends Control{
 	}
 	
 	public void updateMovieListing(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
+		System.out.println("\n=== Current Movie Listing ===");
 		movieControl.printMovies(uniqueMovies);
 		Movie movieChosen = movieControl.selectMovie(uniqueMovies);
 		System.out.print("New Showing Status of " + movieChosen.title + "(Showing/End of Showing): ");
 		Scanner scan = new Scanner(System.in);
 		String newStatus = scan.nextLine();
 		if (movieChosen.status.equals(newStatus)) {
-			System.out.println("New status same as previous status");
+			System.out.println("\nNew status same as previous status");
 			System.out.println("Shall not update movie status");
 		}else if (newStatus.equals("Showing")){
+			System.out.println();
 			movieChosen.status = newStatus;
+			System.out.println();
 			cineplexControl.printCineplexes(cineplexes);
 			Cineplex cineplexChosen = cineplexControl.selectCineplex(cineplexes);
+			System.out.println();
 			ArrayList <String> showtimes = showtimeControl.createShowtimes();
+			System.out.println();
 			Cinema cinemaChosen = cinemaControl.printAndSelectCinema(cineplexChosen);
 			movieControl.replaceMovie(cineplexChosen, cinemaChosen, movieChosen, showtimes);			
 		}else if (newStatus.equals("End of Showing")) {
@@ -56,11 +61,13 @@ public class AdminControl extends Control{
 	}
 
 	public void removeMovieListing(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
+		System.out.println("\n=== Current Movie Listing ===");
 		movieControl.printMovies(uniqueMovies);
 		Movie movieChosen = movieControl.selectMovie(uniqueMovies);
 		System.out.println(movieChosen.title + " will be set to End of Showing");
 		movieChosen.status = "End of Showing";
 		uniqueMovies.remove(movieChosen);
+		System.out.println("\n=== New Movie Listing ===");
 		movieControl.printMovies(uniqueMovies);
 	}
 	
@@ -72,30 +79,37 @@ public class AdminControl extends Control{
 			return;
 		}
 		else {
-		Movie movieChosen = movieControl.printAndSelectFromUnshownMovies(uniqueMovies);
-		movieChosen.status = "Showing";
-		System.out.println("Choose Cineplex to be shown in:");
-		cineplexControl.printCineplexes(cineplexes);
-		Cineplex cineplexChosen = cineplexControl.selectCineplex(cineplexes);
-		ArrayList <String> showtimes = showtimeControl.createShowtimes();
-		Cinema cinemaChosen = cinemaControl.printAndSelectCinema(cineplexChosen);
-		movieControl.replaceMovie(cineplexChosen, cinemaChosen, movieChosen, showtimes);
+			System.out.println("=== Movies Coming Soon/Preview ===");
+			Movie movieChosen = movieControl.printAndSelectFromUnshownMovies(uniqueMovies);
+			movieChosen.status = "Showing";
+			
+			System.out.println("\nChoose Cineplex to be shown in:");
+			cineplexControl.printCineplexes(cineplexes);
+			Cineplex cineplexChosen = cineplexControl.selectCineplex(cineplexes);
+			System.out.println();
+			ArrayList <String> showtimes = showtimeControl.createShowtimes();
+			System.out.println();
+			Cinema cinemaChosen = cinemaControl.printAndSelectCinema(cineplexChosen);
+			movieControl.replaceMovie(cineplexChosen, cinemaChosen, movieChosen, showtimes);
 		}
 	}
 
 	
 	public void updateCinemaShowtimes(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
 		Scanner scan = new Scanner(System.in);
+		System.out.println();
 		cineplexControl.printCineplexes(cineplexes);
 		Cineplex cineplexChosen = cineplexControl.selectCineplex(cineplexes);
+		System.out.println();
 		Movie movieChosen = movieControl.selectMovie(cineplexChosen);
+		System.out.println();
 		String date = movieControl.printAndSelectMovieDates(cineplexChosen, movieChosen);
 		
 		int index = cineplexChosen.movies.indexOf(movieChosen);
 		int dateIndex = cineplexChosen.cinemas.get(index).dates.indexOf(date);
 		ArrayList <String> currShowtimes = cineplexChosen.cinemas.get(index).showtimes[dateIndex];
 		
-		System.out.println("Current Show Times for " + movieChosen.title + ": " + currShowtimes);
+		System.out.println("Current Show Times for " + movieChosen.title + ": " + currShowtimes + "\n");
 		System.out.print("Number of Showtimes for " + movieChosen.title + "  to be removed: ");
 		int choice = scan.nextInt();
 		scan.nextLine();
@@ -104,7 +118,7 @@ public class AdminControl extends Control{
 			currShowtimes.remove(scan.nextLine());
 		}
 		
-		System.out.print("Number of Showtimes for " + movieChosen.title + "  to be added: ");
+		System.out.print("\nNumber of Showtimes for " + movieChosen.title + "  to be added: ");
 		choice = scan.nextInt();
 		scan.nextLine();
 		for (int i=0; i<choice; i++) {
@@ -112,14 +126,16 @@ public class AdminControl extends Control{
 			currShowtimes.add(scan.nextLine());
 		}
 		Collections.sort(currShowtimes);
-		System.out.println("New Showtimes for " + movieChosen.title + " at " + cineplexChosen.name + " " + cineplexChosen.name + " : " + currShowtimes);
+		System.out.println("\nNew Showtimes for " + movieChosen.title + " at " + cineplexChosen.name + " " + cineplexChosen.name + " : " + currShowtimes);
 		cineplexChosen.cinemas.get(index).showtimes[dateIndex] = currShowtimes;
 	}
 	
 	public void addCinemaShowtimes(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
 		Scanner scan = new Scanner(System.in);
+		System.out.println();
 		cineplexControl.printCineplexes(cineplexes);
 		Cineplex cineplexChosen = cineplexControl.selectCineplex(cineplexes);
+		System.out.println();
 		Movie movieChosen = movieControl.selectMovie(cineplexChosen);
 		String date = movieControl.printAndSelectMovieDates(cineplexChosen, movieChosen);
 		
@@ -169,7 +185,7 @@ public class AdminControl extends Control{
 	
 	public void addNewHoliday() {
 		Scanner scan = new Scanner(System.in);
-		System.out.println("Please enter date in the format DD/MM");
+		System.out.print("Enter date in the format DD/MM: ");
 		String date = scan.next();
 		DateChecker.addSpecialDate(date);
 		
