@@ -15,7 +15,7 @@ public class UserView extends View{
 			if (currUser.getUsername().equals(userName)) {
 				user = currUser;
 				found = true;
-				System.out.println("Welcome, back " + user.getUsername());
+				System.out.println("Welcome back " + user.getUsername());
 				break;
 			}
 		}

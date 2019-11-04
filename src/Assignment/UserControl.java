@@ -78,7 +78,7 @@ public class UserControl extends Control{
 		String date = movieControl.printAndSelectMovieDates(cineplex_chosen, movieChosen);
 		
 		if (movieChosen.status.equals("Showing")){
-			user.viewSeatAvailability(cineplex_chosen, movieChosen, date);
+			cinemaControl.viewSeatAvailability(cineplex_chosen, movieChosen, date);
 			System.out.println();
 		}else {
 			System.out.println("Movie is not showing yet");

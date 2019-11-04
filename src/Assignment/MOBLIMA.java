@@ -60,7 +60,7 @@ public class MOBLIMA implements Serializable {
 	public MOBLIMA() {}
 
 	public void MOBLIMAMainLoop() {
-		System.out.println("Would you like to be a user or admin?");
+		System.out.println("Login As:");
 		System.out.println("[1] User");
 		System.out.println("[2] Admin");
 		int choice = InputControl.integerInput(1, 2);

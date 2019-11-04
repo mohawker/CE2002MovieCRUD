@@ -50,43 +50,6 @@ public class User implements Serializable{
 		}
 	}
 	
-	public void viewMoviesListing(Cineplex cineplex) {
-		for (int i = 0; i < cineplex.movies.size(); i++) {
-			System.out.println("Title: " + cineplex.movies.get(i).title + ", Status: "+ cineplex.movies.get(i).status);
-		}
-	}
-	
-	public void viewMovieDetail(Movie movie) {
-		movie.printMovie();
-	}
-	
-	public void viewSeatAvailability(Cineplex cineplex, Movie movie, String date) {
-		int index = cineplex.movies.indexOf(movie);
-		Cinema cinemaShowing = cineplex.cinemas.get(index);
-		Scanner scan = new Scanner(System.in);
-		int movieIndex = cineplex.movies.indexOf(movie);
-		int dateIndex = cineplex.cinemas.get(movieIndex).dates.indexOf(date);
-		System.out.println("=== Available Showtimes ===");
-		for (int i=0; i<cinemaShowing.showtimes[dateIndex].size(); i++) {
-			System.out.println("[" + (i+1) + "] " + cinemaShowing.showtimes[dateIndex].get(i));
-		}
-		System.out.print("Select Showtime: ");
-		int choice = InputControl.integerInput(1, cinemaShowing.showtimes.length);
-		System.out.println();
-		String showtime_chosen;
-		while (1==1) {
-			if (choice < 1 && choice > cinemaShowing.showtimes[dateIndex].size()) {
-				System.out.println("Invalid option. Please try again");
-			}else {
-				showtime_chosen = cinemaShowing.showtimes[dateIndex].get(choice-1);
-				System.out.println("=== Seats for " + movie.title + " on " + date + " " + showtime_chosen + " at " + cineplex.name + " " + cineplex.location + " ===");
-				break;
-			}
-		}
-		cinemaShowing.viewSeats(showtime_chosen, cinemaShowing.dates.get(dateIndex));
-	}
-	
-	
 	public void addTicket(MovieTicket ticket) {
 		this.ticket_history.add(ticket);
 	}
