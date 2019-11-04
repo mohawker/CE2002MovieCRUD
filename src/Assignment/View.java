@@ -6,7 +6,9 @@ import java.util.Set;
 
 public abstract class View{
 	MOBLIMA app; 	
-	public View(MOBLIMA myApp) {
+	DateChecker dateChecker;
+
+	public View(MOBLIMA myApp, DateChecker dateChecker) {
 		app = myApp;		
 	}	
 	public abstract int printView();

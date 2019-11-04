@@ -5,14 +5,16 @@ import java.util.Calendar;
 import java.util.Scanner;
 import java.util.Date;
 import java.util.Iterator;
+import java.io.Serializable;
 
 
-public class DateChecker {
+
+public class DateChecker implements Serializable{
 	
-	static public ArrayList<Date> publicHoliday = new ArrayList<Date>();
+	public ArrayList<Date> publicHoliday = new ArrayList<Date>();
 	
 	@SuppressWarnings("deprecation")
-	static public void generatePublicHoliday() {
+	public void generatePublicHoliday() {
 		int year = Calendar.getInstance().get(Calendar.YEAR) - 1900;
 		//year y - 1900
 		//month 0 - 11
@@ -30,12 +32,23 @@ public class DateChecker {
 		publicHoliday.add(new Date(year,11,25));
 	}
 	
+	public void printPublicHoliday() {
+		System.out.println("===== the public holiday is =====");
+		for (Date holiday: publicHoliday) {
+			System.out.println(holiday.toString());
+		}
+		
+	}
+	
+	public DateChecker() {
+		generatePublicHoliday();
+	}
+	
 	// date is DD/MM/YYYY
 	@SuppressWarnings("deprecation")
-	static public boolean checkSpecialDate(String date) {
+	public boolean checkSpecialDate(String date) {
 		boolean specialDate = false;
 		//parse string
-		generatePublicHoliday();
 		Scanner scan = new Scanner(System.in);
 		
 		int day = Integer.valueOf(date.substring(0, 2));
@@ -59,7 +72,7 @@ public class DateChecker {
 	}
 	
 	@SuppressWarnings("deprecation")
-	static public void addSpecialDate(String date) {
+	public void addSpecialDate(String date) {
 		//Fixed year 2019
 		int def_year = Calendar.getInstance().get(Calendar.YEAR) - 1900;
 		String[] dateSplit = date.split("/"); //Split based on /

@@ -16,7 +16,7 @@ public class BookingManager extends Control{
 	
 	// single responsibility principle: Booking Manager solely handles bookTicket
 	
-	public void bookTicket(User user, ArrayList<Cineplex> cineplexes){
+	public void bookTicket(User user, ArrayList<Cineplex> cineplexes, DateChecker dateChecker){
 		Scanner scan = new Scanner(System.in);
 		cineplexControl.printCineplexes(cineplexes);
 		Cineplex cineplexChosen = cineplexControl.selectCineplex(cineplexes);
@@ -30,7 +30,7 @@ public class BookingManager extends Control{
 		System.out.print("Select Option: ");
 		int choice = InputControl.integerInput(1, 2);
 			if (choice == 1) {
-				MovieTicket ticket = this.bookPurchaseTicket(user, cineplexChosen, movieChosen, 1);
+				MovieTicket ticket = this.bookPurchaseTicket(user, cineplexChosen, movieChosen, 1, dateChecker);
 				if (new Payment().authenticatePayment(ticket) == true) {
 					user.addTicket(ticket);
 				}
@@ -41,7 +41,7 @@ public class BookingManager extends Control{
 			else if (choice==2){
 				System.out.print("Number of seats: ");
 				int numTicket = scan.nextInt();
-				MovieTicket ticket = this.bookPurchaseTicket(user, cineplexChosen, movieChosen, numTicket);
+				MovieTicket ticket = this.bookPurchaseTicket(user, cineplexChosen, movieChosen, numTicket, dateChecker);
 				if (new Payment().authenticatePayment(ticket) == true) {
 					user.addTicket(ticket);
 				}
@@ -51,7 +51,7 @@ public class BookingManager extends Control{
 			}
 	}
 	
-	public MovieTicket bookPurchaseTicket(User user, Cineplex cineplex, Movie movie, int numTicket) {
+	public MovieTicket bookPurchaseTicket(User user, Cineplex cineplex, Movie movie, int numTicket, DateChecker dateChecker) {
 		int index = cineplex.movies.indexOf(movie);
 		
 		Cinema cinemaShowing = cineplex.cinemas.get(index);
@@ -70,10 +70,10 @@ public class BookingManager extends Control{
 		int choice = InputControl.integerInput(1, cinemaShowing.showtimes.length);
 		System.out.println();
 		String showtime = cinemaShowing.showtimes[dateIndex].get(choice-1);
-		return this.bookSeat(cineplex, user, cinemaShowing, showtime, movie, numTicket, cinemaShowing.dates.get(dateIndex));
+		return this.bookSeat(cineplex, user, cinemaShowing, showtime, movie, numTicket, cinemaShowing.dates.get(dateIndex), dateChecker);
 	}
 	
-	public MovieTicket bookSeat(Cineplex cineplex, User user, Cinema cinema, String time, Movie movie, int numTicket, String date) {
+	public MovieTicket bookSeat(Cineplex cineplex, User user, Cinema cinema, String time, Movie movie, int numTicket, String date, DateChecker dateChecker) {
 		Scanner scan = new Scanner(System.in);
 		int dateIndex = cinema.dates.indexOf(date);
 		int index = cinema.showtimes[dateIndex].indexOf(time);
@@ -83,7 +83,7 @@ public class BookingManager extends Control{
 		cinema.viewSeats(time, date);
 		System.out.println();
 		MovieTicket ticket = new MovieTicket(movie, cinema, time, date, 1);
-		ticket.price.generatePrice(user.getAge(), movie.type, cinema.getCinemaType(), date);
+		ticket.price.generatePrice(user.getAge(), movie.type, cinema.getCinemaType(), date, dateChecker);
 		ticket.perTicketPrice = ticket.getPrice();
 		System.out.printf("Each ticket costs $%.2f\n", ticket.perTicketPrice);
 		ticket.price.printBreakdown();

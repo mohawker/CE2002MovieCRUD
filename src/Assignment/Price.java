@@ -19,9 +19,9 @@ public class Price implements Serializable{
 	public Price() {
 	}
 	
-	public void generatePrice(int age, String movieType, String cinemaType, String date) {
+	public void generatePrice(int age, String movieType, String cinemaType, String date, DateChecker dateChecker) {
 		this.age = age;
-		this.weekendPH = DateChecker.checkSpecialDate(date);
+		this.weekendPH = dateChecker.checkSpecialDate(date);
 		this.movieType = movieType;
 		this.cinemaType = cinemaType;		
 		float currPrice = Price.basePrice;

@@ -183,11 +183,11 @@ public class AdminControl extends Control{
 		Price.updatePrices();
 	}
 	
-	public void addNewHoliday() {
+	public void addNewHoliday(DateChecker dateChecker) {
 		Scanner scan = new Scanner(System.in);
 		System.out.print("Enter date in the format DD/MM: ");
 		String date = scan.next();
-		DateChecker.addSpecialDate(date);
+		dateChecker.addSpecialDate(date);
 		
 	}
 

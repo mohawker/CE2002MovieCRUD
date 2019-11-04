@@ -6,8 +6,8 @@ public class UserView extends View{
 	ReviewManager reviewManager;
 	User user;
 
-	public UserView(MOBLIMA app) {
-		super(app);
+	public UserView(MOBLIMA app, DateChecker dateChecker) {
+		super(app, dateChecker);
 		System.out.print("Enter your name: ");
 		String userName = InputControl.stringInput();
 		boolean found = false;
@@ -46,7 +46,7 @@ public class UserView extends View{
 			System.out.println("[6] List Top 5 Movies by Ticket Sales or Overall Rating");
 			System.out.println("[7] Add Rating");
 			System.out.println("[8] Login as Admin");
-			System.out.println("[9] Log Off & Shut Down");
+			System.out.println("[9] Log Off, Save & Shut Down");
 			System.out.println("------------------------------------------------------");
 			System.out.print("Please select (0-9) : ");
 			
@@ -58,12 +58,14 @@ public class UserView extends View{
 				case 1:{userControl.listUniqueMovies(app.uniqueMovies, app.cineplexes);break;}
 				case 2:{userControl.viewMovieDetails(app.uniqueMovies);break;}
 				case 3:{userControl.checkSeatAvailability(app.cineplexes);break;}
-				case 4:{bookingManager.bookTicket(user, app.cineplexes);break;}
+				case 4:{bookingManager.bookTicket(user, app.cineplexes, dateChecker);break;}
 				case 5:{userControl.viewBookingHistory(user);break;}
 				case 6:{userControl.listTop5(app.uniqueMovies);break;}
 				case 7:{reviewManager.addRating(app.uniqueMovies, user);break;}
 				case 8:{return 2;}
-				case 9:{System.out.println("Thank you for using MOBLIMA!\nSystem Logging Off...");return 0;}	
+				case 9:{System.out.println("Thank you for using MOBLIMA!\n Saving and System Logging Off...");
+						app.writeApp();
+						return 0;}	
 				default:{System.out.println("Please enter a valid choice");}
 			}
 			

@@ -14,6 +14,7 @@ public class MOBLIMA implements Serializable {
 	Cineplex cineplex_3;
 	Set<Movie> uniqueMovies = new HashSet<>();
 	ArrayList<User> users = new ArrayList<User>();
+	DateChecker myDateChecker = new DateChecker();
 	
 	public void initialiseApp(){
 		cinemas = Initialiser.generateCinemas();
@@ -67,11 +68,11 @@ public class MOBLIMA implements Serializable {
 		//end 0, user 1 , admin 2
 		while (true) {
 			if (choice == 1) {
-				UserView myUserView = new UserView(this);
+				UserView myUserView = new UserView(this, myDateChecker);
 				choice = myUserView.printView();
 			}
 			else if (choice == 2){
-				AdminView myAdminView = new AdminView(this);
+				AdminView myAdminView = new AdminView(this, myDateChecker);
 				choice = myAdminView.printView();
 			}
 			else {
