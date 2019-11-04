@@ -1,8 +1,9 @@
 package Assignment;
 
 import java.util.Scanner;
+import java.io.Serializable;
 
-public class Review {
+public class Review implements Serializable{
 	public String comment;
 	public float rating;
 	public String userID;
