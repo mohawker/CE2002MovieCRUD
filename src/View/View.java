@@ -11,8 +11,9 @@ public abstract class View{
 	MOBLIMA app; 	
 	DateChecker dateChecker;
 
-	public View(MOBLIMA myApp, DateChecker dateChecker) {
-		app = myApp;		
+	public View(MOBLIMA myApp, DateChecker myDateChecker) {
+		app = myApp;	
+		dateChecker = myDateChecker;
 	}	
 	public abstract int printView();
 	
