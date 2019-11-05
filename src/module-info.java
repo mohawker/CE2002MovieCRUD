@@ -1,2 +1,3 @@
-module Assignment {
+module modules {
+	requires java.desktop;
 }
