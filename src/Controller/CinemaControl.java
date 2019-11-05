@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Set;
 
-import Model.Movie;
-import Model.Admin;
-import Model.Cineplex;
-import Model.Cinema;
-import Model.User;
+import Entity.Cinema;
+import Entity.Cineplex;
+import Entity.Movie;
+import Entity.User;
 
 public class CinemaControl extends Control{
 

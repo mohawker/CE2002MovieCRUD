@@ -1,4 +1,4 @@
-package Model;
+package Entity;
 
 import java.util.ArrayList;
 
@@ -50,6 +50,7 @@ public abstract class RetangularCinema extends Cinema {
 		for (int i=0; i<getCOL()*4 - 1; i++){
 			System.out.print("_");
 		}
+		System.out.println();
 	}
 	
 }

@@ -1,13 +1,16 @@
-package Model;
+package Controller;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Set;
 
-import Controller.CineplexControl;
-import Controller.Control;
-import Controller.InputControl;
-import Controller.MovieControl;
+import Entity.Cinema;
+import Entity.Cineplex;
+import Entity.DateChecker;
+import Entity.Movie;
+import Entity.MovieTicket;
+import Entity.Payment;
+import Entity.User;
 
 public class BookingManager extends Control{
 	MovieControl movieControl;

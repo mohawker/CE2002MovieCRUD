@@ -1,4 +1,4 @@
-package Model;
+package Entity;
 
 import java.awt.*;
 import java.net.URI;

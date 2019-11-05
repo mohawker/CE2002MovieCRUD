@@ -1,10 +1,12 @@
-package Model;
+package Controller;
 
 import java.util.ArrayList;
 import java.util.Set;
 
-import Controller.Control;
-import Controller.MovieControl;
+import Entity.Cineplex;
+import Entity.Movie;
+import Entity.Review;
+import Entity.User;
 
 public class ReviewManager extends Control{
 	MovieControl movieControl;

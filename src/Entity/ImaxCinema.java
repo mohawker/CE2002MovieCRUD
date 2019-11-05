@@ -1,4 +1,4 @@
-package Model;
+package Entity;
 
 import java.util.ArrayList;
 
@@ -86,5 +86,6 @@ public final class ImaxCinema extends Cinema {
 		for (int i=0; i<this.DIAMETER*4 - 1; i++){
 			System.out.print("_");
 		}
+		System.out.println();
 	}
 }

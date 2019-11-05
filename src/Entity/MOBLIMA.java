@@ -1,4 +1,4 @@
-package Model;
+package Entity;
 
 import java.util.ArrayList;
 import java.io.Serializable;
@@ -6,8 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import View.AdminView;
-import View.UserView;
+import Boundary.AdminView;
+import Boundary.UserView;
 import Controller.InputControl;   
 
 public class MOBLIMA implements Serializable {
@@ -59,7 +59,7 @@ public class MOBLIMA implements Serializable {
 	}
 	
 	public void writeApp() {
-		String path = System.getProperty("user.dir")+ "/src/" + "/moblima.dat";
+		String path = System.getProperty("user.dir")+ "/src/" +"moblima.dat";
 		SerializeDB.writeSerializedObject(path, this);
 	}
 

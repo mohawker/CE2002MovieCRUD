@@ -3,9 +3,9 @@ package Controller;
 import java.util.ArrayList;
 import java.util.Set;
 
-import Model.Movie;
-import Model.Cineplex;
-import Model.User;
+import Entity.Cineplex;
+import Entity.Movie;
+import Entity.User;
 
 public class Control {
 	Set<Movie> uniqueMovies;

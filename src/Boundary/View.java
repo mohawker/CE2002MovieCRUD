@@ -1,11 +1,11 @@
-package View;
+package Boundary;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Set;
 
-import Model.DateChecker;
-import Model.MOBLIMA;
+import Entity.DateChecker;
+import Entity.MOBLIMA;
 
 public abstract class View{
 	MOBLIMA app; 	

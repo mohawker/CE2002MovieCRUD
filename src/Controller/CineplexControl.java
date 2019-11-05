@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Set;
 
-import Model.Movie;
-import Model.User;
-import Model.Cineplex;
+import Entity.Cineplex;
+import Entity.Movie;
+import Entity.User;
 
 public class CineplexControl extends Control{
 

@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
-import Model.Movie;
-import Model.Admin;
-import Model.Cineplex;
-import Model.User;
-import Model.VideoPlayer;
+import Entity.Admin;
+import Entity.Cineplex;
+import Entity.Movie;
+import Entity.User;
+import Entity.VideoPlayer;
 
 public class UserControl extends Control{
 	MovieControl movieControl;

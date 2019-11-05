@@ -1,12 +1,12 @@
-package View;
+package Boundary;
 
+import Controller.BookingManager;
 import Controller.InputControl;
+import Controller.ReviewManager;
 import Controller.UserControl;
-import Model.BookingManager;
-import Model.DateChecker;
-import Model.MOBLIMA;
-import Model.ReviewManager;
-import Model.User;
+import Entity.DateChecker;
+import Entity.MOBLIMA;
+import Entity.User;
 
 public class UserView extends View{
 	UserControl userControl;
@@ -16,7 +16,7 @@ public class UserView extends View{
 
 	public UserView(MOBLIMA app, DateChecker dateChecker) {
 		super(app, dateChecker);
-		System.out.print("Enter your name: ");
+		System.out.print("Enter unique username: ");
 		String userName = InputControl.stringInput();
 		boolean found = false;
 		for (User currUser: app.users) {

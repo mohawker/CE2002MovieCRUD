@@ -1,10 +1,10 @@
-package View;
+package Boundary;
 
 import Controller.AdminControl;
 import Controller.InputControl;
-import Model.Admin;
-import Model.DateChecker;
-import Model.MOBLIMA;
+import Entity.Admin;
+import Entity.DateChecker;
+import Entity.MOBLIMA;
 
 public  class AdminView extends View{
 	Admin admin;

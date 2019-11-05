@@ -1,6 +1,9 @@
-package Model;
+package Entity;
 
 import java.util.Scanner;
+
+import Controller.InputControl;
+
 import java.io.Serializable;
 
 public class Review implements Serializable{
@@ -17,18 +20,12 @@ public class Review implements Serializable{
 		String comment = scan.nextLine();
 		while (1==1) {
 			System.out.print("Rating out of 5: ");
-			float rating = scan.nextFloat();
-			if (rating<0 || rating >5) {
-				System.out.println("Only values from 0-5 are valid");
-				System.out.println("Please try again");
-
-			}else {
-				this.comment = comment;
-				this.rating = rating;
-				this.userID = user.getUsername();
-				this.movie = movie;
-				break;
-			}
+			float rating = InputControl.floatInput(1, 5);
+			this.comment = comment;
+			this.rating = rating;
+			this.userID = user.getUsername();
+			this.movie = movie;
+			break;
 		}
 		System.out.println();
 	}
@@ -42,7 +39,7 @@ public class Review implements Serializable{
 	
 	//getMethods
 	public String getComment() {return this.comment;}
-	public String getRating() {return this.getRating();}
+	public float getRating() {return this.rating;}
 	public String getUserID() {return userID;}
 	public String getMovieTitle() {return this.movie.getTitle();}
 	public Movie getMovieR() {return this.movie;}

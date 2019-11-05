@@ -5,12 +5,12 @@ import java.util.Collections;
 import java.util.Scanner;
 import java.util.Set;
 
-import Model.Movie;
-import Model.Admin;
-import Model.Cineplex;
-import Model.Cinema;
-import Model.Price;
-import Model.DateChecker;
+import Entity.Admin;
+import Entity.Cinema;
+import Entity.Cineplex;
+import Entity.DateChecker;
+import Entity.Movie;
+import Entity.Price;
 
 public class AdminControl extends Control{
 	

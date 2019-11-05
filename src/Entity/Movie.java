@@ -1,4 +1,4 @@
-package Model;
+package Entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -93,7 +93,7 @@ public class Movie implements Serializable{
 			return (float)0;
 		}else {
 			for (int i=0; i<this.movieReviews.size(); i++) {
-				totalRating += this.movieReviews.get(i).getRRating();
+				totalRating += this.movieReviews.get(i).getRating();
 			}
 			return totalRating/(this.movieReviews.size());
 		}

@@ -14,11 +14,11 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import Model.Movie;
-import Model.Admin;
-import Model.Cineplex;
-import Model.User;
-import Model.Cinema;
+import Entity.Admin;
+import Entity.Cinema;
+import Entity.Cineplex;
+import Entity.Movie;
+import Entity.User;
 
 public class MovieControl extends Control{
 
