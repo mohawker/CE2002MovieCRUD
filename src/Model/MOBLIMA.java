@@ -40,7 +40,7 @@ public class MOBLIMA implements Serializable {
 		if (choice == 1) {
 			try	{
 				// read from serialized file
-				String path = System.getProperty("user.dir")+ "/src/" + "Assignment" +"/moblima.dat";
+				String path = System.getProperty("user.dir")+ "/src/" + "/moblima.dat";
 				MOBLIMA oldApp = SerializeDB.readSerializedObject(path);
 				return oldApp;
 			}  catch ( Exception e ) {
@@ -59,7 +59,7 @@ public class MOBLIMA implements Serializable {
 	}
 	
 	public void writeApp() {
-		String path = System.getProperty("user.dir")+ "/src/" + this.getClass().getPackage().getName() +"/moblima.dat";
+		String path = System.getProperty("user.dir")+ "/src/" + "/moblima.dat";
 		SerializeDB.writeSerializedObject(path, this);
 	}
 
