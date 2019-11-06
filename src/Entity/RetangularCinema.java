@@ -3,7 +3,6 @@ package Entity;
 import java.util.ArrayList;
 
 public abstract class RetangularCinema extends Cinema {
-	private String[][][][] floorplan;
 	public RetangularCinema(String cinema_type, String cinema_code, ArrayList<String> showtimes, ArrayList<String> dates) { // can customise seats based on cinema_type
 		super(cinema_type, cinema_code, showtimes, dates);
 	}
@@ -11,23 +10,25 @@ public abstract class RetangularCinema extends Cinema {
 	public void generateFloorPlan() {
 		// dynamically generate floor plan;
 		int num_showtimes = super.getShowtime().length;
-		this.floorplan = new String [getShowtime().length][num_showtimes][getROW()][getCOL()];
+		String[][][][] newFloorplan = new String [getShowtime().length][num_showtimes][getROW()][getCOL()];
+		
 		
 		for (int date=0; date<super.getDates().size(); date++) {
 			for (int i=0;i<num_showtimes;i++) {
 				for (int j=0;j<getROW();j++) {
 					for (int k=0;k<getCOL();k++) {
-						this.floorplan[date][i][j][k]= "O";
+						newFloorplan[date][i][j][k]= "O";
 					}
 				}
 			}
 		}
+		setFloorplan(newFloorplan);
 	}
 	
 	public void viewSeats(String time, String date) {
 		int dateIndex = super.getDates().indexOf(date);
 		int index = super.getShowtime()[dateIndex].indexOf(time);
-		String[][] seats = this.floorplan[dateIndex][index];
+		String[][] seats =  getFloorplan()[dateIndex][index];
 		System.out.println("-------------LEGEND-------------");
 		System.out.println("[O] - Vacant Seats");
 		System.out.println("[X] - Occupied Seats");
