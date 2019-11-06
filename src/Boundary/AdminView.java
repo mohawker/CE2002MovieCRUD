@@ -10,17 +10,17 @@ import Entity.DateChecker;
 import Entity.MOBLIMA;
 
 public  class AdminView extends View{
-	Admin admin;
-	AdminControl adminControl;
-	SortingManager sortingManager;
+	private Admin admin;
+	private AdminControl adminControl;
+	private SortingManager sortingManager;
 
 	
 	
 	public AdminView(MOBLIMA myApp, DateChecker dateChecker) {
 		super(myApp, dateChecker);
 		admin = new Admin("Admin", "tom@gmail.com", "98765432", 22, "Password123");
-		adminControl = new AdminControl(app.uniqueMovies, admin, app.cineplexes);
-		sortingManager = new SortingManager(app.uniqueMovies, admin, app.cineplexes);
+		adminControl = new AdminControl(app.getUniqueMovies(), admin, app.getCineplexes());
+		sortingManager = new SortingManager(app.getUniqueMovies(), admin, app.getCineplexes());
 		admin.login();
 		this.dateChecker = dateChecker;
 		System.out.println("+----------------------------------------------------+");
@@ -55,17 +55,17 @@ public  class AdminView extends View{
 			System.out.print("Please select (1-13) : ");
 			int choice = InputControl.integerInput(1, 13);
 			switch (choice){
-				case 1:{adminControl.createMovieListing(app.cineplexes, app.uniqueMovies);break;}
-				case 2:{adminControl.updateMovieListing(app.cineplexes, app.uniqueMovies);break;}
-				case 3:{adminControl.removeMovieListing(app.cineplexes, app.uniqueMovies);break;}
-				case 4:{adminControl.createCinemaShowtimes(app.cineplexes, app.uniqueMovies);break;}
-				case 5:{adminControl.updateCinemaShowtimes(app.cineplexes, app.uniqueMovies);break;}
-				case 6:{adminControl.addCinemaShowtimes(app.cineplexes, app.uniqueMovies); break;}
-				case 7:{adminControl.removeCinemaShowtimes(app.cineplexes, app.uniqueMovies);break;}
+				case 1:{adminControl.createMovieListing(app.getCineplexes(), app.getUniqueMovies());break;}
+				case 2:{adminControl.updateMovieListing(app.getCineplexes(), app.getUniqueMovies());break;}
+				case 3:{adminControl.removeMovieListing(app.getCineplexes(), app.getUniqueMovies());break;}
+				case 4:{adminControl.createCinemaShowtimes(app.getCineplexes(), app.getUniqueMovies());break;}
+				case 5:{adminControl.updateCinemaShowtimes(app.getCineplexes(), app.getUniqueMovies());break;}
+				case 6:{adminControl.addCinemaShowtimes(app.getCineplexes(), app.getUniqueMovies()); break;}
+				case 7:{adminControl.removeCinemaShowtimes(app.getCineplexes(), app.getUniqueMovies());break;}
 				case 8:{adminControl.configureSettings();break;}
 				case 9:{adminControl.addNewHoliday(dateChecker);break;}
 				case 10:{dateChecker.printPublicHoliday();break;}
-				case 11:{sortingManager.listTop5(app.uniqueMovies);break;}
+				case 11:{sortingManager.listTop5(app.getUniqueMovies());break;}
 				case 12:{return 1;}
 				case 13:{System.out.println("Thank you for using MOBLIMA!\nSaving and System Logging Off...");
 						app.writeApp();

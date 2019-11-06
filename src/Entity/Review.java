@@ -31,11 +31,11 @@ public class Review implements Serializable{
 	}
 	
 	//setMethods
-	public void setComment(String comment) {this.comment = comment;}
-	public void setRating(float rating) {this.rating = rating;}
-	public void setUserID(String userID) {this.userID = userID;}
-	public void setTitle(String title) {this.title = title;}
-	public void setMovie(Movie movie) {this.movie = movie;}
+	//public void setComment(String comment) {this.comment = comment;}
+	//public void setRating(float rating) {this.rating = rating;}
+	//public void setUserID(String userID) {this.userID = userID;}
+	//public void setTitle(String title) {this.title = title;}
+	//public void setMovie(Movie movie) {this.movie = movie;}
 	
 	//getMethods
 	public String getComment() {return this.comment;}

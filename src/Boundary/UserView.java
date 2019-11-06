@@ -10,18 +10,18 @@ import Entity.MOBLIMA;
 import Entity.User;
 
 public class UserView extends View{
-	UserControl userControl;
-	BookingManager bookingManager;
-	ReviewManager reviewManager;
-	SortingManager sortingManager;
-	User user;
+	private UserControl userControl;
+	private BookingManager bookingManager;
+	private ReviewManager reviewManager;
+	private SortingManager sortingManager;
+	private User user;
 
 	public UserView(MOBLIMA app, DateChecker dateChecker) {
 		super(app, dateChecker);
 		System.out.print("Enter unique username: ");
 		String userName = InputControl.stringInput();
 		boolean found = false;
-		for (User currUser: app.users) {
+		for (User currUser: app.getUsers()) {
 			if (currUser.getUsername().equals(userName)) {
 				user = currUser;
 				found = true;
@@ -33,7 +33,7 @@ public class UserView extends View{
 			System.out.print("Enter your age: ");
 			int userAge = InputControl.integerInput(1, 150);
 			user = new User(userName, "vincentyongweijie@gmail.com", "83189252", userAge);
-			app.users.add(user);
+			app.getUsers().add(user);
 		}
 		
 		System.out.println("+----------------------------------------------------+");
@@ -43,10 +43,10 @@ public class UserView extends View{
 		System.out.println("+----------------------------------------------------+");
 		System.out.println("User Account: " + user.getUsername());
 		System.out.printf("The date is: %s\n", java.time.LocalDate.now());
-		userControl = new UserControl(app.uniqueMovies, user, app.cineplexes);
-		bookingManager = new BookingManager(app.uniqueMovies, user, app.cineplexes);
-		reviewManager = new ReviewManager(app.uniqueMovies, user, app.cineplexes);
-		sortingManager = new SortingManager(app.uniqueMovies, user, app.cineplexes);
+		userControl = new UserControl(app.getUniqueMovies(), user, app.getCineplexes());
+		bookingManager = new BookingManager(app.getUniqueMovies(), user, app.getCineplexes());
+		reviewManager = new ReviewManager(app.getUniqueMovies(), user, app.getCineplexes());
+		sortingManager = new SortingManager(app.getUniqueMovies(), user, app.getCineplexes());
 	}
 	
 	public int printView() {
@@ -71,15 +71,15 @@ public class UserView extends View{
 			int choice = InputControl.integerInput(1, 11);
 			System.out.println();
 			switch (choice){
-				case 1:{userControl.searchUniqueMovies(app.uniqueMovies, app.cineplexes);break;}
-				case 2:{userControl.viewTrailer(app.uniqueMovies);break;}
-				case 3:{userControl.listUniqueMovies(app.uniqueMovies, app.cineplexes);break;}
-				case 4:{userControl.viewMovieDetails(app.uniqueMovies);break;}
-				case 5:{userControl.checkSeatAvailability(app.cineplexes);break;}
-				case 6:{bookingManager.bookTicket(user, app.cineplexes, dateChecker);break;}
+				case 1:{userControl.searchUniqueMovies(app.getUniqueMovies(), app.getCineplexes());break;}
+				case 2:{userControl.viewTrailer(app.getUniqueMovies());break;}
+				case 3:{userControl.listUniqueMovies(app.getUniqueMovies(), app.getCineplexes());break;}
+				case 4:{userControl.viewMovieDetails(app.getUniqueMovies());break;}
+				case 5:{userControl.checkSeatAvailability(app.getCineplexes());break;}
+				case 6:{bookingManager.bookTicket(user, app.getCineplexes(), dateChecker);break;}
 				case 7:{userControl.viewBookingHistory(user);break;}
-				case 8:{sortingManager.listTop5(app.uniqueMovies);break;}
-				case 9:{reviewManager.addRating(app.uniqueMovies, user);break;}
+				case 8:{sortingManager.listTop5(app.getUniqueMovies());break;}
+				case 9:{reviewManager.addRating(app.getUniqueMovies(), user);break;}
 				case 10:{return 2;}
 				case 11:{System.out.println("Thank you for using MOBLIMA!\n Saving and System Logging Off...");
 						app.writeApp();

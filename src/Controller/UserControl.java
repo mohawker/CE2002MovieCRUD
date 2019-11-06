@@ -13,16 +13,16 @@ import Entity.User;
 import Entity.VideoPlayer;
 
 public class UserControl extends Control{
-	MovieControl movieControl;
-	CinemaControl cinemaControl;
-	ShowtimeControl showtimeControl;
-	CineplexControl cineplexControl;
+	private MovieControl movieControl;
+	private CinemaControl cinemaControl;
+	//private ShowtimeControl showtimeControl;
+	private CineplexControl cineplexControl;
 	
 	public UserControl(Set<Movie> uniqueMovies, User user, ArrayList<Cineplex> cineplexes) {
 		super(uniqueMovies, user, cineplexes);
 		this.movieControl = new MovieControl(uniqueMovies, user, cineplexes);
 		this.cinemaControl = new CinemaControl(uniqueMovies, user, cineplexes);
-		this.showtimeControl = new ShowtimeControl(uniqueMovies, user, cineplexes);
+		//this.setShowtimeControl(new ShowtimeControl(uniqueMovies, user, cineplexes));
 		this.cineplexControl = new CineplexControl(uniqueMovies, user, cineplexes);
 	}
 	
@@ -104,4 +104,10 @@ public class UserControl extends Control{
 		VideoPlayer player = new VideoPlayer();
 		player.play(movieChosen);
 	}
+
+	//public ShowtimeControl getShowtimeControl() {return showtimeControl;}
+
+	/*public void setShowtimeControl(ShowtimeControl showtimeControl) {
+		this.showtimeControl = showtimeControl;
+	}*/
 }

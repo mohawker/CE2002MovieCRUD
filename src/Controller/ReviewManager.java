@@ -9,7 +9,7 @@ import Entity.Review;
 import Entity.User;
 
 public class ReviewManager extends Control{
-	MovieControl movieControl;
+	private MovieControl movieControl;
 	
 	public ReviewManager(Set<Movie> uniqueMovies, User user, ArrayList<Cineplex> cineplexes) {
 		super(uniqueMovies, user, cineplexes);

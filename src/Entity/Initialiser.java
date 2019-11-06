@@ -9,8 +9,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Initialiser {
-	public static String DATE_FORMAT = "dd/MM/YYYY";
-	public static DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+	private static String DATE_FORMAT = "dd/MM/YYYY";
+	private static DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
 	
 	public static Cinema[] generateCinemas() {
 		

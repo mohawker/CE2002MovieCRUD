@@ -14,10 +14,10 @@ import Entity.Price;
 
 public class AdminControl extends Control{
 	
-	MovieControl movieControl;
-	CinemaControl cinemaControl;
-	ShowtimeControl showtimeControl;
-	CineplexControl cineplexControl;
+	private MovieControl movieControl;
+	private CinemaControl cinemaControl;
+	private ShowtimeControl showtimeControl;
+	private CineplexControl cineplexControl;
 	
 	public AdminControl(Set<Movie> uniqueMovies, Admin admin, ArrayList<Cineplex> cineplexes) {
 		super(uniqueMovies, admin, cineplexes);

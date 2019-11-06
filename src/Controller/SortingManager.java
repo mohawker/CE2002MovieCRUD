@@ -9,7 +9,7 @@ import Entity.Movie;
 import Entity.User;
 
 public class SortingManager extends Control{
-	MovieControl movieControl;
+	private MovieControl movieControl;
 	
 	public SortingManager(Set<Movie> uniqueMovies, User user, ArrayList<Cineplex> cineplexes) {
 		super(uniqueMovies, user, cineplexes);
