@@ -96,18 +96,6 @@ public class UserControl extends Control{
 		user.viewTicketHistory();
 	}
 
-	public void listTop5(Set<Movie> uniqueMovies) {
-		Scanner scan = new Scanner(System.in);
-		System.out.println("Would you like to get the top 5 by:");
-		System.out.println("[1] Sales");
-		System.out.println("[2] Overall Rating");
-		int choice = scan.nextInt();
-		if (choice == 1) {
-			movieControl.sortMovies(uniqueMovies, true);
-		}else {
-			movieControl.sortMovies(uniqueMovies, false);
-		}
-	}
 
 	public void viewTrailer(Set<Movie> uniqueMovies) {
 		System.out.println("=== Movies Available ===");

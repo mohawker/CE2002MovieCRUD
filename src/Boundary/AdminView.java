@@ -2,19 +2,25 @@ package Boundary;
 
 import Controller.AdminControl;
 import Controller.InputControl;
+import Controller.SortingManager;
+
 import Entity.Admin;
+import Entity.User;
 import Entity.DateChecker;
 import Entity.MOBLIMA;
 
 public  class AdminView extends View{
 	Admin admin;
 	AdminControl adminControl;
+	SortingManager sortingManager;
+
 	
 	
 	public AdminView(MOBLIMA myApp, DateChecker dateChecker) {
 		super(myApp, dateChecker);
 		admin = new Admin("Admin", "tom@gmail.com", "98765432", 22, "Password123");
 		adminControl = new AdminControl(app.uniqueMovies, admin, app.cineplexes);
+		sortingManager = new SortingManager(app.uniqueMovies, admin, app.cineplexes);
 		admin.login();
 		this.dateChecker = dateChecker;
 		System.out.println("Welcome, " + admin.getUsername());
@@ -54,7 +60,7 @@ public  class AdminView extends View{
 				case 8:{adminControl.configureSettings();break;}
 				case 9:{adminControl.addNewHoliday(dateChecker);break;}
 				case 10:{dateChecker.printPublicHoliday();break;}
-				case 11:{adminControl.listTop5(app.uniqueMovies);break;}
+				case 11:{sortingManager.listTop5(app.uniqueMovies);break;}
 				case 12:{return 1;}
 				case 13:{System.out.println("Thank you for using MOBLIMA!\nSaving and System Logging Off...");
 						app.writeApp();
