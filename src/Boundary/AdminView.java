@@ -9,15 +9,18 @@ import Entity.User;
 import Entity.DateChecker;
 import Entity.MOBLIMA;
 
-public  class AdminView extends View{
+public  class AdminView implements View{
 	private Admin admin;
 	private AdminControl adminControl;
 	private SortingManager sortingManager;
-
+	
+	private MOBLIMA app;
+	private DateChecker dateChecker;
 	
 	
-	public AdminView(MOBLIMA myApp, DateChecker dateChecker) {
-		super(myApp, dateChecker);
+	public AdminView(MOBLIMA myApp, DateChecker myDateChecker) {
+		app = myApp;	
+		dateChecker = myDateChecker;
 		admin = new Admin("Admin", "tom@gmail.com", "98765432", 22, "Password123");
 		adminControl = new AdminControl(app.getUniqueMovies(), admin, app.getCineplexes());
 		sortingManager = new SortingManager(app.getUniqueMovies(), admin, app.getCineplexes());

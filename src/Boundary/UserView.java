@@ -9,15 +9,18 @@ import Entity.DateChecker;
 import Entity.MOBLIMA;
 import Entity.User;
 
-public class UserView extends View{
+public class UserView implements View{
 	private UserControl userControl;
 	private BookingManager bookingManager;
 	private ReviewManager reviewManager;
 	private SortingManager sortingManager;
 	private User user;
+	private MOBLIMA app;
+	private DateChecker dateChecker;
 
-	public UserView(MOBLIMA app, DateChecker dateChecker) {
-		super(app, dateChecker);
+	public UserView(MOBLIMA myApp, DateChecker myDateChecker) {
+		app = myApp;	
+		dateChecker = myDateChecker;
 		System.out.print("Enter unique username: ");
 		String userName = InputControl.stringInput();
 		boolean found = false;
