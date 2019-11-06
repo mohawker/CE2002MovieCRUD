@@ -23,6 +23,11 @@ public  class AdminView extends View{
 		sortingManager = new SortingManager(app.uniqueMovies, admin, app.cineplexes);
 		admin.login();
 		this.dateChecker = dateChecker;
+		System.out.println("+----------------------------------------------------+");
+		System.out.println("|                                                    |");
+		System.out.println("|                   MOBLIMA (v1.0)                   |");
+		System.out.println("|                    Admin Menu                      |");
+		System.out.println("+----------------------------------------------------+");
 		System.out.println("Welcome, " + admin.getUsername());
 		System.out.println("------------------------------------------------------");
 		System.out.printf("The date is: %s\n", java.time.LocalDate.now());

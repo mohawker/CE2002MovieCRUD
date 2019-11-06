@@ -36,7 +36,12 @@ public class UserView extends View{
 			app.users.add(user);
 		}
 		
-		System.out.println("------------------------------------------------------");
+		System.out.println("+----------------------------------------------------+");
+		System.out.println("|                                                    |");
+		System.out.println("|             WELCOME TO MOBLIMA (v1.0)              |");
+		System.out.println("|                   User Menu                        |");
+		System.out.println("+----------------------------------------------------+");
+		System.out.println("User Account: " + user.getUsername());
 		System.out.printf("The date is: %s\n", java.time.LocalDate.now());
 		userControl = new UserControl(app.uniqueMovies, user, app.cineplexes);
 		bookingManager = new BookingManager(app.uniqueMovies, user, app.cineplexes);
