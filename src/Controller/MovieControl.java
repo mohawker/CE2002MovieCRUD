@@ -181,7 +181,7 @@ public class MovieControl extends Control{
 						sortedMoviesList.add(j, uniqueMoviesList.get(i));
 						break;
 					}else if (j == sortedMoviesList.size()-1) {
-						sortedMoviesList.add(j, uniqueMoviesList.get(i));
+						sortedMoviesList.add(j+1, uniqueMoviesList.get(i));
 						break;
 					}
 				}
@@ -198,7 +198,7 @@ public class MovieControl extends Control{
 						sortedMoviesList.add(j, uniqueMoviesList.get(i));
 						break;
 					}else if (j == sortedMoviesList.size()-1) {
-						sortedMoviesList.add(j, uniqueMoviesList.get(i));
+						sortedMoviesList.add(j+1, uniqueMoviesList.get(i));
 						break;
 					}
 				}

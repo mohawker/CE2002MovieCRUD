@@ -6,8 +6,6 @@ public final class ImaxCinema extends Cinema {
 	//imax have a circular theater 
 	int DIAMETER = 5; //only odd numbers allowed
 	
-
-	
 	public ImaxCinema(String cinema_type, String cinema_code, ArrayList<String> showtimes, ArrayList<String> dates) { // can customise seats based on cinema_type
 		super(cinema_type, cinema_code, showtimes, dates);
 		setROW(DIAMETER);
