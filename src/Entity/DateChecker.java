@@ -49,8 +49,8 @@ public class DateChecker implements Serializable{
 		Scanner scan = new Scanner(System.in);
 		
 		int day = Integer.valueOf(date.substring(0, 2));
-		int month = Integer.valueOf(date.substring(3, 5));
-		int year = Integer.valueOf(date.substring(6, 10));
+		int month = Integer.valueOf(date.substring(3, 5)) - 1;
+		int year = Integer.valueOf(date.substring(6, 10)) - 1900;
 		
 		Date userDate = new Date(year,month,day);		
 		Calendar c1 = Calendar.getInstance();

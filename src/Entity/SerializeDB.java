@@ -7,9 +7,9 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class SerializeDB {
+public class SerializeDB implements DBmanager{
 	
-	public static MOBLIMA readSerializedObject(String filename) {
+	public MOBLIMA loadData(String filename) {
 		MOBLIMA app = null;
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
@@ -29,7 +29,7 @@ public class SerializeDB {
 		return app;
 	}
 
-	public static void writeSerializedObject(String filename, MOBLIMA app) {
+	public void saveData(String filename, MOBLIMA app) {
 		FileOutputStream fos = null;
 		ObjectOutputStream out = null;
 		try {

@@ -6,11 +6,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import Boundary.View;
 import Boundary.AdminView;
 import Boundary.UserView;
 import Controller.InputControl;   
 
-public class MOBLIMA implements Serializable {
+public class MOBLIMA implements Serializable, View{
 	private Cinema[] cinemas;
 	private Movie[] movies;
 	private ArrayList<Cineplex> cineplexes;
@@ -36,12 +37,13 @@ public class MOBLIMA implements Serializable {
 		System.out.println("Would you like to continue to load previous save or start anew?");
 		System.out.println("[1] Load");
 		System.out.println("[2] New");
+		DBmanager myDBManager = new SerializeDB();
 		int choice = InputControl.integerInput(1, 2);
 		if (choice == 1) {
 			try	{
 				// read from serialized file
 				String path = System.getProperty("user.dir")+ "/src/" + "/moblima.dat";
-				MOBLIMA oldApp = SerializeDB.readSerializedObject(path);
+				MOBLIMA oldApp = myDBManager.loadData(path);
 				return oldApp;
 			}  catch ( Exception e ) {
 				System.out.println( "Failed to load......Exception >> " + e.getMessage() );
@@ -59,17 +61,22 @@ public class MOBLIMA implements Serializable {
 	}
 	
 	public void writeApp() {
+		DBmanager myDBManager = new SerializeDB();
 		String path = System.getProperty("user.dir")+ "/src/" +"moblima.dat";
-		SerializeDB.writeSerializedObject(path, this);
+		myDBManager.saveData(path, this);
 	}
 
 	public MOBLIMA() {}
 
-	public void MOBLIMAMainLoop() {
+	public int printView() {
 		System.out.println("Login As:");
 		System.out.println("[1] User");
 		System.out.println("[2] Admin");
-		int choice = InputControl.integerInput(1, 2);
+		return InputControl.integerInput(1, 2);
+	}
+	
+	public void MOBLIMAMainLoop() {
+		int choice  = this.printView();
 		//end 0, user 1 , admin 2
 		while (true) {
 			if (choice == 1) {
