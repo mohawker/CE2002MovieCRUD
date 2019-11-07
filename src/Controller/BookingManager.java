@@ -38,7 +38,7 @@ public class BookingManager extends Control{
 		System.out.print("Select Option: ");
 		int choice = InputControl.integerInput(1, 2);
 			if (choice == 1) {
-				MovieTicket ticket = this.bookPurchaseTicket(user, cineplexChosen, movieChosen, 1, dateChecker);
+				MovieTicket ticket = this.selectTicketSeat(user, cineplexChosen, movieChosen, 1, dateChecker);
 				if (new Payment().authenticatePayment(ticket) == true) {
 					user.addTicket(ticket);
 				}
@@ -49,7 +49,7 @@ public class BookingManager extends Control{
 			else if (choice==2){
 				System.out.print("Number of seats: ");
 				int numTicket = scan.nextInt();
-				MovieTicket ticket = this.bookPurchaseTicket(user, cineplexChosen, movieChosen, numTicket, dateChecker);
+				MovieTicket ticket = this.selectTicketSeat(user, cineplexChosen, movieChosen, numTicket, dateChecker);
 				if (new Payment().authenticatePayment(ticket) == true) {
 					user.addTicket(ticket);
 				}
@@ -59,7 +59,7 @@ public class BookingManager extends Control{
 			}
 	}
 	
-	public MovieTicket bookPurchaseTicket(User user, Cineplex cineplex, Movie movie, int numTicket, DateChecker dateChecker) {
+	public MovieTicket selectTicketSeat(User user, Cineplex cineplex, Movie movie, int numTicket, DateChecker dateChecker) {
 		int index = cineplex.getMovies().indexOf(movie);
 		
 		Cinema cinemaShowing = cineplex.getCinemas().get(index);
@@ -77,21 +77,18 @@ public class BookingManager extends Control{
 		System.out.print("Select Showtime: ");
 		int choice = InputControl.integerInput(1, cinemaShowing.getShowtime().length);
 		System.out.println();
-		String showtime = cinemaShowing.getShowtime()[dateIndex].get(choice-1);
-		return this.bookSeat(cineplex, user, cinemaShowing, showtime, movie, numTicket, cinemaShowing.getDates().get(dateIndex), dateChecker);
-	}
-	
-	public MovieTicket bookSeat(Cineplex cineplex, User user, Cinema cinema, String time, Movie movie, int numTicket, String date, DateChecker dateChecker) {
-		Scanner scan = new Scanner(System.in);
-		int dateIndex = cinema.getDates().indexOf(date);
-		int index = cinema.getShowtime()[dateIndex].indexOf(time);
-		String[][] seats = cinema.getFloorplan()[dateIndex][index];
 		
-		System.out.println("=== Seats for " + movie.getTitle() + " on " + date + " " + time + " at " + cineplex.getName() + " " + cineplex.getLocation() + " ===");
-		cinema.viewSeats(time, date);
+		String showtime = cinemaShowing.getShowtime()[dateIndex].get(choice-1);
+		String date = cinemaShowing.getDates().get(dateIndex);
+		int finalDateIndex = cinemaShowing.getDates().indexOf(date);
+		int showtimeIndex = cinemaShowing.getShowtime()[finalDateIndex].indexOf(showtime);
+		String[][] seats = cinemaShowing.getFloorplan()[finalDateIndex][showtimeIndex];
+		
+		System.out.println("=== Seats for " + movie.getTitle() + " on " + date + " " + showtime + " at " + cineplex.getName() + " " + cineplex.getLocation() + " ===");
+		cinemaShowing.viewSeats(showtime, date);
 		System.out.println();
-		MovieTicket ticket = new MovieTicket(movie, cinema, time, date, 1);
-		ticket.getTPrice().generatePrice(user.getAge(), movie.getType(), cinema.getCinemaType(), date, dateChecker);
+		MovieTicket ticket = new MovieTicket(movie, cinemaShowing, showtime, date, 1);
+		ticket.getTPrice().generatePrice(user.getAge(), movie.getType(), cinemaShowing.getCinemaType(), date, dateChecker);
 		ticket.setPerTicketPrice(ticket.getPrice());
 		System.out.printf("Each ticket costs $%.2f\n", ticket.getPerTicketPrice());
 		ticket.getTPrice().printBreakdown();
@@ -101,7 +98,7 @@ public class BookingManager extends Control{
 				String seat = scan.next();
 				int row_index = (int) seat.charAt(0) - 65;
 				int column_index = (int) seat.charAt(1) - 49;
-				if (row_index > cinema.getROW() - 1 || column_index > cinema.getCOL() - 1) {
+				if (row_index > cinemaShowing.getROW() - 1 || column_index > cinemaShowing.getCOL() - 1) {
 					System.out.println("No such seats available.");
 				} else if (seats[row_index][column_index].equals("X")) {
 					System.out.println("Seat is taken. Please choose another one.");
@@ -109,7 +106,7 @@ public class BookingManager extends Control{
 						System.out.println("Seat is a spacing. Please choose another one.");
 				} else {
 					seats[row_index][column_index] = "+";
-					cinema.viewSeats(time, date);
+					cinemaShowing.viewSeats(showtime, date);
 					System.out.print("\nPlease confirm your seat (Y/N) ");
 					char reply = scan.next().charAt(0);
 					if (reply == 'Y') {
@@ -131,7 +128,7 @@ public class BookingManager extends Control{
 					int row_index = (int) seat.charAt(0) - 65;
 					int column_index = (int) seat.charAt(1) - 49;
 
-					if (row_index > cinema.getROW() - 1 || column_index > cinema.getCOL() - 1) {
+					if (row_index > cinemaShowing.getROW() - 1 || column_index > cinemaShowing.getCOL() - 1) {
 						System.out.println("No such seats available.");
 					} else if (seats[row_index][column_index].equals("X")) {
 						System.out.println("Seat is taken. Please choose another one.");
@@ -143,7 +140,7 @@ public class BookingManager extends Control{
 						seats[row_index][column_index] = "+";
 					}
 				}
-				cinema.viewSeats(time, date);
+				cinemaShowing.viewSeats(showtime, date);
 				System.out.println();
 				float totalPrice = 0;
 				System.out.println("Please confirm your seat (Y/N)");
