@@ -10,18 +10,20 @@ public class Movie implements Serializable{
 	private String synopsis;
 	private String director;
 	private String type;
+	private String ageRating;
 	private float movieSales=0;
 	//private float averageRating = 0;
 	private ArrayList <String> cast;
 	private ArrayList <Review> movieReviews=new ArrayList <Review>(); // When creating a new movie, there are no reviews
 	
-	public Movie(String title, String status, String synopsis, String director, String type, ArrayList <String> cast) {
+	public Movie(String title, String status, String synopsis, String director, String type, ArrayList <String> cast, String ageRating) {
 		this.title = title;
 		this.status = status;
 		this.synopsis = synopsis;
 		this.director = director;
 		this.type = type;
 		this.cast = cast;
+		this.ageRating = ageRating;
 	}
 	
 	
@@ -44,7 +46,7 @@ public class Movie implements Serializable{
 		System.out.println("=== Movie Details of " + this.title + " ===");
 		System.out.println("Title: " + this.title);
 		System.out.println("Director: " + this.director);
-		
+		System.out.println("Rating: " + this.ageRating);
 		if (this.movieReviews.size() == 0){
 			System.out.println("There are no ratings available");
 		}else {

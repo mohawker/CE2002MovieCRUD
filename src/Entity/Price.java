@@ -29,7 +29,7 @@ public class Price implements Serializable{
 		if ( this.age<=6 || this.age >= 55) {
 			currPrice = currPrice*(1-Price.multAge);
 		}
-		if (this.movieType.equals("3D")) {
+		if (this.movieType.equals("3D") || this.cinemaType.equals("Imax")) {
 			currPrice = currPrice*(Price.mult3D+1);
 		}
 		if (this.movieType.equals("Blockbuster")) {
@@ -52,8 +52,8 @@ public class Price implements Serializable{
 			System.out.printf("Child/Senior Citizen Discount: -$%.2f\n", Price.basePrice*Price.multAge);
 			currPrice = currPrice*(1-Price.multAge);
 		}		
-		if (this.movieType.equals("3D")) {
-			System.out.printf("3D Movie Multiplier: +$%.2f\n", currPrice*Price.mult3D);
+		if (this.movieType.equals("3D") || this.cinemaType.equals("Imax")) {
+			System.out.printf("3D/Imax Movie Multiplier: +$%.2f\n", currPrice*Price.mult3D);
 			currPrice = currPrice*(Price.mult3D+1);
 		}
 		if (this.movieType.equals("Blockbuster")) {
@@ -85,9 +85,9 @@ public class Price implements Serializable{
 		System.out.println();
 		switch(choice) {
 			case 1:
-				System.out.println("=== Multiplier for 3D Movies ===");
+				System.out.println("=== Multiplier for 3D/Imax Movies ===");
 				System.out.printf("Current Multiplier: %.2f\n", Price.mult3D);
-				System.out.print("Input New Multiplier for 3D Movies: ");
+				System.out.print("Input New Multiplier for 3D/Imax Movies: ");
 				Price.mult3D = scan.nextFloat();
 				System.out.printf("New rate: %.2f\n", Price.mult3D);
 				break;

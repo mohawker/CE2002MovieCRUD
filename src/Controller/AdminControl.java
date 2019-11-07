@@ -35,7 +35,7 @@ public class AdminControl extends Control{
 			Cineplex cineplexChosen = cineplexControl.selectCineplex(cineplexes);
 			ArrayList <String> showtimes = showtimeControl.createShowtimes();
 			Cinema cinemaChosen = cinemaControl.printAndSelectCinema(cineplexChosen);
-			movieControl.replaceMovie(cineplexChosen, cinemaChosen, movie, showtimes);
+			movieControl.replaceMovie(cineplexChosen, cinemaChosen, movie, showtimes, uniqueMovies);
 		}
 		return movie;
 	}
@@ -60,7 +60,7 @@ public class AdminControl extends Control{
 			ArrayList <String> showtimes = showtimeControl.createShowtimes();
 			System.out.println();
 			Cinema cinemaChosen = cinemaControl.printAndSelectCinema(cineplexChosen);
-			movieControl.replaceMovie(cineplexChosen, cinemaChosen, movieChosen, showtimes);			
+			movieControl.replaceMovie(cineplexChosen, cinemaChosen, movieChosen, showtimes, uniqueMovies);			
 		}else if (newStatus.equals("End of Showing")) {
 			movieChosen.setStatus(newStatus);
 			uniqueMovies.remove(movieChosen);
@@ -97,7 +97,7 @@ public class AdminControl extends Control{
 			ArrayList <String> showtimes = showtimeControl.createShowtimes();
 			System.out.println();
 			Cinema cinemaChosen = cinemaControl.printAndSelectCinema(cineplexChosen);
-			movieControl.replaceMovie(cineplexChosen, cinemaChosen, movieChosen, showtimes);
+			movieControl.replaceMovie(cineplexChosen, cinemaChosen, movieChosen, showtimes, uniqueMovies);
 		}
 	}
 

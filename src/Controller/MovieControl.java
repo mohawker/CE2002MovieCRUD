@@ -110,24 +110,6 @@ public class MovieControl extends Control{
 		}
 	}
 	
-	// for adding showtimes to movies which are now showing
-//	public Movie printAndSelectNowShowingMovies(Set<Movie> uniqueMovies) {
-//		List<Movie> showingMoviesList = new ArrayList<Movie>(uniqueMovies);
-//		int count = 1;
-//		for (Movie m : uniqueMovies) {
-//			if (!m.status.equals("End of Showing") && !m.status.equals("Coming Soon")) {
-//				System.out.println(count + ". " + m.title + ", Status: " + m.status);
-//				count += 1;
-//			}else {
-//				showingMoviesList.remove(m);
-//			}
-//		}
-//		System.out.print("Select your movie: ");
-//		int choice = InputHandler.integerInput(1, showingMoviesList.size());
-//		return showingMoviesList.get(choice-1);
-//	}
-	
-	// for adding showtimes to movies which are coming soon/preview
 	public Movie printAndSelectFromUnshownMovies(Set<Movie> uniqueMovies) {
 		List<Movie> unshownMoviesList = new ArrayList<Movie>(uniqueMovies);
 		int count = 1;
@@ -164,7 +146,9 @@ public class MovieControl extends Control{
 			System.out.print("Cast Member " + (i+1) + ": ");
 			cast.add(scan.nextLine());
 		}
-		Movie movie = new Movie(title, status, synopsis, director, type, cast);
+		System.out.print("Age Rating: ");
+		String ageRating = scan.next();
+		Movie movie = new Movie(title, status, synopsis, director, type, cast, ageRating);
 		uniqueMovies.add(movie);
 		return movie;
 	}
@@ -215,12 +199,13 @@ public class MovieControl extends Control{
         return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
 	}
 	
-	public void replaceMovie(Cineplex cineplexChosen, Cinema cinemaChosen, Movie movieChosen, ArrayList<String> showtimes) {
+	public void replaceMovie(Cineplex cineplexChosen, Cinema cinemaChosen, Movie movieChosen, ArrayList<String> showtimes, Set<Movie> uniqueMovies) {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("=== Previous Movies at " + cineplexChosen.getName() + " " + cineplexChosen.getLocation() + " ===");
 		printMovies(cineplexChosen);
 		int index = cineplexChosen.getCinemas().indexOf(cinemaChosen);
 		cineplexChosen.getMovies().get(index).setStatus("End of Showing");
+		uniqueMovies.remove(cineplexChosen.getMovies().get(index));
 		System.out.println("\nMovie being replaced: " + cineplexChosen.getMovies().get(index).getTitle());
 		cineplexChosen.getMovies().set(index, movieChosen);
 		System.out.println("New Movie: " + cineplexChosen.getMovies().get(index).getTitle());
