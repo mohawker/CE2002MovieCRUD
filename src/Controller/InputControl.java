@@ -1,10 +1,21 @@
 package Controller;
 import java.util.Scanner;
 
+/**
+ * To check that user provides correct input
+ * @author vince
+ *
+ */
 public class InputControl {
 
 	public InputControl() {}
 	
+	/**
+	 * Check for correct integer input between a given upper limit and lower limit
+	 * @param lowRange Lower limit of selection
+	 * @param highRange Upper limit of selection
+	 * @return
+	 */
 	public static int integerInput(int lowRange, int highRange) {
 		Scanner scan = new Scanner(System.in);
 		while (!scan.hasNextInt()){
@@ -20,12 +31,22 @@ public class InputControl {
 		}
 	}
 	
+	/**
+	 * Checks for string input from user
+	 * @return
+	 */
 	public static String stringInput() {
 		Scanner scan = new Scanner(System.in);
 		String input = scan.next();
 		return input;
 	}
-
+	
+	/**
+	 * Checks for float input from user between a upper limit and a lower limit
+	 * @param lowRange Lower limit of selection
+	 * @param highRange Upper limit of selection
+	 * @return
+	 */
 	public static float floatInput(int lowRange, int highRange) {
 		Scanner scan = new Scanner(System.in);
 		while (!scan.hasNextFloat()){

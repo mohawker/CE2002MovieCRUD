@@ -11,6 +11,12 @@ import Boundary.AdminView;
 import Boundary.UserView;
 import Controller.InputControl;   
 
+/**
+ * MOBLIMA loads/saves or instantiates new data
+ * and directs users to the correct view (UserView/AdminView)
+ * @author vince
+ *
+ */
 public class MOBLIMA implements Serializable, View{
 	private Cinema[] cinemas;
 	private Movie[] movies;
@@ -22,6 +28,18 @@ public class MOBLIMA implements Serializable, View{
 	private ArrayList<User> users = new ArrayList<User>();
 	private DateChecker myDateChecker = new DateChecker();
 	
+	/**
+	 * Loads up the option for users to select UserView or AdminView
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		MOBLIMA myApp = loadApp();
+		myApp.MOBLIMAMainLoop();
+	}
+	
+	/**
+	 * Instantiating new data
+	 */
 	public void initialiseApp(){
 		cinemas = Initialiser.generateCinemas();
 		movies = Initialiser.generateMovies();
@@ -32,6 +50,10 @@ public class MOBLIMA implements Serializable, View{
 		setUniqueMovies(Initialiser.generateMovies(cineplexes));
 	}
 	
+	/**
+	 * Loading data from serialised database
+	 * @return
+	 */
 	public static MOBLIMA loadApp() {
 		System.out.println("Welcome to MOBLIMA App");
 		System.out.println("Would you like to continue to load previous save or start anew?");
@@ -60,14 +82,18 @@ public class MOBLIMA implements Serializable, View{
 		}
 	}
 	
+	/**
+	 * Saving data into our serialised database
+	 */
 	public void writeApp() {
 		DBmanager myDBManager = new SerializeDB();
 		String path = System.getProperty("user.dir")+ "/src/" +"moblima.dat";
 		myDBManager.saveData(path, this);
 	}
-
-	public MOBLIMA() {}
-
+	
+	/**
+	 * Makes users choose between using the app as a normal user or as an admin
+	 */
 	public int printView() {
 		System.out.println("Login As:");
 		System.out.println("[1] User");
@@ -75,6 +101,9 @@ public class MOBLIMA implements Serializable, View{
 		return InputControl.integerInput(1, 2);
 	}
 	
+	/**
+	 * Directs users to the correct view
+	 */
 	public void MOBLIMAMainLoop() {
 		int choice  = this.printView();
 		//end 0, user 1 , admin 2
@@ -93,12 +122,6 @@ public class MOBLIMA implements Serializable, View{
 		}
 	}
 	
-	
-
-	public static void main(String[] args) {
-		MOBLIMA myApp = loadApp();
-		myApp.MOBLIMAMainLoop();
-	}
 
 	public Cineplex getCineplex_1() {return cineplex_1;}
 

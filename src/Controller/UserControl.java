@@ -12,20 +12,35 @@ import Entity.Movie;
 import Entity.User;
 import Entity.VideoPlayer;
 
+/**
+ * Provides logic to perform user functions
+ * @author vince
+ *
+ */
 public class UserControl extends Control{
 	private MovieControl movieControl;
 	private CinemaControl cinemaControl;
 	//private ShowtimeControl showtimeControl;
 	private CineplexControl cineplexControl;
 	
+	/**
+	 * Uses the Control class constructor and instantiates MovieControl, CinemaControl and CineplexControl
+	 * @param uniqueMovies
+	 * @param user
+	 * @param cineplexes
+	 */
 	public UserControl(Set<Movie> uniqueMovies, User user, ArrayList<Cineplex> cineplexes) {
 		super(uniqueMovies, user, cineplexes);
 		this.movieControl = new MovieControl(uniqueMovies, user, cineplexes);
 		this.cinemaControl = new CinemaControl(uniqueMovies, user, cineplexes);
-		//this.setShowtimeControl(new ShowtimeControl(uniqueMovies, user, cineplexes));
 		this.cineplexControl = new CineplexControl(uniqueMovies, user, cineplexes);
 	}
 	
+	/**
+	 * Search for a  movie based on string matching
+	 * @param uniqueMovies
+	 * @param cineplexes
+	 */
 	public void searchUniqueMovies(Set<Movie> uniqueMovies, ArrayList<Cineplex> cineplexes) {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("=== Movie Search ===");
@@ -53,6 +68,11 @@ public class UserControl extends Control{
 		}
 	}
 	
+	/**
+	 * List unique movies being shown across all 3 cineplexes
+	 * @param uniqueMovies
+	 * @param cineplexes
+	 */
 	public void listUniqueMovies(Set<Movie> uniqueMovies, ArrayList<Cineplex> cineplexes) {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("=== Movie Listings ===");
@@ -64,7 +84,11 @@ public class UserControl extends Control{
 			movieControl.printMovieShowings(movieChosen, cineplexes); // for unique movies
 		}
 	}
-
+	
+	/**
+	 * View the details of a movie
+	 * @param uniqueMovies
+	 */
 	public void viewMovieDetails(Set<Movie> uniqueMovies) {
 		// print out titles of unique movie
 		Scanner scan = new Scanner(System.in);
@@ -74,7 +98,11 @@ public class UserControl extends Control{
 		System.out.println();
 		movieChosen.printMovie();
 	}
-
+	
+	/**
+	 * Check the seats available for a movie on a particular date at a particualr cineplex
+	 * @param cineplexes
+	 */
 	public void checkSeatAvailability(ArrayList<Cineplex> cineplexes) {
 		Scanner scan = new Scanner(System.in);
 		cineplexControl.printCineplexes(cineplexes);
@@ -92,11 +120,18 @@ public class UserControl extends Control{
 		
 	}
 	
+	/**
+	 * View the booking history of the user
+	 * @param user
+	 */
 	public void viewBookingHistory(User user) {
 		user.viewTicketHistory();
 	}
 
-
+	/**
+	 * Allow users to view trailers
+	 * @param uniqueMovies
+	 */
 	public void viewTrailer(Set<Movie> uniqueMovies) {
 		System.out.println("=== Movies Available ===");
 		movieControl.printMovies(uniqueMovies);
@@ -104,10 +139,4 @@ public class UserControl extends Control{
 		VideoPlayer player = new VideoPlayer();
 		player.play(movieChosen);
 	}
-
-	//public ShowtimeControl getShowtimeControl() {return showtimeControl;}
-
-	/*public void setShowtimeControl(ShowtimeControl showtimeControl) {
-		this.showtimeControl = showtimeControl;
-	}*/
 }

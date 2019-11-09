@@ -9,6 +9,11 @@ import Entity.User;
 import Entity.DateChecker;
 import Entity.MOBLIMA;
 
+/**
+ * Provides a view of the functions that an admin can perform
+ * @author vince
+ *
+ */
 public  class AdminView implements View{
 	private Admin admin;
 	private AdminControl adminControl;
@@ -37,6 +42,9 @@ public  class AdminView implements View{
 		
 	}
 	
+	/**
+	 * Prompts admin to choose a function
+	 */
 	public int printView() {
 		while (true) {
 			System.out.println("What would you like to do next?");
@@ -76,7 +84,6 @@ public  class AdminView implements View{
 				default:{System.out.println("Please enter a valid choice");}
 			}
 			System.out.println();	
-			
 		}
 	}
 }

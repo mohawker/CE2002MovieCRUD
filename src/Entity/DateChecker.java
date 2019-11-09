@@ -6,10 +6,25 @@ import java.util.Scanner;
 import java.util.Date;
 import java.io.Serializable;
 
+/**
+ * Checks if the date is a public holiday or weekend
+ * @author vince
+ *
+ */
 public class DateChecker implements Serializable{
 	
 	public ArrayList<Date> publicHoliday = new ArrayList<Date>();
 	
+	/**
+	 * Instantiated with an ArryList of Date objects of public holidays
+	 */
+	public DateChecker() {
+		generatePublicHoliday();
+	}
+	
+	/**
+	 * Generates default public holidays in 2019
+	 */
 	@SuppressWarnings("deprecation")
 	public void generatePublicHoliday() {
 		int year = Calendar.getInstance().get(Calendar.YEAR) - 1900;
@@ -37,11 +52,11 @@ public class DateChecker implements Serializable{
 		
 	}
 	
-	public DateChecker() {
-		generatePublicHoliday();
-	}
-	
-	// date is DD/MM/YYYY
+	/**
+	 * Checks if a particular date is a public holiday or weekend
+	 * @param date
+	 * @return boolean indicating if the date is public holiday or weekend
+	 */
 	@SuppressWarnings("deprecation")
 	public boolean checkSpecialDate(String date) {
 		boolean specialDate = false;
@@ -68,6 +83,10 @@ public class DateChecker implements Serializable{
 	    return specialDate;
 	}
 	
+	/**
+	 * Enables admin to add public holidays to the ArrayList of Date objects
+	 * @param date Date is passed in DD/MM/YYYY format
+	 */
 	@SuppressWarnings("deprecation")
 	public void addSpecialDate(String date) {
 		//Fixed year 2019

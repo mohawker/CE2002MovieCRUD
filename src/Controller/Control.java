@@ -7,12 +7,22 @@ import Entity.Cineplex;
 import Entity.Movie;
 import Entity.User;
 
+/**
+ * Used to create other control classes for helper functions
+ * @author vince
+ *
+ */
 public class Control {
 	private Set<Movie> uniqueMovies;
 	private User user;
 	private ArrayList<Cineplex> cineplexes;
 	
-	// movieHelper, cineplexHelper etc
+	/**
+	 * Constructor that will be used by derived classes of Control
+	 * @param uniqueMovies
+	 * @param user
+	 * @param cineplexes
+	 */
 	public Control(Set<Movie> uniqueMovies, User user, ArrayList<Cineplex> cineplexes) {
 		this.setUniqueMovies(uniqueMovies);
 		this.setUser(user);

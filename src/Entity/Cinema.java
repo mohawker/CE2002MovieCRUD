@@ -9,18 +9,30 @@ import Controller.Control;
 import Controller.InputControl;
 import Controller.MovieControl;
 
+/**
+ * Cinema refers to the theatre which movies will be played in
+ * @author vince
+ *
+ */
 public abstract class Cinema implements Serializable{
 		
 	private int ROW=0;
 	private int COL=0;
-	private String cinemaType; // normal/gold-class/3D/imax etc
-	private String cinemaCode; //3lettercode
+	private String cinemaType; 
+	private String cinemaCode; 
 	
 	
 	private String[][][][] floorplan; // first 2 dimension is the index of the time, date then show time
 	private ArrayList<String>[] showtimes = new ArrayList[6];
 	private ArrayList<String> dates;
 	
+	/**
+	 * 
+	 * @param cinemaType Cinema can be Normal/GoldClass/Imax
+	 * @param cinemaCode Unique 3-letter code assigned to the cinema
+	 * @param showtimes ArrayList of Strings which contain showtimes in 24H format
+	 * @param dates ArrayList of Strings which contain showtimes in DD/MM/YYYY format
+	 */
 	public Cinema(String cinemaType, String cinemaCode, ArrayList<String> showtimes, ArrayList<String> dates) { // can customise seats based on cinemaType
 		this.cinemaType = cinemaType;
 		this.cinemaCode = cinemaCode;
@@ -31,7 +43,14 @@ public abstract class Cinema implements Serializable{
 
 	}
 	
-	
+	/**
+	 * Generates the seating plan of the cinema based on its type
+	 * @param cinemaType
+	 * @param cinemaCode
+	 * @param showtimes
+	 * @param dates
+	 * @return Cinema with generated floorplan
+	 */
 	public static Cinema generateCinema(String cinemaType, String cinemaCode, ArrayList<String> showtimes, ArrayList<String> dates) {
 		// dynamically generate seats
 		// For seating, different cinema types have different number of seats

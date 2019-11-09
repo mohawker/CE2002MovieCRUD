@@ -2,11 +2,27 @@ package Entity;
 
 import java.util.ArrayList;
 
+/**
+ * Cinema with a rectangular floorplan
+ * @author vince
+ *
+ */
 public abstract class RetangularCinema extends Cinema {
+	
+	/**
+	 * Uses Cinema class constructor
+	 * @param cinema_type
+	 * @param cinema_code
+	 * @param showtimes
+	 * @param dates
+	 */
 	public RetangularCinema(String cinema_type, String cinema_code, ArrayList<String> showtimes, ArrayList<String> dates) { // can customise seats based on cinema_type
 		super(cinema_type, cinema_code, showtimes, dates);
 	}
 	
+	/**
+	 * Generate floorplan based on the rows and columns of the cinema
+	 */
 	public void generateFloorPlan() {
 		// dynamically generate floor plan;
 		int num_showtimes = super.getShowtime().length;
@@ -25,6 +41,9 @@ public abstract class RetangularCinema extends Cinema {
 		setFloorplan(newFloorplan);
 	}
 	
+	/**
+	 * View seats available in the cinema based on a time and date
+	 */
 	public void viewSeats(String time, String date) {
 		int dateIndex = super.getDates().indexOf(date);
 		int index = super.getShowtime()[dateIndex].indexOf(time);

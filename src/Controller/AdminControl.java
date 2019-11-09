@@ -12,6 +12,11 @@ import Entity.DateChecker;
 import Entity.Movie;
 import Entity.Price;
 
+/**
+ * Provides logic to perform admin functions
+ * @author vince
+ *
+ */
 public class AdminControl extends Control{
 	
 	private MovieControl movieControl;
@@ -19,6 +24,12 @@ public class AdminControl extends Control{
 	private ShowtimeControl showtimeControl;
 	private CineplexControl cineplexControl;
 	
+	/**
+	 * Admin needs to have movieContrl, cinemaControl, showtimeControl, cineplexControl to carry out his/her functions
+	 * @param uniqueMovies Unqiue movies shown across all the cineplexes
+	 * @param admin 
+	 * @param cineplexes
+	 */
 	public AdminControl(Set<Movie> uniqueMovies, Admin admin, ArrayList<Cineplex> cineplexes) {
 		super(uniqueMovies, admin, cineplexes);
 		this.movieControl = new MovieControl(uniqueMovies, admin, cineplexes);
@@ -26,7 +37,13 @@ public class AdminControl extends Control{
 		this.showtimeControl = new ShowtimeControl(uniqueMovies, admin, cineplexes);
 		this.cineplexControl = new CineplexControl(uniqueMovies, admin, cineplexes);
 	}
-
+	
+	/**
+	 * Allows admin to create a movie listing, replaces a movie currently being shown if the new movie is "Showing" as well
+	 * @param cineplexes
+	 * @param uniqueMovies
+	 * @return
+	 */
 	public Movie createMovieListing(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
 		Movie movie = movieControl.createMovie(uniqueMovies);
 		if (movie.getStatus().equals("Showing")) {
@@ -40,6 +57,11 @@ public class AdminControl extends Control{
 		return movie;
 	}
 	
+	/**
+	 * Update movie showing status to "Showing" or "End of Showing"
+	 * @param cineplexes
+	 * @param uniqueMovies
+	 */
 	public void updateMovieListing(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
 		System.out.println("\n=== Current Movie Listing ===");
 		movieControl.printMovies(uniqueMovies);
@@ -66,7 +88,12 @@ public class AdminControl extends Control{
 			uniqueMovies.remove(movieChosen);
 		}
 	}
-
+	
+	/**
+	 * Remove a movie that is currently "Showing"
+	 * @param cineplexes
+	 * @param uniqueMovies
+	 */
 	public void removeMovieListing(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
 		System.out.println("\n=== Current Movie Listing ===");
 		movieControl.printMovies(uniqueMovies);
@@ -78,7 +105,11 @@ public class AdminControl extends Control{
 		movieControl.printMovies(uniqueMovies);
 	}
 	
-	// Has issues
+	/**
+	 * Creates showtimes for movie that are "Coming Soon"
+	 * @param cineplexes
+	 * @param uniqueMovies
+	 */
 	public void createCinemaShowtimes(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
 		int valid = movieControl.ensureUnshownMovies(uniqueMovies);
 		if (valid == 0) {
@@ -101,7 +132,11 @@ public class AdminControl extends Control{
 		}
 	}
 
-	
+	/**
+	 * Updates showtimes for movies that are "Showing"
+	 * @param cineplexes
+	 * @param uniqueMovies
+	 */
 	public void updateCinemaShowtimes(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
 		Scanner scan = new Scanner(System.in);
 		System.out.println();
@@ -137,6 +172,11 @@ public class AdminControl extends Control{
 		cineplexChosen.getCinemas().get(index).getShowtime()[dateIndex] = currShowtimes;
 	}
 	
+	/**
+	 * Add showtimes for movie currently "Showing"
+	 * @param cineplexes
+	 * @param uniqueMovies
+	 */
 	public void addCinemaShowtimes(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
 		Scanner scan = new Scanner(System.in);
 		System.out.println();
@@ -162,7 +202,12 @@ public class AdminControl extends Control{
 		System.out.println("New Showtimes for " + movieChosen.getTitle() + " at " + cineplexChosen.getName() + " " + cineplexChosen.getName() + " : " + currShowtimes);
 		cineplexChosen.getCinemas().get(index).getShowtime()[dateIndex] = currShowtimes;
 	}
-
+	
+	/**
+	 * Remove showtimes for movies that are "Showing"
+	 * @param cineplexes
+	 * @param uniqueMovies
+	 */
 	public void removeCinemaShowtimes(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
 		Scanner scan = new Scanner(System.in);
 		cineplexControl.printCineplexes(cineplexes);
@@ -170,7 +215,7 @@ public class AdminControl extends Control{
 		Movie movieChosen = movieControl.selectMovie(cineplexChosen);
 		String date = movieControl.printAndSelectMovieDates(cineplexChosen, movieChosen);
 		
-		int index = cineplexChosen.getCinemas().indexOf(movieChosen);
+		int index = cineplexChosen.getMovies().indexOf(movieChosen);
 		int dateIndex = cineplexChosen.getCinemas().get(index).getDates().indexOf(date);
 		ArrayList <String> currShowtimes = cineplexChosen.getCinemas().get(index).getShowtime()[dateIndex];
 		
@@ -185,11 +230,18 @@ public class AdminControl extends Control{
 		System.out.println("New Showtimes for " + movieChosen.getTitle() + " at " + cineplexChosen.getName() + " " + cineplexChosen.getName() + " : " + currShowtimes);
 		cineplexChosen.getCinemas().get(index).getShowtime()[dateIndex] = currShowtimes;
 	}
-
+	
+	/**
+	 * Configure price multipliers
+	 */
 	public void configureSettings() {
 		Price.updatePrices();
 	}
 	
+	/**
+	 * Enables new public holiday to be added
+	 * @param dateChecker
+	 */
 	public void addNewHoliday(DateChecker dateChecker) {
 		Scanner scan = new Scanner(System.in);
 		System.out.print("Enter date in the format DD/MM: ");

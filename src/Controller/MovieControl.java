@@ -20,13 +20,21 @@ import Entity.Cineplex;
 import Entity.Movie;
 import Entity.User;
 
+/**
+ * Provides helper functions relating to movies
+ * @author vince
+ *
+ */
 public class MovieControl extends Control{
 
 	public MovieControl(Set<Movie> uniqueMovies, User user, ArrayList<Cineplex> cineplexes) {
 		super(uniqueMovies, user, cineplexes);
 	}
 	
-	// print all unique movies
+	/**
+	 * Prints out unique movies across all cineplexes
+	 * @param uniqueMovies
+	 */
 	public void printMovies(Set<Movie> uniqueMovies) {
 		int count = 1;
 		for (Movie m : uniqueMovies) {
@@ -37,7 +45,10 @@ public class MovieControl extends Control{
 		}
 	}
 	
-	// print all movies in a cineplex
+	/**
+	 * Prints out movie shown in a cineplex
+	 * @param cineplex
+	 */
 	public void printMovies(Cineplex cineplex) {
 		for (int i=0 ; i<cineplex.getMovies().size(); i++) {
 			if (!cineplex.getMovies().get(i).getStatus().equals("End of Showing")) {
@@ -46,7 +57,11 @@ public class MovieControl extends Control{
 		}
 	}
 	
-	// print movie showtimes for a movie in all cineplex
+	/**
+	 * Print movie showtimes for a given movie at a particular cineplex
+	 * @param movieChosen
+	 * @param cineplexes
+	 */
 	public void printMovieShowings(Movie movieChosen, ArrayList<Cineplex> cineplexes) {
 		if (movieChosen.getStatus().equals("Showing")){
 			for (int i=0; i<cineplexes.size(); i++) {
@@ -72,7 +87,11 @@ public class MovieControl extends Control{
 	}
 	
 	
-	// select a movie from all unique movies
+	/**
+	 * Prompts user to select a movie from the unqiue movies across all cineplexes
+	 * @param uniqueMovies
+	 * @return
+	 */
 	public Movie selectMovie(Set<Movie> uniqueMovies) {
 		List<Movie> uniqueMoviesList = new ArrayList<Movie>(uniqueMovies);
 		System.out.print("Select your movie: ");
@@ -80,7 +99,11 @@ public class MovieControl extends Control{
 		return uniqueMoviesList.get(choice-1);
 	}
 	
-	// select a movie from a particular cineplex
+	/**
+	 * Prompts user to select a movie from a list of movies in a cineplex
+	 * @param cineplex
+	 * @return
+	 */
 	public Movie selectMovie(Cineplex cineplex) {
 		System.out.println("=== Movies ===");
 		printMovies(cineplex);
@@ -91,7 +114,9 @@ public class MovieControl extends Control{
 		return cineplex.getMovies().get(choice-1);
 	}
 	
-	// for ensuring there are UnshownMovies
+	/*
+	 * Ensure that there are movies that are "Coming Soon" or "Preview" for showtimes to be created for them
+	 */
 	public int ensureUnshownMovies(Set<Movie> uniqueMovies) {
 		List<Movie> unshownMoviesList = new ArrayList<Movie>(uniqueMovies);
 		int count = 1;
@@ -110,6 +135,9 @@ public class MovieControl extends Control{
 		}
 	}
 	
+	/*
+	 * Print movies which are "Coming Soon" or "Preview"
+	 */
 	public Movie printAndSelectFromUnshownMovies(Set<Movie> uniqueMovies) {
 		List<Movie> unshownMoviesList = new ArrayList<Movie>(uniqueMovies);
 		int count = 1;
@@ -126,7 +154,9 @@ public class MovieControl extends Control{
 		return unshownMoviesList.get(choice-1);
 	}
 
-	// creating a new movie
+	/*
+	 * Prompts user for attributes needed to instantiate a new movie
+	 */
 	public Movie createMovie(Set<Movie> uniqueMovies) {
 		Scanner scan = new Scanner(System.in);
 		System.out.print("Name of Movie: ");
@@ -153,7 +183,9 @@ public class MovieControl extends Control{
 		return movie;
 	}
 	
-	// sorting movies by sale/ratings
+	/*
+	 * Sort all the unique movies by sales or by review scores and prints out the top 5
+	 */
 	public void sortMovies(Set<Movie> uniqueMovies, boolean bySales) {
 		ArrayList<Movie> uniqueMoviesList = new ArrayList<Movie>(uniqueMovies);
 		ArrayList<Movie> sortedMoviesList = new ArrayList<Movie>();
@@ -195,10 +227,24 @@ public class MovieControl extends Control{
 		}
 	}
 	
+	/**
+	 * Counts the number of days between 2 dates in DD/MM/YYYY format
+	 * @param d1
+	 * @param d2
+	 * @return
+	 */
 	public int daysBetween(Date d1, Date d2){
         return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
 	}
 	
+	/**
+	 * Show a new movie until a given date specified by the admin and replace the movie that was previously showing
+	 * @param cineplexChosen
+	 * @param cinemaChosen
+	 * @param movieChosen
+	 * @param showtimes
+	 * @param uniqueMovies
+	 */
 	public void replaceMovie(Cineplex cineplexChosen, Cinema cinemaChosen, Movie movieChosen, ArrayList<String> showtimes, Set<Movie> uniqueMovies) {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("=== Previous Movies at " + cineplexChosen.getName() + " " + cineplexChosen.getLocation() + " ===");
@@ -244,6 +290,12 @@ public class MovieControl extends Control{
 		printMovies(cineplexChosen);
 	}
 	
+	/**
+	 * Print out the available dates for a movie and select from those options
+	 * @param cineplex
+	 * @param movieChosen
+	 * @return
+	 */
 	public String printAndSelectMovieDates(Cineplex cineplex, Movie movieChosen) {
 		Cinema cinema = cineplex.getCinemas().get(cineplex.getMovies().indexOf(movieChosen));
 		System.out.println("=== Dates available for " + movieChosen.getTitle() + " at " + cineplex.getName() + " " + cineplex.getLocation() + " ===");

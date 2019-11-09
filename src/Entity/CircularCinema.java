@@ -2,15 +2,29 @@ package Entity;
 
 import java.util.ArrayList;
 
+/**
+ * CircularCinema refers to a cinema with a circular seating plan, similar to IMAX theatres
+ * @author vince
+ *
+ */
 public class CircularCinema extends Cinema {
 	//imax have a circular theater 
 	int DIAMETER;  //only odd numbers allowed
 	
+	/**
+	 * Uses the same constructor as Cinema class
+	 * @param cinema_type
+	 * @param cinema_code
+	 * @param showtimes
+	 * @param dates
+	 */
 	public CircularCinema(String cinema_type, String cinema_code, ArrayList<String> showtimes, ArrayList<String> dates) { // can customise seats based on cinema_type
 		super(cinema_type, cinema_code, showtimes, dates);
 	}
 	
-	// dynamically generate floor plan;
+	/**
+	 * Generate a circular floor plan
+	 */
 	public void generateFloorPlan() {
 		int num_showtimes = getShowtime()[0].size();
 		String[][][][] newFloorplan = new String [getShowtime().length][num_showtimes][getROW()][getCOL()];

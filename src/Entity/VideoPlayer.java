@@ -1,11 +1,19 @@
 package Entity;
 
 import java.awt.*;
+
+/**
+ * Additional feature which enables trailer to be played
+ */
 import java.net.URI;
 public class VideoPlayer {
 	
 	static Desktop d = Desktop.getDesktop();
-		
+	
+	/**
+	 * User will be directed to the link for the trailers. Must be connected to the internet to use this feature
+	 * @param movie
+	 */
 	public static void play(Movie movie){
 		try {
 			switch (movie.getTitle()) {

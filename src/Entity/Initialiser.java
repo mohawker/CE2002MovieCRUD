@@ -8,12 +8,20 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Instantiates new data instead of loading previous state
+ * @author vince
+ *
+ */
 public class Initialiser {
 	private static String DATE_FORMAT = "dd/MM/YYYY";
 	private static DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
 	
+	/**
+	 * Generates an array of Cinema objects
+	 * @return
+	 */
 	public static Cinema[] generateCinemas() {
-		
 		// current date and next 5 dates
 		ArrayList<String> dates = new ArrayList<String>();
 		Date currentDate = new Date();
@@ -87,6 +95,10 @@ public class Initialiser {
 		return cinemas;
 	}
 	
+	/**
+	 * Generates an array of Movie objects
+	 * @return
+	 */
 	public static Movie[] generateMovies() {
 		Movie[] movies = new Movie[10];
 		
@@ -132,7 +144,11 @@ public class Initialiser {
 		
 		return movies;
 	}
-
+	
+	/**
+	 * Generates an array of Cineplex objects
+	 * @return
+	 */
 	public static ArrayList<Cineplex> generateCineplexes(Cinema[] cinemas, Movie[] movies) {
 		ArrayList<Cinema> cinemas_1 = new ArrayList<Cinema>();
 		cinemas_1.add(cinemas[0]);cinemas_1.add(cinemas[1]);cinemas_1.add(cinemas[2]);cinemas_1.add(cinemas[3]);cinemas_1.add(cinemas[4]);
@@ -156,7 +172,11 @@ public class Initialiser {
 		cineplexes.add(cineplex_1);cineplexes.add(cineplex_2);cineplexes.add(cineplex_3);
 		return cineplexes;
 	}
-
+	
+	/**
+	 * Generates a set of unique movies being shown
+	 * @return
+	 */
 	public static Set<Movie> generateMovies(ArrayList<Cineplex> cineplexes){
 		Cineplex cineplex_1 = cineplexes.get(0);
 		Cineplex cineplex_2 = cineplexes.get(1);

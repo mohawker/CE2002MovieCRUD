@@ -4,6 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * Movie that will be shown in the cinema
+ * @author vince
+ *
+ */
 public class Movie implements Serializable{
 	private String title;
 	private String status;
@@ -16,6 +21,17 @@ public class Movie implements Serializable{
 	private ArrayList <String> cast;
 	private ArrayList <Review> movieReviews=new ArrayList <Review>(); // When creating a new movie, there are no reviews
 	
+	
+	/**
+	 * 
+	 * @param title Title of movie
+	 * @param status Status of movie (Coming Soon/Preview/Showing/End of Showing)
+	 * @param synopsis Synopsis of movie
+	 * @param director Director of move
+	 * @param type Type of movie (3D/Normal/Blockbuster)
+	 * @param cast Cast of movie
+	 * @param ageRating Rating of movie (G/PG13/NC16/M18/R21)
+	 */
 	public Movie(String title, String status, String synopsis, String director, String type, ArrayList <String> cast, String ageRating) {
 		this.title = title;
 		this.status = status;
@@ -26,7 +42,9 @@ public class Movie implements Serializable{
 		this.ageRating = ageRating;
 	}
 	
-	
+	/**
+	 * Prints out ArrayList of Review objects for the movie
+	 */
 	public void printReviews() {
 		if (this.movieReviews.size() == 0) {
 			System.out.println("There are no reviews for " + this.title + " yet\n");
@@ -42,6 +60,9 @@ public class Movie implements Serializable{
 		}
 	}
 	
+	/**
+	 * Prints out details about movie
+	 */
 	public void printMovie() {
 		System.out.println("=== Movie Details of " + this.title + " ===");
 		System.out.println("Title: " + this.title);
@@ -67,6 +88,22 @@ public class Movie implements Serializable{
 		printReviews();
 	}
 	
+	/**
+	 * Returns the average rating of the movie as a float
+	 * @return
+	 */
+	public float getAverageRating() {
+		float totalRating = 0;
+		if (this.movieReviews.size()==0) {
+			return (float)0;
+		}else {
+			for (int i=0; i<this.movieReviews.size(); i++) {
+				totalRating += this.movieReviews.get(i).getRating();
+			}
+			return totalRating/(this.movieReviews.size());
+		}
+	}
+	
 	// Set Methods
 	public void setTitle(String title) {this.title = title;}
 	public void setStatus(String status) {this.status = status;}
@@ -87,17 +124,4 @@ public class Movie implements Serializable{
 	public float getMovieSales() {return movieSales;}
 	public ArrayList <String> getCast(){return this.cast;}
 	public ArrayList<Review> getMovieReviews(){return this.movieReviews;}
-	
-	
-	public float getAverageRating() {
-		float totalRating = 0;
-		if (this.movieReviews.size()==0) {
-			return (float)0;
-		}else {
-			for (int i=0; i<this.movieReviews.size(); i++) {
-				totalRating += this.movieReviews.get(i).getRating();
-			}
-			return totalRating/(this.movieReviews.size());
-		}
-	}
 }

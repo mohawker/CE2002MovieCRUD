@@ -7,6 +7,11 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+/**
+ * Implements DBManager, enables loading and saving of data
+ * @author vince
+ *
+ */
 public class SerializeDB implements DBmanager{
 	
 	public MOBLIMA loadData(String filename) {
@@ -23,9 +28,6 @@ public class SerializeDB implements DBmanager{
 		} catch (ClassNotFoundException ex) {
 			ex.printStackTrace();
 		}
-		// print out the size
-		//System.out.println(" Details Size: " + pDetails.size());
-		//System.out.println();
 		return app;
 	}
 
@@ -37,7 +39,6 @@ public class SerializeDB implements DBmanager{
 			out = new ObjectOutputStream(fos);
 			out.writeObject(app);
 			out.close();
-		//	System.out.println("Object Persisted");
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}

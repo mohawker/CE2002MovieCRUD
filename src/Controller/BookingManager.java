@@ -12,18 +12,33 @@ import Entity.MovieTicket;
 import Entity.Payment;
 import Entity.User;
 
+/**
+ * Makes movie booking for users
+ * @author vince
+ *
+ */
 public class BookingManager extends Control{
 	MovieControl movieControl;
 	CineplexControl cineplexControl;
 	
+	/**
+	 * Instantiates movieControl and cineplexControl for the BookingManager
+	 * @param uniqueMovies
+	 * @param user
+	 * @param cineplexes
+	 */
 	public BookingManager(Set<Movie> uniqueMovies, User user, ArrayList<Cineplex> cineplexes) {
 		super(uniqueMovies, user, cineplexes);
 		this.movieControl = new MovieControl(uniqueMovies, user, cineplexes);
 		this.cineplexControl = new CineplexControl(uniqueMovies, user, cineplexes);
 	}
 	
-	// single responsibility principle: Booking Manager solely handles bookTicket
-	
+	/**
+	 * Enables user to choose number of seats for movie booking and authenticates the payment upon user confirmation
+	 * @param user
+	 * @param cineplexes
+	 * @param dateChecker
+	 */
 	public void bookTicket(User user, ArrayList<Cineplex> cineplexes, DateChecker dateChecker){
 		Scanner scan = new Scanner(System.in);
 		cineplexControl.printCineplexes(cineplexes);
@@ -59,6 +74,15 @@ public class BookingManager extends Control{
 			}
 	}
 	
+	/**
+	 * Enables user to choose seats for movie booking upon user confirmation
+	 * @param user
+	 * @param cineplex
+	 * @param movie
+	 * @param numTicket
+	 * @param dateChecker
+	 * @return
+	 */
 	public MovieTicket selectTicketSeat(User user, Cineplex cineplex, Movie movie, int numTicket, DateChecker dateChecker) {
 		int index = cineplex.getMovies().indexOf(movie);
 		

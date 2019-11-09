@@ -3,13 +3,24 @@ package Entity;
 import java.util.ArrayList;
 import java.io.Serializable;
 
-
+/**
+ * Cineplex is made up of multiple cinemas and movies with a unique location
+ * @author vince
+ *
+ */
 public class Cineplex implements Serializable{
 	private String name;
 	private String location;
 	private ArrayList<Cinema> cinemas;
 	private ArrayList<Movie> movies;
 	
+	/**
+	 * 
+	 * @param name Branch of the cineplexes (e.g. Golden Village, Cathay)
+	 * @param location Place of the cinema (e.g. Bishan)
+	 * @param cinemas ArrayList of cinemas where movies will be shown in
+	 * @param movies ArrayList of movies shown at this cineplex
+	 */
 	public Cineplex(String name, String location, ArrayList<Cinema> cinemas, ArrayList<Movie> movies) {
 		this.name = name;
 		this.location = location;

@@ -9,12 +9,28 @@ import Entity.Cineplex;
 import Entity.Movie;
 import Entity.User;
 
+/**
+ * Provides helper functions relating to cinemas
+ * @author vince
+ *
+ */
 public class CinemaControl extends Control{
-
+	
+	/**
+	 * Constructed using Control superclass constructor
+	 * @param uniqueMovies
+	 * @param user
+	 * @param cineplexes
+	 */
 	public CinemaControl(Set<Movie> uniqueMovies, User user, ArrayList<Cineplex> cineplexes) {
 		super(uniqueMovies, user, cineplexes);
 	}
 	
+	/**
+	 * Prints out cinemas from a cineplex and prompts user to choose a cinema
+	 * @param cineplex
+	 * @return
+	 */
 	public Cinema printAndSelectCinema(Cineplex cineplex) {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("=== Cinemas ===");
@@ -27,6 +43,12 @@ public class CinemaControl extends Control{
 		return cineplex.getCinemas().get(choice-1);
 	}
 	
+	/**
+	 * Views the floorplan of the cinema
+	 * @param cineplex
+	 * @param movie
+	 * @param date
+	 */
 	public void viewSeatAvailability(Cineplex cineplex, Movie movie, String date) {
 		int index = cineplex.getMovies().indexOf(movie);
 		Cinema cinemaShowing = cineplex.getCinemas().get(index);

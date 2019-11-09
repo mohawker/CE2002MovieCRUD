@@ -8,15 +8,30 @@ import Entity.Movie;
 import Entity.Review;
 import Entity.User;
 
+/**
+ * Helper functions for users to add movie reviews
+ * @author vince
+ *
+ */
 public class ReviewManager extends Control{
 	private MovieControl movieControl;
 	
+	/**
+	 * Uses Control class constructor and instantiates a new MovieControl object
+	 * @param uniqueMovies
+	 * @param user
+	 * @param cineplexes
+	 */
 	public ReviewManager(Set<Movie> uniqueMovies, User user, ArrayList<Cineplex> cineplexes) {
 		super(uniqueMovies, user, cineplexes);
 		this.movieControl = new MovieControl(uniqueMovies, user, cineplexes);
 	}
 	
-	// single responsibility principle: Review Manager just adds Reviews
+	/**
+	 * Add rating for a particular moview
+	 * @param uniqueMovies
+	 * @param user
+	 */
 	public void addRating(Set<Movie> uniqueMovies, User user) {
 		System.out.println("=== Review Movies ===");
 		movieControl.printMovies(uniqueMovies);
@@ -25,6 +40,11 @@ public class ReviewManager extends Control{
 		this.addReview(movieChosen, review);
 	}
 	
+	/**
+	 * Provide confirmation to check if review has been added successfully
+	 * @param movieChosen
+	 * @param review
+	 */
 	public void addReview(Movie movieChosen, Review review) {
 		boolean result = movieChosen.getMovieReviews().add(review);
 		if (result == true) {

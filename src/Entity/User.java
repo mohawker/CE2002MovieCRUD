@@ -4,7 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
+/**
+ * Normal user who can use the app to book tickets and other functionalities
+ *
+ */
 public class User implements Serializable{
 	private String username;
 	private String email;
@@ -12,7 +15,12 @@ public class User implements Serializable{
 	private int age;
 	private ArrayList<MovieTicket> ticket_history = new ArrayList<MovieTicket>(); // Start out with no history
 	
-	
+	/**
+	 * @param username Username of user
+	 * @param email Email address of user
+	 * @param telno Telephone number of user
+	 * @param age Age of user
+	 */
 	public User(String username, String email, String telno, int age) {
 		this.username = username;
 		this.email = email;
@@ -20,18 +28,9 @@ public class User implements Serializable{
 		this.age = age;
 	}
 	
-	//setMethods
-	public void setUsername(String username) {this.username = username;}
-	public void setEmail(String email) {this.email = email;}
-	public void setTelno(String telno) {this.telno = telno;}
-	public void setAge(int age) {this.age = age;}
-	
-	//getMethods
-	public String getUsername() {return this.username;}
-	public String getEmail() {return this.email;}
-	public String getTelno() {return this.telno;}
-	public int getAge() {return this.age;}
-	
+	/**
+	 * Print out ticket history of the user
+	 */
 	public void viewTicketHistory() {
 		System.out.println("Generating Ticket History");
 		System.out.println("-----------------------");
@@ -50,7 +49,23 @@ public class User implements Serializable{
 		}
 	}
 	
+	/**
+	 * Enables ticket to be added to user's booking history
+	 * @param ticket
+	 */
 	public void addTicket(MovieTicket ticket) {
 		this.ticket_history.add(ticket);
 	}
+	
+	//setMethods
+	public void setUsername(String username) {this.username = username;}
+	public void setEmail(String email) {this.email = email;}
+	public void setTelno(String telno) {this.telno = telno;}
+	public void setAge(int age) {this.age = age;}
+	
+	//getMethods
+	public String getUsername() {return this.username;}
+	public String getEmail() {return this.email;}
+	public String getTelno() {return this.telno;}
+	public int getAge() {return this.age;}
 }

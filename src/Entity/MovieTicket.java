@@ -7,6 +7,11 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
+/**
+ * Movie Ticket of a movie at a cineplex and cinema
+ * @author vince
+ *
+ */
 public class MovieTicket implements Serializable{
 	
 	private float perTicketPrice;
@@ -18,15 +23,20 @@ public class MovieTicket implements Serializable{
 	private String TID;
 	private boolean isPeak;
 	private String currentDateTime;
+	private Price price; 
 	
-	
-	private Price price;//no need getset
-	// For time of ticket 
 	DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 	DateFormat timeFormat = new SimpleDateFormat("HHmm");
 	Date date = new Date();
 	
-	
+	/**
+	 * Constructs MovieTicket objects with the following parameters
+	 * @param movie Movie shown
+	 * @param cinema Cinema shown in
+	 * @param time Time of movie
+	 * @param movieDate Date of movie
+	 * @param quantityTicket Number of tickets bought
+	 */
 	public MovieTicket(Movie movie, Cinema cinema, String time, String movieDate, int quantityTicket){
 		this.movie = movie;
 		this.cinema = cinema;
@@ -38,12 +48,8 @@ public class MovieTicket implements Serializable{
 		this.price = new Price();
 	}
 
-	public void setPrice(float totalPrice) {this.price.setPrice(totalPrice);}
-
-	public float getPrice() {return this.price.getPrice();}
-	
 	//setters
-	
+	public void setPrice(float totalPrice) {this.price.setPrice(totalPrice);}
 	public void setPerTicketPrice(float perTicketPrice) {this.perTicketPrice=perTicketPrice;}	
 	public void setQuantityTickets(int quantityTicket) {this.quantityTicket=quantityTicket;}	
 	public void setTMovie(Movie movie) {this.movie=movie;}	
@@ -53,7 +59,9 @@ public class MovieTicket implements Serializable{
 	public void setTID(String TID) {this.TID=TID;}	
 	public void setIsPeak(boolean isPeak) {this.isPeak=isPeak;}
 	public void setTprice(Price price) {this.price = price;}
+	
 	//getters
+	public float getPrice() {return this.price.getPrice();}
 	public float getPerTicketPrice() {return this.perTicketPrice;}
 	public int getQuantityTickets() {return this.quantityTicket;}
 	public Movie getTMovie() {return this.movie;}
@@ -63,6 +71,5 @@ public class MovieTicket implements Serializable{
 	public String getTID() {return this.TID;}
 	public boolean getIsPeak() {return this.isPeak;}
 	public Price getTPrice() {return this.price;}
-	public String getCurrentDateTime() {return this.currentDateTime;}
-	
+	public String getCurrentDateTime() {return this.currentDateTime;}	
 }

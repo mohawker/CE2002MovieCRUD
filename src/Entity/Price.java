@@ -3,6 +3,11 @@ package Entity;
 import java.io.Serializable;
 import java.util.Scanner;
 
+/**
+ * Price class of a movie ticket
+ * @author vince
+ *
+ */
 public class Price implements Serializable{
 	private int age;
 	private String cinemaType;
@@ -19,6 +24,14 @@ public class Price implements Serializable{
 	public Price() {
 	}
 	
+	/**
+	 * Generates price based on movie type, cinema type and the date
+	 * @param age
+	 * @param movieType
+	 * @param cinemaType
+	 * @param date
+	 * @param dateChecker
+	 */
 	public void generatePrice(int age, String movieType, String cinemaType, String date, DateChecker dateChecker) {
 		this.age = age;
 		this.weekendPH = dateChecker.checkSpecialDate(date);
@@ -44,6 +57,9 @@ public class Price implements Serializable{
 		this.price = currPrice;
 	}
 	
+	/**
+	 * Prints the price breakdown (e.g. Surcharges) of the ticket
+	 */
 	public void printBreakdown() {
 		System.out.println("=== Price Breakdown ===");
 		float currPrice = Price.basePrice;
@@ -71,6 +87,9 @@ public class Price implements Serializable{
 		System.out.printf("Final Price: $%.2f\n", currPrice);
 	}
 	
+	/**
+	 * Updates surcharges and multipliers for the ticket price
+	 */
 	public static void updatePrices() {
 		System.out.println("\n=== Prices & Surcharges & Multiplers ===");
 		System.out.println("[1] Multiplier for 3D Movies");

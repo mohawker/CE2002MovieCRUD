@@ -2,10 +2,23 @@ package Entity;
 
 import java.util.ArrayList;
 
+/**
+ * IMAX Cinema is a RectangularCinema with its own number of rows
+ * and columns
+ * @author vince
+ *
+ */
 public final class ImaxCinema extends Cinema {
-	//imax have a circular theater 
 	int DIAMETER = 5; //only odd numbers allowed
 	
+	/**
+	 * Uses the constructor from RectangularCinema class
+	 * IMAX Cinema circular floorplan is created using stated diameter
+	 * @param cinema_type
+	 * @param cinema_code
+	 * @param showtimes
+	 * @param dates
+	 */
 	public ImaxCinema(String cinema_type, String cinema_code, ArrayList<String> showtimes, ArrayList<String> dates) { // can customise seats based on cinema_type
 		super(cinema_type, cinema_code, showtimes, dates);
 		setROW(DIAMETER);
@@ -34,14 +47,7 @@ public final class ImaxCinema extends Cinema {
 	}
 	
 	private boolean checkInCircle(int x, int y) {
-		//[0,0,0,0,0],
-		//[0,0,0,0,0],
-		//[0,0,0,0,0],
-		//[0,0,0,0,0],
-		//[0,0,0,0,0]
-		//generate center 
-		int center = DIAMETER /2; //needs to divide by float ;
-		//Pythagoras theorem 
+		int center = DIAMETER /2;
 		double distanceFromCenter = Math.sqrt(Math.pow(x-center, 2) + Math.pow(y-center, 2));
 		if (distanceFromCenter > center)  {
 			return false;

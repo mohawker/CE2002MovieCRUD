@@ -9,6 +9,11 @@ import Entity.DateChecker;
 import Entity.MOBLIMA;
 import Entity.User;
 
+/**
+ * Provides a view of the functions that a normal user can perform
+ * @author vince
+ *
+ */
 public class UserView implements View{
 	private UserControl userControl;
 	private BookingManager bookingManager;
@@ -52,6 +57,9 @@ public class UserView implements View{
 		sortingManager = new SortingManager(app.getUniqueMovies(), user, app.getCineplexes());
 	}
 	
+	/**
+	 * Prompts user to choose a function
+	 */
 	public int printView() {
 		while (true){
 			System.out.println("What would you like to do next?");
