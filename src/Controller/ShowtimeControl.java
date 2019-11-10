@@ -35,7 +35,7 @@ public class ShowtimeControl extends Control{
 		int numShows = InputControl.integerInput(1,999);
 		ArrayList <String> showtimes = new ArrayList <String>();
 		for (int i=0; i<numShows; i++) {
-			System.out.print("Showtime " + (i+1) + ": ");
+			System.out.print("Showtime " + (i+1) + " in 24h format (hhhh): ");
 			showtimes.add(scan.nextLine());
 		}
 		return showtimes;

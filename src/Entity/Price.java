@@ -14,12 +14,12 @@ public class Price implements Serializable{
 	private boolean weekendPH = false;
 	private String movieType;
 	private float price = 8;
-	private static float basePrice = 8;
+	private static float basePrice = 8f;
 	private static float multAge = 0.5f;
-	private static float mult3D = (float) 0.75;
-	private static float multGC = (float) 2.0;
-	private static float surBlockbuster = 3;
-	private static float surPHWeekend = 5;
+	private static float mult3D = (float) 0.75f;
+	private static float multGC = (float) 2.0f;
+	private static float surBlockbuster = 3f;
+	private static float surPHWeekend = 5f;
 	
 	public Price() {
 	}
@@ -106,21 +106,21 @@ public class Price implements Serializable{
 			case 1:
 				System.out.println("=== Multiplier for 3D/Imax Movies ===");
 				System.out.printf("Current Multiplier: %.2f\n", Price.mult3D);
-				System.out.print("Input New Multiplier for 3D/Imax Movies: ");
+				System.out.print("Input New Multiplier for 3D/Imax Movies (0.00-100.00): ");
 				Price.mult3D = scan.nextFloat();
 				System.out.printf("New rate: %.2f\n", Price.mult3D);
 				break;
 			case 2:
 				System.out.println("=== Surcharge for Blockbuster Movies ===");
 				System.out.printf("Current Surcharge: %.2f\n", Price.surBlockbuster);
-				System.out.print("Input New Surcharge: ");
+				System.out.print("Input New Surcharge (0.00-100.00)");
 				Price.surBlockbuster = scan.nextFloat();
 				System.out.printf("New surcharge: %.2f\n", Price.surBlockbuster);
 				break;
 			case 3:
 				System.out.println("=== Multipler for GoldClass Cinemas ===");
 				System.out.printf("Current rate: %.2f\n", Price.multGC);
-				System.out.print("Input new rate for Gold Class Cinema: ");
+				System.out.print("Input new rate for Gold Class Cinema (0.00-100.00). Do not type $: ");
 				Price.multGC = scan.nextFloat();
 				System.out.printf("New rate: %.2f\n", Price.multGC);
 				break;
@@ -134,16 +134,16 @@ public class Price implements Serializable{
 			case 5:
 				System.out.println("=== Weekend & Public Holiday Surcharge ===");
 				System.out.printf("Current surcharge: %.2f\n", Price.surPHWeekend);
-				System.out.print("Input new weekend/public holiday surcharge: ");
+				System.out.print("Input new weekend/public holiday surcharge (0.00-100.00): ");
 				Price.surPHWeekend = scan.nextFloat();
 				System.out.printf("New surcharge: %.2f\n", Price.surPHWeekend);
 				break;
 			case 6:
 				System.out.println("=== Ticket Base Price ===");
 				System.out.printf("Current base price: $%.2f\n", Price.basePrice);
-				System.out.print("Input new base price for tickets: ");
+				System.out.print("Input new base price for tickets (0.00-100.00): ");
 				Price.basePrice = scan.nextFloat();
-				System.out.printf("New base price: $%.2f\\n"+ Price.basePrice);
+				System.out.printf("New base price: $%.2f\n", Price.basePrice);
 				break;
 				
 			default:

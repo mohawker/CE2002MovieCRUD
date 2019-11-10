@@ -42,6 +42,17 @@ public class InputControl {
 	}
 	
 	/**
+	 * Checks for string input from user includes whitespace
+	 * @return
+	 */
+	public static String lineInput() {
+		Scanner scan = new Scanner(System.in);
+		String input = scan.nextLine();
+		return input;
+	}
+
+	
+	/**
 	 * Checks for float input from user between a upper limit and a lower limit
 	 * @param lowRange Lower limit of selection
 	 * @param highRange Upper limit of selection

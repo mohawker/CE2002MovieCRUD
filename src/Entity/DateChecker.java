@@ -75,8 +75,8 @@ public class DateChecker implements Serializable{
 	    	specialDate = true;
 	    }
 	    
-	    for (Date data: publicHoliday) {
-	    	if (date.equals(userDate)) {
+	    for (Date currDate: publicHoliday) {
+	    	if (currDate.equals(userDate)) {
 	    		specialDate = true;
 	    	}
 	    }
@@ -103,7 +103,7 @@ public class DateChecker implements Serializable{
 		
 		System.out.printf("Day: %d Month: %d\n", day, month);
 		if ((day>=1 && day<=31) && (month>=1 && month <= 12)) {
-			publicHoliday.add(new Date(def_year,month-1,day-1));//account for range of day month
+			publicHoliday.add(new Date(def_year,month-1,day));//account for range of day month
 			System.out.printf("Updated Specials Date for %s\n", date);
 		}
 		else {

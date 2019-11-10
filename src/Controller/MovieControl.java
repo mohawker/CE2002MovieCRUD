@@ -164,7 +164,7 @@ public class MovieControl extends Control{
 		System.out.print("Status of Movie (Coming Soon/Preview/Showing): ");
 		String status = InputControl.stringInput();
 		System.out.print("Synopsis: ");
-		String synopsis = InputControl.stringInput();
+		String synopsis = InputControl.lineInput();
 		System.out.print("Director: ");
 		String director = InputControl.stringInput();
 		System.out.print("Type (3D/Blockbuster): ");

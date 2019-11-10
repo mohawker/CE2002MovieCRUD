@@ -156,7 +156,7 @@ public class AdminControl extends Control{
 		int choice = scan.nextInt();
 		scan.nextLine();
 		for (int i=0; i<choice; i++) {
-			System.out.print("Remove Showtime: ");
+			System.out.print("Remove Showtime in 24h format (hhhh): ");
 			currShowtimes.remove(scan.nextLine());
 		}
 		
@@ -164,7 +164,7 @@ public class AdminControl extends Control{
 		choice = scan.nextInt();
 		scan.nextLine();
 		for (int i=0; i<choice; i++) {
-			System.out.print("Add Showtime: ");
+			System.out.print("Add Showtime in 24h format (hhhh): ");
 			currShowtimes.add(scan.nextLine());
 		}
 		Collections.sort(currShowtimes);
