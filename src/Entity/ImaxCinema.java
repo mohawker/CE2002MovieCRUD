@@ -13,14 +13,14 @@ public final class ImaxCinema extends Cinema {
 	
 	/**
 	 * Uses the constructor from RectangularCinema class
-	 * IMAX Cinema circular floorplan is created using stated diameter
-	 * @param cinema_type
-	 * @param cinema_code
+	 * IMAX Cinema's circular floorplan is created using stated diameter
+	 * @param cinemaType
+	 * @param cinemaCode
 	 * @param showtimes
 	 * @param dates
 	 */
-	public ImaxCinema(String cinema_type, String cinema_code, ArrayList<String> showtimes, ArrayList<String> dates) { // can customise seats based on cinema_type
-		super(cinema_type, cinema_code, showtimes, dates);
+	public ImaxCinema(String cinemaType, String cinemaCode, ArrayList<String> showtimes, ArrayList<String> dates) { // can customise seats based on cinemaType
+		super(cinemaType, cinemaCode, showtimes, dates);
 		setROW(DIAMETER);
 		setCOL(DIAMETER);
 		// dynamically generate floor plan;

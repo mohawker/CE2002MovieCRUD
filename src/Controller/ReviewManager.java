@@ -28,24 +28,15 @@ public class ReviewManager extends Control{
 	}
 	
 	/**
-	 * Add rating for a particular moview
+	 * Add review for a particular movie
 	 * @param uniqueMovies
 	 * @param user
 	 */
-	public void addRating(Set<Movie> uniqueMovies, User user) {
+	public void addReview(Set<Movie> uniqueMovies, User user) {
 		System.out.println("=== Review Movies ===");
 		movieControl.printMovies(uniqueMovies);
 		Movie movieChosen = movieControl.selectMovie(uniqueMovies);
 		Review review = new Review(user, movieChosen);
-		this.addReview(movieChosen, review);
-	}
-	
-	/**
-	 * Provide confirmation to check if review has been added successfully
-	 * @param movieChosen
-	 * @param review
-	 */
-	public void addReview(Movie movieChosen, Review review) {
 		boolean result = movieChosen.getMovieReviews().add(review);
 		if (result == true) {
 			System.out.println("Movie review for " + movieChosen.getTitle() + " added successfully");

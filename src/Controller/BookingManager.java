@@ -18,8 +18,8 @@ import Entity.User;
  *
  */
 public class BookingManager extends Control{
-	MovieControl movieControl;
-	CineplexControl cineplexControl;
+	private MovieControl movieControl;
+	private CineplexControl cineplexControl;
 	
 	/**
 	 * Instantiates movieControl and cineplexControl for the BookingManager

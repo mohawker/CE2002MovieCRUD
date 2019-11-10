@@ -1,11 +1,14 @@
 package Entity;
 
 import java.awt.*;
+import java.net.URI;
 
 /**
+ * 
  * Additional feature which enables trailer to be played
+ * @author vince
+ * 
  */
-import java.net.URI;
 public class VideoPlayer {
 	
 	static Desktop d = Desktop.getDesktop();

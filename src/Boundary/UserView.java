@@ -72,7 +72,7 @@ public class UserView implements View{
 			System.out.println("[6] Book Ticket");
 			System.out.println("[7] View Booking History");
 			System.out.println("[8] List Top 5 Movies by Ticket Sales or Overall Rating");
-			System.out.println("[9] Add Rating");
+			System.out.println("[9] Add Review");
 			System.out.println("[10] Login as Admin");
 			System.out.println("[11] Log Off, Save & Shut Down");
 			System.out.println("------------------------------------------------------");
@@ -90,7 +90,7 @@ public class UserView implements View{
 				case 6:{bookingManager.bookTicket(user, app.getCineplexes(), dateChecker);break;}
 				case 7:{userControl.viewBookingHistory(user);break;}
 				case 8:{sortingManager.listTop5(app.getUniqueMovies());break;}
-				case 9:{reviewManager.addRating(app.getUniqueMovies(), user);break;}
+				case 9:{reviewManager.addReview(app.getUniqueMovies(), user);break;}
 				case 10:{return 2;}
 				case 11:{System.out.println("Thank you for using MOBLIMA!\n Saving and System Logging Off...");
 						app.writeApp();

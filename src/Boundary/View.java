@@ -1,7 +1,7 @@
 package Boundary;
 
 /**
- * View is set as an interface so that other types of users can be added easily to the app
+ * Interface for other potential account views to be easily implemented: To easily add more boundaries/views to the application
  * @author vince
  *
  */

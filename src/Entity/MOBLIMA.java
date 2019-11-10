@@ -10,6 +10,7 @@ import Boundary.View;
 import Boundary.AdminView;
 import Boundary.UserView;
 import Controller.InputControl;   
+import Controller.DBManager;
 
 /**
  * MOBLIMA loads/saves or instantiates new data
@@ -59,7 +60,7 @@ public class MOBLIMA implements Serializable, View{
 		System.out.println("Would you like to continue to load previous save or start anew?");
 		System.out.println("[1] Load");
 		System.out.println("[2] New");
-		DBmanager myDBManager = new SerializeDB();
+		DBManager myDBManager = new SerializeDB();
 		int choice = InputControl.integerInput(1, 2);
 		if (choice == 1) {
 			try	{
@@ -86,7 +87,7 @@ public class MOBLIMA implements Serializable, View{
 	 * Saving data into our serialised database
 	 */
 	public void writeApp() {
-		DBmanager myDBManager = new SerializeDB();
+		DBManager myDBManager = new SerializeDB();
 		String path = System.getProperty("user.dir")+ "/src/" +"moblima.dat";
 		myDBManager.saveData(path, this);
 	}

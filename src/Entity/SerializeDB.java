@@ -7,12 +7,14 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import Controller.DBManager;
+
 /**
  * Implements DBManager, enables loading and saving of data
  * @author vince
  *
  */
-public class SerializeDB implements DBmanager{
+public class SerializeDB implements DBManager{
 	
 	public MOBLIMA loadData(String filename) {
 		MOBLIMA app = null;
