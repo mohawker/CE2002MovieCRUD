@@ -119,7 +119,7 @@ public class BookingManager extends Control{
 		while (true) {
 			if (numTicket == 1) {
 				System.out.print("\nChoose your seat (e.g. A2): ");
-				String seat = scan.next();
+				String seat = InputControl.seatInput();
 				int row_index = (int) seat.charAt(0) - 65;
 				int column_index = (int) seat.charAt(1) - 49;
 				if (row_index > cinemaShowing.getROW() - 1 || column_index > cinemaShowing.getCOL() - 1) {
@@ -132,7 +132,7 @@ public class BookingManager extends Control{
 					seats[row_index][column_index] = "+";
 					cinemaShowing.viewSeats(showtime, date);
 					System.out.print("\nPlease confirm your seat (Y/N) ");
-					char reply = scan.next().charAt(0);
+					char reply = InputControl.ynInput();
 					if (reply == 'Y') {
 						seats[row_index][column_index] = "X";
 							movie.setMovieSales(getMovieSales()+ticket.getPrice());
@@ -147,7 +147,7 @@ public class BookingManager extends Control{
 				ArrayList<String> seatList = new ArrayList<String>();
 				for (int i = 1; i <= numTicket; i++) {
 					System.out.print("\nChoose seat " + i + ": ");
-					String seat = scan.next();
+					String seat = InputControl.seatInput();
 					seatList.add(seat);
 					int row_index = (int) seat.charAt(0) - 65;
 					int column_index = (int) seat.charAt(1) - 49;
@@ -168,7 +168,7 @@ public class BookingManager extends Control{
 				System.out.println();
 				float totalPrice = 0;
 				System.out.println("Please confirm your seat (Y/N)");
-				char reply = scan.next().charAt(0);
+				char reply = InputControl.ynInput();
 				if (reply == 'Y') {
 					for (int i = 0; i < seatList.size(); i++) {
 						int row_index = (int) seatList.get(i).charAt(0) - 65;

@@ -162,13 +162,13 @@ public class MovieControl extends Control{
 		System.out.print("Name of Movie: ");
 		String title = InputControl.stringInput();
 		System.out.print("Status of Movie (Coming Soon/Preview/Showing): ");
-		String status = InputControl.stringInput();
+		String status = InputControl.statusInput();
 		System.out.print("Synopsis: ");
 		String synopsis = InputControl.lineInput();
 		System.out.print("Director: ");
 		String director = InputControl.stringInput();
 		System.out.print("Type (3D/Blockbuster): ");
-		String type = InputControl.stringInput();
+		String type = InputControl.movieTypeInput();
 		System.out.print("Number of Cast Members: ");
 		int numCast = InputControl.integerInput(2, 999);
 		ArrayList <String> cast = new ArrayList <String>();
@@ -177,7 +177,7 @@ public class MovieControl extends Control{
 			cast.add(scan.nextLine());
 		}
 		System.out.print("Age Rating: ");
-		String ageRating = scan.next();
+		String ageRating = InputControl.ageRatingInput();
 		Movie movie = new Movie(title, status, synopsis, director, type, cast, ageRating);
 		uniqueMovies.add(movie);
 		return movie;

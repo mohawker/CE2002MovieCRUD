@@ -1,6 +1,8 @@
 package Entity;
 import java.util.Scanner;
 
+import Controller.InputControl;
+
 /**
  * To authenticate payment
  * @author vince
@@ -16,7 +18,7 @@ public class Payment {
 	public boolean authenticatePayment(MovieTicket ticket){
 		Scanner scan = new Scanner(System.in);
 		System.out.printf("Total Price would be $%.2f. Would you like to go ahead with the transaction? (Y/N)\n", ticket.getPrice());
-		char choice = scan.next().charAt(0);
+		char choice = InputControl.ynInput();
 		if (choice == 'Y') {
 			System.out.printf("Payment is successful! You paid $%.2f! Enjoy your movie!\n", ticket.getPrice());
 			return true;
@@ -26,9 +28,9 @@ public class Payment {
 			return false;
 		}
 		else {
-		System.out.println("Please input either Y or N");
-		this.authenticatePayment(ticket);
-	}
+			System.out.println("Please input either Y or N");
+			this.authenticatePayment(ticket);
+		}
 	return false;
 }
 }
