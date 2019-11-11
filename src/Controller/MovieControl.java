@@ -160,7 +160,7 @@ public class MovieControl extends Control{
 	public Movie createMovie(Set<Movie> uniqueMovies) {
 		Scanner scan = new Scanner(System.in);
 		System.out.print("Name of Movie: ");
-		String title = InputControl.stringInput();
+		String title = InputControl.lineInput();
 		System.out.print("Status of Movie (Coming Soon/Preview/Showing): ");
 		String status = InputControl.statusInput();
 		System.out.print("Synopsis: ");
