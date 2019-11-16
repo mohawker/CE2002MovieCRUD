@@ -3,16 +3,12 @@ package Boundary;
 import Controller.AdminControl;
 import Controller.InputControl;
 import Controller.SortingManager;
-
 import Entity.Admin;
-import Entity.User;
 import Entity.DateChecker;
 import Entity.MOBLIMA;
 
 /**
  * Provides a view of the functions that an admin can perform
- * @author vince
- *
  */
 public  class AdminView implements View{
 	private Admin admin;
@@ -22,7 +18,11 @@ public  class AdminView implements View{
 	private MOBLIMA app;
 	private DateChecker dateChecker;
 	
-	
+	/**
+	 * Constructor for the admin view
+	 * @param myApp - MOBLIMA app with the data
+	 * @param myDateChecker - Used to check if a given date is a weekend or public holiday
+	 */
 	public AdminView(MOBLIMA myApp, DateChecker myDateChecker) {
 		app = myApp;	
 		dateChecker = myDateChecker;
@@ -30,7 +30,6 @@ public  class AdminView implements View{
 		adminControl = new AdminControl(app.getUniqueMovies(), admin, app.getCineplexes());
 		sortingManager = new SortingManager(app.getUniqueMovies(), admin, app.getCineplexes());
 		admin.login();
-		this.dateChecker = dateChecker;
 		System.out.println("+----------------------------------------------------+");
 		System.out.println("|                                                    |");
 		System.out.println("|                   MOBLIMA (v1.0)                   |");
@@ -43,7 +42,7 @@ public  class AdminView implements View{
 	}
 	
 	/**
-	 * Prompts admin to choose a function
+	 * Prints functions available for admin and prompts admin to choose a function
 	 */
 	public int printView() {
 		while (true) {

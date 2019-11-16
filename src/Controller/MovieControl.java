@@ -1,20 +1,16 @@
 package Controller;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import Entity.Admin;
 import Entity.Cinema;
 import Entity.Cineplex;
 import Entity.Movie;
@@ -22,18 +18,22 @@ import Entity.User;
 
 /**
  * Provides helper functions relating to movies
- * @author vince
- *
  */
 public class MovieControl extends Control{
-
+	
+	/**
+	 * Constructor for MovieControl class
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
+	 * @param user - User of MOBLIMA app
+	 * @param cineplexes - ArrayList of the 3 cineplexes
+	 */
 	public MovieControl(Set<Movie> uniqueMovies, User user, ArrayList<Cineplex> cineplexes) {
 		super(uniqueMovies, user, cineplexes);
 	}
 	
 	/**
 	 * Prints out unique movies across all cineplexes
-	 * @param uniqueMovies
+	 * @param uniqueMovies - Unqiue movies shown across all the cineplexes
 	 */
 	public void printMovies(Set<Movie> uniqueMovies) {
 		int count = 1;
@@ -47,7 +47,7 @@ public class MovieControl extends Control{
 	
 	/**
 	 * Prints out movie shown in a cineplex
-	 * @param cineplex
+	 * @param cineplex - Cineplex which contains the movies and cinemas
 	 */
 	public void printMovies(Cineplex cineplex) {
 		for (int i=0 ; i<cineplex.getMovies().size(); i++) {
@@ -59,8 +59,8 @@ public class MovieControl extends Control{
 	
 	/**
 	 * Print movie showtimes for a given movie at a particular cineplex
-	 * @param movieChosen
-	 * @param cineplexes
+	 * @param movieChosen - Movie chosen
+	 * @param cineplexes - ArrayList of the 3 cineplexes
 	 */
 	public void printMovieShowings(Movie movieChosen, ArrayList<Cineplex> cineplexes) {
 		if (movieChosen.getStatus().equals("Showing")){
@@ -88,9 +88,9 @@ public class MovieControl extends Control{
 	
 	
 	/**
-	 * Prompts user to select a movie from the unqiue movies across all cineplexes
-	 * @param uniqueMovies
-	 * @return
+	 * Prompts user to select a movie from the unique movies across all cineplexes
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
+	 * @return Movie selected
 	 */
 	public Movie selectMovie(Set<Movie> uniqueMovies) {
 		List<Movie> uniqueMoviesList = new ArrayList<Movie>(uniqueMovies);
@@ -101,8 +101,8 @@ public class MovieControl extends Control{
 	
 	/**
 	 * Prompts user to select a movie from a list of movies in a cineplex
-	 * @param cineplex
-	 * @return
+	 * @param cineplex - Cineplex which contains the movies and cinemas
+	 * @return Movie selected
 	 */
 	public Movie selectMovie(Cineplex cineplex) {
 		System.out.println("=== Movies ===");
@@ -114,8 +114,10 @@ public class MovieControl extends Control{
 		return cineplex.getMovies().get(choice-1);
 	}
 	
-	/*
-	 * Ensure that there are movies that are "Coming Soon" or "Preview" for showtimes to be created for them
+	/**
+	 * Ensure that there are movies that are not showing
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
+	 * @return An integer indicating if there are movies not showing
 	 */
 	public int ensureUnshownMovies(Set<Movie> uniqueMovies) {
 		List<Movie> unshownMoviesList = new ArrayList<Movie>(uniqueMovies);
@@ -135,8 +137,10 @@ public class MovieControl extends Control{
 		}
 	}
 	
-	/*
-	 * Print movies which are "Coming Soon" or "Preview"
+	/**
+	 * Print the movies that are not showing yet and select from that list
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
+	 * @return Movie selected
 	 */
 	public Movie printAndSelectFromUnshownMovies(Set<Movie> uniqueMovies) {
 		List<Movie> unshownMoviesList = new ArrayList<Movie>(uniqueMovies);
@@ -154,8 +158,10 @@ public class MovieControl extends Control{
 		return unshownMoviesList.get(choice-1);
 	}
 
-	/*
-	 * Prompts user for attributes needed to instantiate a new movie
+	/**
+	 * Creates a new movie
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
+	 * @return Movie created
 	 */
 	public Movie createMovie(Set<Movie> uniqueMovies) {
 		Scanner scan = new Scanner(System.in);
@@ -183,8 +189,10 @@ public class MovieControl extends Control{
 		return movie;
 	}
 	
-	/*
-	 * Sort all the unique movies by sales or by review scores and prints out the top 5
+	/**
+	 * Sorts the movies by sales or by ratings and prints out the top 5
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
+	 * @param bySales - Indicates if it is to be sorted by sales or by rating
 	 */
 	public void sortMovies(Set<Movie> uniqueMovies, boolean bySales) {
 		ArrayList<Movie> uniqueMoviesList = new ArrayList<Movie>(uniqueMovies);
@@ -229,9 +237,9 @@ public class MovieControl extends Control{
 	
 	/**
 	 * Counts the number of days between 2 dates in DD/MM/YYYY format
-	 * @param d1
-	 * @param d2
-	 * @return
+	 * @param d1 - Start date
+	 * @param d2 - End date
+	 * @return Number of days between those 2 dates
 	 */
 	public int daysBetween(Date d1, Date d2){
         return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
@@ -239,11 +247,11 @@ public class MovieControl extends Control{
 	
 	/**
 	 * Show a new movie until a given date specified by the admin and replace the movie that was previously showing
-	 * @param cineplexChosen
-	 * @param cinemaChosen
-	 * @param movieChosen
-	 * @param showtimes
-	 * @param uniqueMovies
+	 * @param cineplexChosen - Cineplex chosen
+	 * @param cinemaChosen - Cinema chosen
+	 * @param movieChosen - Movie chosen
+	 * @param showtimes - ArrayList of Strings containing showtimes in 24H format
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
 	 */
 	public void replaceMovie(Cineplex cineplexChosen, Cinema cinemaChosen, Movie movieChosen, ArrayList<String> showtimes, Set<Movie> uniqueMovies) {
 		Scanner scan = new Scanner(System.in);
@@ -292,9 +300,9 @@ public class MovieControl extends Control{
 	
 	/**
 	 * Print out the available dates for a movie and select from those options
-	 * @param cineplex
-	 * @param movieChosen
-	 * @return
+	 * @param cineplex - Cineplex which contains the movies and cinemas
+	 * @param movieChosen - Movie chosen
+	 * @return Movie date chosens
 	 */
 	public String printAndSelectMovieDates(Cineplex cineplex, Movie movieChosen) {
 		Cinema cinema = cineplex.getCinemas().get(cineplex.getMovies().indexOf(movieChosen));

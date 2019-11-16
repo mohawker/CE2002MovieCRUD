@@ -3,18 +3,19 @@ import java.util.Scanner;
 
 /**
  * To check that user provides correct input
- * @author vince
- *
  */
 public class InputControl {
-
+	
+	/**
+	 * Constructor for the Class
+	 */
 	public InputControl() {}
 	
 	/**
-	 * Check for correct integer input between a given upper limit and lower limit
-	 * @param lowRange Lower limit of selection
-	 * @param highRange Upper limit of selection
-	 * @return
+	 * Check for valid integer input
+	 * @param lowRange - Lower limit of selection
+	 * @param highRange - Upper limit of selection
+	 * @return Valid integer input
 	 */
 	public static int integerInput(int lowRange, int highRange) {
 		Scanner scan = new Scanner(System.in);
@@ -32,8 +33,8 @@ public class InputControl {
 	}
 	
 	/**
-	 * Checks for string input from user
-	 * @return
+	 * Checks for valid string input
+	 * @return Valid String input
 	 */
 	public static String stringInput() {
 		Scanner scan = new Scanner(System.in);
@@ -42,8 +43,8 @@ public class InputControl {
 	}
 	
 	/**
-	 * Checks for string input from user includes whitespace
-	 * @return
+	 * Checks for string input including whitespace
+	 * @return Valid String input
 	 */
 	public static String lineInput() {
 		Scanner scan = new Scanner(System.in);
@@ -51,12 +52,11 @@ public class InputControl {
 		return input;
 	}
 
-	
 	/**
-	 * Checks for float input from user between a upper limit and a lower limit
-	 * @param lowRange Lower limit of selection
-	 * @param highRange Upper limit of selection
-	 * @return
+	 * Checks for valid float input
+	 * @param lowRange - Lower limit of selection
+	 * @param highRange - Upper limit of selection
+	 * @return Valid float input
 	 */
 	public static float floatInput(int lowRange, int highRange) {
 		Scanner scan = new Scanner(System.in);
@@ -72,6 +72,11 @@ public class InputControl {
 			return choice;
 		}
 	}
+	
+	/**
+	 * Check for valid seat selection
+	 * @return Valid seat selection
+	 */
 	public static String seatInput() {
 		Scanner scan = new Scanner(System.in);
 		String input = scan.nextLine();
@@ -91,6 +96,10 @@ public class InputControl {
 			return input;
 	}
 	
+	/**
+	 * Check for valid user confirmation (Y/N)
+	 * @return Valid user confirmation
+	 */
 	public static char ynInput() {
 		Scanner scan = new Scanner(System.in);
 		char input = scan.next().charAt(0);
@@ -101,6 +110,11 @@ public class InputControl {
 		else
 			return input;
 	}
+	
+	/**
+	 * Check for valid movie status input
+	 * @return Valid movie status input
+	 */
 	public static String statusInput() {
 		Scanner scan = new Scanner(System.in);
 		String input = scan.nextLine();
@@ -111,6 +125,11 @@ public class InputControl {
 			return statusInput();
 		}
 	}
+	
+	/**
+	 * Check for valid movie type input
+	 * @return Valid movie type input
+	 */
 	public static String movieTypeInput() {
 		Scanner scan = new Scanner(System.in);
 		String input = scan.nextLine();
@@ -121,6 +140,11 @@ public class InputControl {
 			return movieTypeInput();
 		}
 	}
+	
+	/**
+	 * Check for valid movie age rating input
+	 * @return Valid movie age rating
+	 */
 	public static String ageRatingInput() {
 		Scanner scan = new Scanner(System.in);
 		String input = scan.nextLine();

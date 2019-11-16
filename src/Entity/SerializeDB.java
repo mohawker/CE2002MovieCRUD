@@ -11,11 +11,12 @@ import Controller.DBManager;
 
 /**
  * Implements DBManager, enables loading and saving of data
- * @author vince
- *
  */
 public class SerializeDB implements DBManager{
 	
+	/**
+	 * Implements the loadData abstract method in the DBManager interface
+	 */
 	public MOBLIMA loadData(String filename) {
 		MOBLIMA app = null;
 		FileInputStream fis = null;
@@ -33,6 +34,9 @@ public class SerializeDB implements DBManager{
 		return app;
 	}
 
+	/**
+	 * Implements the saveData abstract method in the DBManager interface
+	 */
 	public void saveData(String filename, MOBLIMA app) {
 		FileOutputStream fos = null;
 		ObjectOutputStream out = null;

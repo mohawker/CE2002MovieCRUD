@@ -1,7 +1,6 @@
 package Controller;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.Set;
 
 import Entity.Cineplex;
@@ -10,16 +9,14 @@ import Entity.User;
 
 /**
  * Provides helper functions relating to cineplexes
- * @author vince
- *
  */
 public class CineplexControl extends Control{
 	
 	/**
 	 * Constructed using Control superclass constructor
-	 * @param uniqueMovies
-	 * @param user
-	 * @param cineplexes
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
+	 * @param user - User of MOBLIMA app
+	 * @param cineplexes - ArrayList of the 3 cineplexes
 	 */
 	public CineplexControl(Set<Movie> uniqueMovies, User user, ArrayList<Cineplex> cineplexes) {
 		super(uniqueMovies, user, cineplexes);
@@ -27,7 +24,7 @@ public class CineplexControl extends Control{
 	
 	/**
 	 * Prints cineplexes to console
-	 * @param cineplexes
+	 * @param cineplexes - ArrayList of the 3 cineplexes
 	 */
 	public void printCineplexes(ArrayList<Cineplex> cineplexes) {
 		System.out.println("=== Cineplexes ===");
@@ -38,11 +35,10 @@ public class CineplexControl extends Control{
 	
 	/**
 	 * Prompts users to select a cineplex
-	 * @param cineplexes
-	 * @return
+	 * @param cineplexes - ArrayList of the 3 cineplexes
+	 * @return Cineplex chosen
 	 */
 	public Cineplex selectCineplex(ArrayList<Cineplex> cineplexes) {
-		Scanner scan = new Scanner(System.in);
 		System.out.print("Select Cineplex: ");
 		int choice = InputControl.integerInput(1, cineplexes.size());
 		return cineplexes.get(choice-1);

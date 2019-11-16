@@ -2,11 +2,9 @@ package Entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Normal user who can use the app to book tickets and other functionalities
- *
  */
 public class User implements Serializable{
 	private String username;
@@ -16,10 +14,11 @@ public class User implements Serializable{
 	private ArrayList<MovieTicket> ticket_history = new ArrayList<MovieTicket>(); // Start out with no history
 	
 	/**
-	 * @param username Username of user
-	 * @param email Email address of user
-	 * @param telno Telephone number of user
-	 * @param age Age of user
+	 * Constructor of User class
+	 * @param username - Username of user
+	 * @param email - Email address of user
+	 * @param telno - Telephone number of user
+	 * @param age - Age of user
 	 */
 	public User(String username, String email, String telno, int age) {
 		this.username = username;
@@ -51,7 +50,7 @@ public class User implements Serializable{
 	
 	/**
 	 * Enables ticket to be added to user's booking history
-	 * @param ticket
+	 * @param ticket - Ticket to be added to booking history
 	 */
 	public void addTicket(MovieTicket ticket) {
 		this.ticket_history.add(ticket);

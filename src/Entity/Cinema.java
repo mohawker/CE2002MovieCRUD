@@ -1,18 +1,10 @@
 package Entity;
 
-import java.util.Scanner;
 import java.io.Serializable;
 import java.util.ArrayList;
-import Controller.CineplexControl;
-
-import Controller.Control;
-import Controller.InputControl;
-import Controller.MovieControl;
 
 /**
  * Cinema refers to the theatre which movies will be played in
- * @author vince
- *
  */
 public abstract class Cinema implements Serializable{
 		
@@ -27,11 +19,11 @@ public abstract class Cinema implements Serializable{
 	private ArrayList<String> dates;
 	
 	/**
-	 * 
-	 * @param cinemaType Cinema can be Normal/GoldClass/Imax
-	 * @param cinemaCode Unique 3-letter code assigned to the cinema
-	 * @param showtimes ArrayList of Strings which contain showtimes in 24H format
-	 * @param dates ArrayList of Strings which contain showtimes in DD/MM/YYYY format
+	 * Constructor for Cinema class
+	 * @param cinemaType - Cinema can be Normal/GoldClass/Imax
+	 * @param cinemaCode - Unique 3-letter code assigned to the cinema
+	 * @param showtimes - ArrayList of Strings which contain showtimes in 24H format
+	 * @param dates - ArrayList of Strings which contain showtimes in DD/MM/YYYY format
 	 */
 	public Cinema(String cinemaType, String cinemaCode, ArrayList<String> showtimes, ArrayList<String> dates) { // can customise seats based on cinemaType
 		this.cinemaType = cinemaType;
@@ -45,10 +37,10 @@ public abstract class Cinema implements Serializable{
 	
 	/**
 	 * Generates the seating plan of the cinema based on its type
-	 * @param cinemaType
-	 * @param cinemaCode
-	 * @param showtimes
-	 * @param dates
+	 * @param cinemaType - Cinema can be Normal/GoldClass/Imax
+	 * @param cinemaCode - Unique 3-letter code assigned to the cinema
+	 * @param showtimes - ArrayList of Strings which contain showtimes in 24H format
+	 * @param dates - ArrayList of Strings which contain showtimes in DD/MM/YYYY format
 	 * @return Cinema with generated floorplan
 	 */
 	public static Cinema generateCinema(String cinemaType, String cinemaCode, ArrayList<String> showtimes, ArrayList<String> dates) {
@@ -68,31 +60,28 @@ public abstract class Cinema implements Serializable{
 	}
 	
 	
-	//Show available seats for a specific show time
+	/**
+	 * View seats of a cinema at a particular date and time
+	 * @param time - Time chosen
+	 * @param date - Date chosen
+	 */
 	public abstract void viewSeats(String time, String date);
 	
-	public String[][][][] getFloorplan(){return this.floorplan;	}
-	public void setFloorplan(String[][][][] myFloorPlan) {this.floorplan = myFloorPlan;	}
-	
-	public ArrayList<String>[] getShowtime(){return this.showtimes;	}
-	public void setShowtime(ArrayList<String>[] myShowtimes) {this.showtimes = myShowtimes;	}
-	
+	// getters
+	public String[][][][] getFloorplan(){return this.floorplan;}
+	public ArrayList<String>[] getShowtime(){return this.showtimes;}
 	public ArrayList<String> getDates(){return this.dates;}
-	public void setDates(ArrayList<String> myDates) {this.dates = myDates;}
-	
-
 	public int getROW() {return this.ROW;}
-	public void setROW(int myRow) {this.ROW = myRow;}
-	
 	public int getCOL() {return this.COL;}
-	public void setCOL(int myCOL) {this.COL = myCOL;}
-	
-	public String getCinemaType() {return this.cinemaType;
-	}
-	public void setCinemaType(String myType) {this.cinemaType = myType;}
-	
+	public String getCinemaType() {return this.cinemaType;}
 	public String getCinemaCode() {	return this.cinemaCode;}
 	
-
+	// setters
+	public void setFloorplan(String[][][][] myFloorPlan) {this.floorplan = myFloorPlan;}
+	public void setShowtime(ArrayList<String>[] myShowtimes) {this.showtimes = myShowtimes;}
+	public void setDates(ArrayList<String> myDates) {this.dates = myDates;}
+	public void setROW(int myRow) {this.ROW = myRow;}
+	public void setCOL(int myCOL) {this.COL = myCOL;}
+	public void setCinemaType(String myType) {this.cinemaType = myType;}
 	public void setCinemaCode(String myType) {this.cinemaCode = myType;}
 }

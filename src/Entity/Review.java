@@ -7,9 +7,7 @@ import Controller.InputControl;
 import java.io.Serializable;
 
 /**
- * Review class found in movies
- * @author vince
- *
+ * Review of movies
  */
 public class Review implements Serializable{
 	private String comment;
@@ -19,17 +17,16 @@ public class Review implements Serializable{
 	private Movie movie;
 	
 	/**
-	 * Reviews only need to be instantiated when users add reviews
-	 * Hence, attributes of reviews are requested for in the constructor
-	 * @param user
-	 * @param movie
+	 * Reviews only need to be instantiated when users add reviews. Hence, attributes of reviews are requested for in the constructor
+	 * @param user - User generating the review
+	 * @param movie - Movie being reviewed
 	 */
 	public Review(User user, Movie movie) {
 		Scanner scan = new Scanner (System.in);
 		System.out.println("\n=== Review for " + movie.getTitle() + " ===");
 		System.out.print("Comment: ");
 		String comment = scan.nextLine();
-		while (1==1) {
+		while (true) {
 			System.out.print("Rating out of 5: ");
 			float rating = InputControl.floatInput(1, 5);
 			this.comment = comment;
@@ -48,5 +45,4 @@ public class Review implements Serializable{
 	public String getMovieTitle() {return this.movie.getTitle();}
 	public Movie getMovieR() {return this.movie;}
 	public String getTitle() {return this.title;}
-	public float getRRating() {return this.rating;}
 }

@@ -2,12 +2,9 @@ package Entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Movie that will be shown in the cinema
- * @author vince
- *
  */
 public class Movie implements Serializable{
 	private String title;
@@ -17,20 +14,19 @@ public class Movie implements Serializable{
 	private String type;
 	private String ageRating;
 	private float movieSales=0;
-	//private float averageRating = 0;
 	private ArrayList <String> cast;
 	private ArrayList <Review> movieReviews=new ArrayList <Review>(); // When creating a new movie, there are no reviews
 	
 	
 	/**
-	 * 
-	 * @param title Title of movie
-	 * @param status Status of movie (Coming Soon/Preview/Showing/End of Showing)
-	 * @param synopsis Synopsis of movie
-	 * @param director Director of move
-	 * @param type Type of movie (3D/Normal/Blockbuster)
-	 * @param cast Cast of movie
-	 * @param ageRating Rating of movie (G/PG13/NC16/M18/R21)
+	 * Constructor for Movie class
+	 * @param title - Title of movie
+	 * @param status - Status of movie (Coming Soon/Preview/Showing/End of Showing)
+	 * @param synopsis - Synopsis of movie
+	 * @param director - Director of move
+	 * @param type - Type of movie (3D/Normal/Blockbuster)
+	 * @param cast - Cast of movie
+	 * @param ageRating - Rating of movie (G/PG13/NC16/M18/R21)
 	 */
 	public Movie(String title, String status, String synopsis, String director, String type, ArrayList <String> cast, String ageRating) {
 		this.title = title;
@@ -89,8 +85,8 @@ public class Movie implements Serializable{
 	}
 	
 	/**
-	 * Returns the average rating of the movie as a float
-	 * @return
+	 * Generates the average rating of the movie
+	 * @return Average rating of the movie as a float
 	 */
 	public float getAverageRating() {
 		float totalRating = 0;
@@ -104,7 +100,7 @@ public class Movie implements Serializable{
 		}
 	}
 	
-	// Set Methods
+	// setters
 	public void setTitle(String title) {this.title = title;}
 	public void setStatus(String status) {this.status = status;}
 	public void setSynopsis(String synopsis) {this.synopsis = synopsis;}
@@ -112,10 +108,9 @@ public class Movie implements Serializable{
 	public void setType(String type) {this.type = type;}
 	public void setCast(ArrayList <String> cast) {this.cast = cast;}
 	public void setMovieSales(float movieSales) {this.movieSales = movieSales;}
-	//public void setAverageRating(float averageRating) {this.averageRating = averageRating;}
 	public void setReview(ArrayList<Review> movieReviews) {this.movieReviews = movieReviews;}
 	
-	//getMethods
+	// getters
 	public String getTitle() {return title;}
 	public String getStatus() {return status;}
 	public String getSynopsis() {return synopsis;}

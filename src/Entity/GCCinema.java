@@ -14,12 +14,11 @@ public final class GCCinema extends RetangularCinema{
 	
 	/**
 	 * Uses the constructor from RectangularCinema class
-	 * Gold Class Cinema floorplan is created using stated number of
-	 * rows and columns
-	 * @param cinema_type
-	 * @param cinema_code
-	 * @param showtimes
-	 * @param dates
+	 * Gold Class Cinema floorplan is created using stated number of rows and columns
+	 * @param cinemaType - Cinema can be Normal/GoldClass/Imax
+	 * @param cinemaCode - Unique 3-letter code assigned to the cinema
+	 * @param showtimes - ArrayList of Strings which contain showtimes in 24H format
+	 * @param dates - ArrayList of Strings which contain showtimes in DD/MM/YYYY format
 	 */
 	public GCCinema(String cinema_type, String cinema_code, ArrayList<String> showtimes, ArrayList<String> dates) {
 		super(cinema_type, cinema_code, showtimes, dates);

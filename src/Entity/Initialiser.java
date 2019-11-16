@@ -3,15 +3,12 @@ package Entity;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Instantiates new data instead of loading previous state
- * @author vince
- *
  */
 public class Initialiser {
 	private static String DATE_FORMAT = "dd/MM/YYYY";
@@ -19,7 +16,7 @@ public class Initialiser {
 	
 	/**
 	 * Generates an array of Cinema objects
-	 * @return
+	 * @return ArrayList of Cinema objects created
 	 */
 	public static Cinema[] generateCinemas() {
 		// current date and next 5 dates
@@ -97,7 +94,7 @@ public class Initialiser {
 	
 	/**
 	 * Generates an array of Movie objects
-	 * @return
+	 * @return ArrayList of Movie objects created
 	 */
 	public static Movie[] generateMovies() {
 		Movie[] movies = new Movie[10];
@@ -147,7 +144,7 @@ public class Initialiser {
 	
 	/**
 	 * Generates an array of Cineplex objects
-	 * @return
+	 * @return ArrayList of Cineplex objects created
 	 */
 	public static ArrayList<Cineplex> generateCineplexes(Cinema[] cinemas, Movie[] movies) {
 		ArrayList<Cinema> cinemas_1 = new ArrayList<Cinema>();
@@ -175,7 +172,7 @@ public class Initialiser {
 	
 	/**
 	 * Generates a set of unique movies being shown
-	 * @return
+	 * @return Set of movies, with no repeating movies
 	 */
 	public static Set<Movie> generateMovies(ArrayList<Cineplex> cineplexes){
 		Cineplex cineplex_1 = cineplexes.get(0);

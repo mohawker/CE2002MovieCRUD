@@ -10,16 +10,14 @@ import Entity.User;
 
 /**
  * Provides helper functions relating to movie showtimes
- * @author vince
- *
  */
 public class ShowtimeControl extends Control{
 	
 	/**
 	 * Uses the constructor from Control class
-	 * @param uniqueMovies
-	 * @param user
-	 * @param cineplexes
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
+	 * @param user - User of MOBLIMA app
+	 * @param cineplexes - ArrayList of the 3 cineplexes
 	 */
 	public ShowtimeControl(Set<Movie> uniqueMovies, User user, ArrayList<Cineplex> cineplexes) {
 		super(uniqueMovies, user, cineplexes);
@@ -27,7 +25,7 @@ public class ShowtimeControl extends Control{
 	
 	/**
 	 * Creates an ArrayList of String objects that are movie showtimes in 24H format
-	 * @return
+	 * @return ArrayList of String containing showtimes in 24H format
 	 */
 	public ArrayList<String> createShowtimes(){
 		Scanner scan = new Scanner(System.in);

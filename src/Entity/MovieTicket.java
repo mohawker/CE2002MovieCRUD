@@ -3,14 +3,10 @@ package Entity;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
  * Movie Ticket of a movie at a cineplex and cinema
- * @author vince
- *
  */
 public class MovieTicket implements Serializable{
 	
@@ -31,11 +27,11 @@ public class MovieTicket implements Serializable{
 	
 	/**
 	 * Constructs MovieTicket objects with the following parameters
-	 * @param movie Movie shown
-	 * @param cinema Cinema shown in
-	 * @param time Time of movie
-	 * @param movieDate Date of movie
-	 * @param quantityTicket Number of tickets bought
+	 * @param movie - Movie shown
+	 * @param cinema - Cinema shown in
+	 * @param time - Time of movie
+	 * @param movieDate - Date of movie
+	 * @param quantityTicket - Number of tickets bought
 	 */
 	public MovieTicket(Movie movie, Cinema cinema, String time, String movieDate, int quantityTicket){
 		this.movie = movie;

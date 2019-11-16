@@ -4,10 +4,7 @@ import java.awt.*;
 import java.net.URI;
 
 /**
- * 
  * Additional feature which enables trailer to be played
- * @author vince
- * 
  */
 public class VideoPlayer {
 	
@@ -15,7 +12,7 @@ public class VideoPlayer {
 	
 	/**
 	 * User will be directed to the link for the trailers. Must be connected to the internet to use this feature
-	 * @param movie
+	 * @param movie - Movie requested
 	 */
 	public static void play(Movie movie){
 		try {
@@ -62,9 +59,6 @@ public class VideoPlayer {
 					break;
 			}
 		}
-
-		
-
 		catch (Exception e){
 			e.printStackTrace();
 		}

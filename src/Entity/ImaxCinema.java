@@ -12,12 +12,11 @@ public final class ImaxCinema extends Cinema {
 	int DIAMETER = 5; //only odd numbers allowed
 	
 	/**
-	 * Uses the constructor from RectangularCinema class
-	 * IMAX Cinema's circular floorplan is created using stated diameter
-	 * @param cinemaType
-	 * @param cinemaCode
-	 * @param showtimes
-	 * @param dates
+	 * Uses the constructor from RectangularCinema class, IMAX Cinema's circular floorplan is created using stated diameter
+	 * @param cinemaType - Cinema can be Normal/GoldClass/Imax
+	 * @param cinemaCode - Unique 3-letter code assigned to the cinema
+	 * @param showtimes - ArrayList of Strings which contain showtimes in 24H format
+	 * @param dates - ArrayList of Strings which contain showtimes in DD/MM/YYYY format
 	 */
 	public ImaxCinema(String cinemaType, String cinemaCode, ArrayList<String> showtimes, ArrayList<String> dates) { // can customise seats based on cinemaType
 		super(cinemaType, cinemaCode, showtimes, dates);
@@ -35,17 +34,20 @@ public final class ImaxCinema extends Cinema {
 							getFloorplan()[date][i][x][y]= "O";
 						}
 						else {
-							//spacing
 							getFloorplan()[date][i][x][y]= "@";
 						}
-						
 					}
 				}
 			}
 		}
-		
 	}
 	
+	/**
+	 * Checks if a given seat should be included in the circular seating arrangement
+	 * @param x - Row of seat
+	 * @param y - Column of seat
+	 * @return boolean indicating if that seat is in the circular floorplan
+	 */
 	private boolean checkInCircle(int x, int y) {
 		int center = DIAMETER /2;
 		double distanceFromCenter = Math.sqrt(Math.pow(x-center, 2) + Math.pow(y-center, 2));
@@ -55,7 +57,6 @@ public final class ImaxCinema extends Cinema {
 		else {
 			return true;
 		}
-		
 	}
 	
 

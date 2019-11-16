@@ -14,8 +14,6 @@ import Entity.Price;
 
 /**
  * Provides logic to perform admin functions
- * @author vince
- *
  */
 public class AdminControl extends Control{
 	
@@ -26,9 +24,9 @@ public class AdminControl extends Control{
 	
 	/**
 	 * Admin needs to have movieContrl, cinemaControl, showtimeControl, cineplexControl to carry out his/her functions
-	 * @param uniqueMovies Unqiue movies shown across all the cineplexes
-	 * @param admin 
-	 * @param cineplexes
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
+	 * @param admin - Admin of the MOBLIMA app
+	 * @param cineplexes - ArrayList of the 3 cineplexes
 	 */
 	public AdminControl(Set<Movie> uniqueMovies, Admin admin, ArrayList<Cineplex> cineplexes) {
 		super(uniqueMovies, admin, cineplexes);
@@ -40,9 +38,9 @@ public class AdminControl extends Control{
 	
 	/**
 	 * Allows admin to create a movie listing, replaces a movie currently being shown if the new movie is "Showing" as well
-	 * @param cineplexes
-	 * @param uniqueMovies
-	 * @return
+	 * @param cineplexes - ArrayList of the 3 cineplexes
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
+	 * @return Movie created
 	 */
 	public Movie createMovieListing(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
 		Movie movie = movieControl.createMovie(uniqueMovies);
@@ -59,8 +57,8 @@ public class AdminControl extends Control{
 	
 	/**
 	 * Update movie showing status to "Showing" or "End of Showing"
-	 * @param cineplexes
-	 * @param uniqueMovies
+	 * @param cineplexes - ArrayList of the 3 cineplexes
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
 	 */
 	public void updateMovieListing(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
 		System.out.println("\n=== Current Movie Listing ===");
@@ -91,8 +89,8 @@ public class AdminControl extends Control{
 	
 	/**
 	 * Remove a movie that is currently "Showing"
-	 * @param cineplexes
-	 * @param uniqueMovies
+	 * @param cineplexes - ArrayList of the 3 cineplexes
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
 	 */
 	public void removeMovieListing(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
 		System.out.println("\n=== Current Movie Listing ===");
@@ -107,8 +105,8 @@ public class AdminControl extends Control{
 	
 	/**
 	 * Creates showtimes for movie that are "Coming Soon"
-	 * @param cineplexes
-	 * @param uniqueMovies
+	 * @param cineplexes - ArrayList of the 3 cineplexes
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
 	 */
 	public void createCinemaShowtimes(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
 		int valid = movieControl.ensureUnshownMovies(uniqueMovies);
@@ -134,8 +132,8 @@ public class AdminControl extends Control{
 
 	/**
 	 * Updates showtimes for movies that are "Showing"
-	 * @param cineplexes
-	 * @param uniqueMovies
+	 * @param cineplexes - ArrayList of the 3 cineplexes
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
 	 */
 	public void updateCinemaShowtimes(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
 		Scanner scan = new Scanner(System.in);
@@ -174,8 +172,8 @@ public class AdminControl extends Control{
 	
 	/**
 	 * Add showtimes for movie currently "Showing"
-	 * @param cineplexes
-	 * @param uniqueMovies
+	 * @param cineplexes - ArrayList of the 3 cineplexes
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
 	 */
 	public void addCinemaShowtimes(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
 		Scanner scan = new Scanner(System.in);
@@ -205,8 +203,8 @@ public class AdminControl extends Control{
 	
 	/**
 	 * Remove showtimes for movies that are "Showing"
-	 * @param cineplexes
-	 * @param uniqueMovies
+	 * @param cineplexes - ArrayList of the 3 cineplexes
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
 	 */
 	public void removeCinemaShowtimes(ArrayList<Cineplex> cineplexes, Set<Movie> uniqueMovies) {
 		Scanner scan = new Scanner(System.in);
@@ -240,7 +238,7 @@ public class AdminControl extends Control{
 	
 	/**
 	 * Enables new public holiday to be added
-	 * @param dateChecker
+	 * @param dateChecker - Used to check if a given date is a weekend or public holiday
 	 */
 	public void addNewHoliday(DateChecker dateChecker) {
 		Scanner scan = new Scanner(System.in);

@@ -1,7 +1,6 @@
 package Controller;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.Set;
 
 import Entity.Cinema;
@@ -11,16 +10,14 @@ import Entity.User;
 
 /**
  * Provides helper functions relating to cinemas
- * @author vince
- *
  */
 public class CinemaControl extends Control{
 	
 	/**
 	 * Constructed using Control superclass constructor
-	 * @param uniqueMovies
-	 * @param user
-	 * @param cineplexes
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
+	 * @param user - User of MOBLIMA app
+	 * @param cineplexes - ArrayList of the 3 cineplexes
 	 */
 	public CinemaControl(Set<Movie> uniqueMovies, User user, ArrayList<Cineplex> cineplexes) {
 		super(uniqueMovies, user, cineplexes);
@@ -28,11 +25,10 @@ public class CinemaControl extends Control{
 	
 	/**
 	 * Prints out cinemas from a cineplex and prompts user to choose a cinema
-	 * @param cineplex
-	 * @return
+	 * @param cineplex - Cineplex which contains the movies and cinemas
+	 * @return Cinema chosen
 	 */
 	public Cinema printAndSelectCinema(Cineplex cineplex) {
-		Scanner scan = new Scanner(System.in);
 		System.out.println("=== Cinemas ===");
 		for (int i = 0; i<cineplex.getCinemas().size(); i++) {
 			System.out.println("[" + (i+1) + "] " + " Cinema Code " + cineplex.getCinemas().get(i).getCinemaCode() + "(" + cineplex.getCinemas().get(i).getCinemaType() + ")");
@@ -45,14 +41,13 @@ public class CinemaControl extends Control{
 	
 	/**
 	 * Views the floorplan of the cinema
-	 * @param cineplex
-	 * @param movie
-	 * @param date
+	 * @param cineplex - Cineplex which contains the movies and cinemas
+	 * @param movie - Movie chosen
+	 * @param date - Date of the movie
 	 */
 	public void viewSeatAvailability(Cineplex cineplex, Movie movie, String date) {
 		int index = cineplex.getMovies().indexOf(movie);
 		Cinema cinemaShowing = cineplex.getCinemas().get(index);
-		Scanner scan = new Scanner(System.in);
 		int movieIndex = cineplex.getMovies().indexOf(movie);
 		int dateIndex = (cineplex.getCinemas().get(movieIndex).getDates().indexOf(date)) - 1;
 		System.out.println("=== Available Showtimes ===");
@@ -63,7 +58,7 @@ public class CinemaControl extends Control{
 		int choice = InputControl.integerInput(1, cinemaShowing.getShowtime().length);
 		System.out.println();
 		String showtimeChosen;
-		while (1==1) {
+		while (true) {
 			if (choice < 1 && choice > cinemaShowing.getShowtime()[dateIndex].size()) {
 				System.out.println("Invalid option. Please try again");
 			}else {

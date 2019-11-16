@@ -2,14 +2,11 @@ package Entity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Scanner;
 import java.util.Date;
 import java.io.Serializable;
 
 /**
  * Checks if the date is a public holiday or weekend
- * @author vince
- *
  */
 public class DateChecker implements Serializable{
 	
@@ -49,20 +46,16 @@ public class DateChecker implements Serializable{
 		for (Date holiday: publicHoliday) {
 			System.out.println(holiday.toString());
 		}
-		
 	}
 	
 	/**
 	 * Checks if a particular date is a public holiday or weekend
-	 * @param date
+	 * @param date - Date being checked
 	 * @return boolean indicating if the date is public holiday or weekend
 	 */
 	@SuppressWarnings("deprecation")
 	public boolean checkSpecialDate(String date) {
 		boolean specialDate = false;
-		//parse string
-		Scanner scan = new Scanner(System.in);
-		
 		int day = Integer.valueOf(date.substring(0, 2));
 		int month = Integer.valueOf(date.substring(3, 5)) - 1;
 		int year = Integer.valueOf(date.substring(6, 10)) - 1900;
@@ -85,7 +78,7 @@ public class DateChecker implements Serializable{
 	
 	/**
 	 * Enables admin to add public holidays to the ArrayList of Date objects
-	 * @param date Date is passed in DD/MM/YYYY format
+	 * @param date - Date to be added is passed in DD/MM/YYYY format
 	 */
 	@SuppressWarnings("deprecation")
 	public void addSpecialDate(String date) {

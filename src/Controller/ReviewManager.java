@@ -10,17 +10,15 @@ import Entity.User;
 
 /**
  * Helper functions for users to add movie reviews
- * @author vince
- *
  */
 public class ReviewManager extends Control{
 	private MovieControl movieControl;
 	
 	/**
 	 * Uses Control class constructor and instantiates a new MovieControl object
-	 * @param uniqueMovies
-	 * @param user
-	 * @param cineplexes
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
+	 * @param user - User of MOBLIMA app
+	 * @param cineplexes - ArrayList of the 3 cineplexes
 	 */
 	public ReviewManager(Set<Movie> uniqueMovies, User user, ArrayList<Cineplex> cineplexes) {
 		super(uniqueMovies, user, cineplexes);
@@ -29,8 +27,8 @@ public class ReviewManager extends Control{
 	
 	/**
 	 * Add review for a particular movie
-	 * @param uniqueMovies
-	 * @param user
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
+	 * @param user - User of MOBLIMA app
 	 */
 	public void addReview(Set<Movie> uniqueMovies, User user) {
 		System.out.println("=== Review Movies ===");

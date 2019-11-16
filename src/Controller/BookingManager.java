@@ -14,8 +14,6 @@ import Entity.User;
 
 /**
  * Makes movie booking for users
- * @author vince
- *
  */
 public class BookingManager extends Control{
 	private MovieControl movieControl;
@@ -23,9 +21,9 @@ public class BookingManager extends Control{
 	
 	/**
 	 * Instantiates movieControl and cineplexControl for the BookingManager
-	 * @param uniqueMovies
-	 * @param user
-	 * @param cineplexes
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
+	 * @param user - User of MOBLIMA app
+	 * @param cineplexes - ArrayList of the 3 cineplexes
 	 */
 	public BookingManager(Set<Movie> uniqueMovies, User user, ArrayList<Cineplex> cineplexes) {
 		super(uniqueMovies, user, cineplexes);
@@ -35,9 +33,9 @@ public class BookingManager extends Control{
 	
 	/**
 	 * Enables user to choose number of seats for movie booking and authenticates the payment upon user confirmation
-	 * @param user
-	 * @param cineplexes
-	 * @param dateChecker
+	 * @param user - User of MOBLIMA app
+	 * @param cineplexes - ArrayList of the 3 cineplexes
+	 * @param dateChecker - Used to check if a given date is a weekend or public holiday
 	 */
 	public void bookTicket(User user, ArrayList<Cineplex> cineplexes, DateChecker dateChecker){
 		Scanner scan = new Scanner(System.in);
@@ -76,18 +74,17 @@ public class BookingManager extends Control{
 	
 	/**
 	 * Enables user to choose seats for movie booking upon user confirmation
-	 * @param user
-	 * @param cineplex
-	 * @param movie
-	 * @param numTicket
-	 * @param dateChecker
-	 * @return
+	 * @param user - User of MOBLIMA app
+	 * @param cineplex - Cineplex which contains the movies and cinemas
+	 * @param movie - Movie chosen
+	 * @param numTicket - Number of tickets which corresponds to number of seats selected
+	 * @param dateChecker - Used to check if a given date is a weekend or public holiday
+	 * @return Movie ticket after making payment
 	 */
 	public MovieTicket selectTicketSeat(User user, Cineplex cineplex, Movie movie, int numTicket, DateChecker dateChecker) {
 		int index = cineplex.getMovies().indexOf(movie);
 		
 		Cinema cinemaShowing = cineplex.getCinemas().get(index);
-		Scanner scan = new Scanner(System.in);
 		System.out.println("\n=== Dates for " + movie.getTitle() + " at " + cineplex.getName() + " " + cineplex.getLocation() + " ===");
 		for (int i=0; i<cinemaShowing.getDates().size(); i++) {
 			System.out.println("[" + (i+1) + "] " + cinemaShowing.getDates().get(i));
@@ -135,7 +132,7 @@ public class BookingManager extends Control{
 					char reply = InputControl.ynInput();
 					if (reply == 'Y') {
 						seats[row_index][column_index] = "X";
-							movie.setMovieSales(getMovieSales()+ticket.getPrice());
+							movie.setMovieSales(movie.getMovieSales()+ticket.getPrice());
 							return ticket;
 						} 
 					else {
@@ -177,7 +174,7 @@ public class BookingManager extends Control{
 						totalPrice += ticket.getPerTicketPrice();
 					}
 					ticket.setPrice(totalPrice);
-					movie.setMovieSales(getMovieSales()+ticket.getPrice());
+					movie.setMovieSales(movie.getMovieSales()+ticket.getPrice());
 					ticket.setQuantityTickets(seatList.size());
 					return ticket;
 					} else {
@@ -190,10 +187,5 @@ public class BookingManager extends Control{
 				}
 			}
 		}
-	}
-
-	private float getMovieSales() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 }

@@ -3,20 +3,16 @@ package Entity;
 import java.util.ArrayList;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import Boundary.View;
 import Boundary.AdminView;
 import Boundary.UserView;
-import Controller.InputControl;   
+import Boundary.View;
 import Controller.DBManager;
+import Controller.InputControl;
 
 /**
- * MOBLIMA loads/saves or instantiates new data
- * and directs users to the correct view (UserView/AdminView)
- * @author vince
- *
+ * MOBLIMA loads/saves or instantiates new data and directs users to the correct view (UserView/AdminView)
  */
 public class MOBLIMA implements Serializable, View{
 	private Cinema[] cinemas;
@@ -53,7 +49,7 @@ public class MOBLIMA implements Serializable, View{
 	
 	/**
 	 * Loading data from serialised database
-	 * @return
+	 * @return MOBLIMA app with the loaded data or new data
 	 */
 	public static MOBLIMA loadApp() {
 		System.out.println("Welcome to MOBLIMA App");
@@ -123,28 +119,19 @@ public class MOBLIMA implements Serializable, View{
 		}
 	}
 	
-
+	// getters
 	public Cineplex getCineplex_1() {return cineplex_1;}
-
-	public void setCineplex_1(Cineplex cineplex_1) {this.cineplex_1 = cineplex_1;}
-
 	public Cineplex getCineplex_2() {return cineplex_2;}
-
-	public void setCineplex_2(Cineplex cineplex_2) {this.cineplex_2 = cineplex_2;}
-
 	public Cineplex getCineplex_3() {return cineplex_3;}
-
-	public void setCineplex_3(Cineplex cineplex_3) {this.cineplex_3 = cineplex_3;}
-
 	public Set<Movie> getUniqueMovies() {return uniqueMovies;}
-
-	public void setUniqueMovies(Set<Movie> uniqueMovies) {this.uniqueMovies = uniqueMovies;}
-
 	public ArrayList<User> getUsers() {return users;}
-
-	public void setUsers(ArrayList<User> users) {this.users = users;}
-	
 	public ArrayList<Cineplex> getCineplexes(){return cineplexes;}
 	
+	// setters
+	public void setCineplex_1(Cineplex cineplex_1) {this.cineplex_1 = cineplex_1;}
+	public void setCineplex_2(Cineplex cineplex_2) {this.cineplex_2 = cineplex_2;}
+	public void setCineplex_3(Cineplex cineplex_3) {this.cineplex_3 = cineplex_3;}
+	public void setUniqueMovies(Set<Movie> uniqueMovies) {this.uniqueMovies = uniqueMovies;}
+	public void setUsers(ArrayList<User> users) {this.users = users;}
 	public void setCineplexes(ArrayList<Cineplex> cineplexes){this.cineplexes=cineplexes;}
 }	

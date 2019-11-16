@@ -11,8 +11,6 @@ import Entity.User;
 
 /**
  * Provides a view of the functions that a normal user can perform
- * @author vince
- *
  */
 public class UserView implements View{
 	private UserControl userControl;
@@ -22,7 +20,12 @@ public class UserView implements View{
 	private User user;
 	private MOBLIMA app;
 	private DateChecker dateChecker;
-
+	
+	/**
+	 * Constructor for admin view
+	 * @param myApp - MOBLIMA app with the data
+	 * @param myDateChecker - Used to check if a given date is a weekend or public holiday
+	 */
 	public UserView(MOBLIMA myApp, DateChecker myDateChecker) {
 		app = myApp;	
 		dateChecker = myDateChecker;
@@ -58,7 +61,7 @@ public class UserView implements View{
 	}
 	
 	/**
-	 * Prompts user to choose a function
+	 * Prints functions available for user and prompts user to choose a function
 	 */
 	public int printView() {
 		while (true){

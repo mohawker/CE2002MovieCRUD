@@ -10,17 +10,15 @@ import Entity.User;
 
 /**
  * Provides helper functions relating to sorting of movies
- * @author vince
- *
  */
 public class SortingManager extends Control{
 	private MovieControl movieControl;
 	
 	/**
 	 * Uses Control class constructor and instantiates new MovieControl object
-	 * @param uniqueMovies
-	 * @param user
-	 * @param cineplexes
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
+	 * @param user - User of MOBLIMA app
+	 * @param cineplexes - ArrayList of the 3 cineplexes
 	 */
 	public SortingManager(Set<Movie> uniqueMovies, User user, ArrayList<Cineplex> cineplexes) {
 		super(uniqueMovies, user, cineplexes);
@@ -29,7 +27,7 @@ public class SortingManager extends Control{
 	
 	/**
 	 * Prompts user to list top 5 movies by sales/review ratings
-	 * @param uniqueMovies
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
 	 */
 	public void listTop5(Set<Movie> uniqueMovies) {
 		Scanner scan = new Scanner(System.in);

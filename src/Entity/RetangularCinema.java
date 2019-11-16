@@ -4,17 +4,15 @@ import java.util.ArrayList;
 
 /**
  * Cinema with a rectangular floorplan
- * @author vince
- *
  */
 public abstract class RetangularCinema extends Cinema {
 	
 	/**
 	 * Uses Cinema class constructor
-	 * @param cinema_type
-	 * @param cinema_code
-	 * @param showtimes
-	 * @param dates
+	 * @param cinemaType - Cinema can be Normal/GoldClass/Imax
+	 * @param cinemaCode - Unique 3-letter code assigned to the cinema
+	 * @param showtimes - ArrayList of Strings which contain showtimes in 24H format
+	 * @param dates - ArrayList of Strings which contain showtimes in DD/MM/YYYY format
 	 */
 	public RetangularCinema(String cinema_type, String cinema_code, ArrayList<String> showtimes, ArrayList<String> dates) { // can customise seats based on cinema_type
 		super(cinema_type, cinema_code, showtimes, dates);

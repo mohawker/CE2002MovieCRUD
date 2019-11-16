@@ -9,8 +9,6 @@ import Entity.User;
 
 /**
  * Used to create other control classes for helper functions
- * @author vince
- *
  */
 public class Control {
 	private Set<Movie> uniqueMovies;
@@ -19,9 +17,9 @@ public class Control {
 	
 	/**
 	 * Constructor that will be used by derived classes of Control
-	 * @param uniqueMovies
-	 * @param user
-	 * @param cineplexes
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
+	 * @param user - User of MOBLIMA app
+	 * @param cineplexes - ArrayList of the 3 cineplexes
 	 */
 	public Control(Set<Movie> uniqueMovies, User user, ArrayList<Cineplex> cineplexes) {
 		this.setUniqueMovies(uniqueMovies);
@@ -29,15 +27,14 @@ public class Control {
 		this.setCineplexes(cineplexes);
 	}
 
-	public Set<Movie> getUniqueMovies() {return uniqueMovies;}
-
+	
+	// setters
 	public void setUniqueMovies(Set<Movie> uniqueMovies) {this.uniqueMovies = uniqueMovies;}
-
-	public User getUser() {return user;}
-
 	public void setUser(User user) {this.user = user;}
-
-	public ArrayList<Cineplex> getCineplexes() {return cineplexes;}
-
 	public void setCineplexes(ArrayList<Cineplex> cineplexes) {this.cineplexes = cineplexes;}
+	
+	// getters
+	public Set<Movie> getUniqueMovies() {return uniqueMovies;}
+	public User getUser() {return user;}
+	public ArrayList<Cineplex> getCineplexes() {return cineplexes;}
 }

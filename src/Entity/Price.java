@@ -5,8 +5,6 @@ import java.util.Scanner;
 
 /**
  * Price class of a movie ticket
- * @author vince
- *
  */
 public class Price implements Serializable{
 	private int age;
@@ -26,11 +24,11 @@ public class Price implements Serializable{
 	
 	/**
 	 * Generates price based on movie type, cinema type and the date
-	 * @param age
-	 * @param movieType
-	 * @param cinemaType
-	 * @param date
-	 * @param dateChecker
+	 * @param age - Age of user
+	 * @param movieType - Type of movie
+	 * @param cinemaType - Type of cinema
+	 * @param date - Date of movie
+	 * @param dateChecker - Used to check if a given date is a weekend or public holiday
 	 */
 	public void generatePrice(int age, String movieType, String cinemaType, String date, DateChecker dateChecker) {
 		this.age = age;
@@ -151,11 +149,9 @@ public class Price implements Serializable{
 		}		
 	}
 	
-	public void setPrice(float price) {
-		this.price = price;
-	}
+	// setter
+	public void setPrice(float price) {this.price = price;}
 	
-	public float getPrice() {
-		return this.price;
-	}
+	// getter
+	public float getPrice() {return this.price;}
 }

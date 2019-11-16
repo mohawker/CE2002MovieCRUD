@@ -1,12 +1,10 @@
 package Controller;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
-import Entity.Admin;
 import Entity.Cineplex;
 import Entity.Movie;
 import Entity.User;
@@ -14,8 +12,6 @@ import Entity.VideoPlayer;
 
 /**
  * Provides logic to perform user functions
- * @author vince
- *
  */
 public class UserControl extends Control{
 	private MovieControl movieControl;
@@ -25,9 +21,9 @@ public class UserControl extends Control{
 	
 	/**
 	 * Uses the Control class constructor and instantiates MovieControl, CinemaControl and CineplexControl
-	 * @param uniqueMovies
-	 * @param user
-	 * @param cineplexes
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
+	 * @param user - User of MOBLIMA app
+	 * @param cineplexes - ArrayList of the 3 cineplexes
 	 */
 	public UserControl(Set<Movie> uniqueMovies, User user, ArrayList<Cineplex> cineplexes) {
 		super(uniqueMovies, user, cineplexes);
@@ -38,8 +34,8 @@ public class UserControl extends Control{
 	
 	/**
 	 * Search for a  movie based on string matching
-	 * @param uniqueMovies
-	 * @param cineplexes
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
+	 * @param cineplexes - ArrayList of the 3 cineplexes
 	 */
 	public void searchUniqueMovies(Set<Movie> uniqueMovies, ArrayList<Cineplex> cineplexes) {
 		Scanner scan = new Scanner(System.in);
@@ -70,8 +66,8 @@ public class UserControl extends Control{
 	
 	/**
 	 * List unique movies being shown across all 3 cineplexes
-	 * @param uniqueMovies
-	 * @param cineplexes
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
+	 * @param cineplexes - ArrayList of the 3 cineplexes
 	 */
 	public void listUniqueMovies(Set<Movie> uniqueMovies, ArrayList<Cineplex> cineplexes) {
 		Scanner scan = new Scanner(System.in);
@@ -87,11 +83,9 @@ public class UserControl extends Control{
 	
 	/**
 	 * View the details of a movie
-	 * @param uniqueMovies
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
 	 */
 	public void viewMovieDetails(Set<Movie> uniqueMovies) {
-		// print out titles of unique movie
-		Scanner scan = new Scanner(System.in);
 		System.out.println("=== Movies Available ===");
 		movieControl.printMovies(uniqueMovies);
 		Movie movieChosen = movieControl.selectMovie(uniqueMovies);
@@ -101,10 +95,9 @@ public class UserControl extends Control{
 	
 	/**
 	 * Check the seats available for a movie on a particular date at a particualr cineplex
-	 * @param cineplexes
+	 * @param cineplexes - ArrayList of the 3 cineplexes
 	 */
 	public void checkSeatAvailability(ArrayList<Cineplex> cineplexes) {
-		Scanner scan = new Scanner(System.in);
 		cineplexControl.printCineplexes(cineplexes);
 		Cineplex cineplex_chosen = cineplexControl.selectCineplex(cineplexes);
 		System.out.println();
@@ -122,7 +115,7 @@ public class UserControl extends Control{
 	
 	/**
 	 * View the booking history of the user
-	 * @param user
+	 * @param user - User of MOBLIMA app
 	 */
 	public void viewBookingHistory(User user) {
 		user.viewTicketHistory();
@@ -130,13 +123,12 @@ public class UserControl extends Control{
 
 	/**
 	 * Allow users to view trailers
-	 * @param uniqueMovies
+	 * @param uniqueMovies - Unique movies shown across all the cineplexes
 	 */
 	public void viewTrailer(Set<Movie> uniqueMovies) {
 		System.out.println("=== Movies Available ===");
 		movieControl.printMovies(uniqueMovies);
 		Movie movieChosen = movieControl.selectMovie(uniqueMovies);
-		VideoPlayer player = new VideoPlayer();
-		player.play(movieChosen);
+		VideoPlayer.play(movieChosen);
 	}
 }
