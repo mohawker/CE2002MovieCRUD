@@ -1,6 +1,6 @@
-package Entity;
+package entity;
 
-import Controller.InputControl;
+import controller.InputControl;
 
 /**
  * To authenticate payment

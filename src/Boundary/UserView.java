@@ -1,13 +1,13 @@
-package Boundary;
+package boundary;
 
-import Controller.BookingManager;
-import Controller.InputControl;
-import Controller.ReviewManager;
-import Controller.SortingManager;
-import Controller.UserControl;
-import Entity.DateChecker;
-import Entity.MOBLIMA;
-import Entity.User;
+import controller.BookingManager;
+import controller.InputControl;
+import controller.ReviewManager;
+import controller.SortingManager;
+import controller.UserControl;
+import entity.DateChecker;
+import entity.MOBLIMA;
+import entity.User;
 
 /**
  * Provides a view of the functions that a normal user can perform

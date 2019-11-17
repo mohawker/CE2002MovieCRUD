@@ -1,8 +1,8 @@
-package Entity;
+package entity;
 
 import java.util.Scanner;
 
-import Controller.InputControl;
+import controller.InputControl;
 
 import java.io.Serializable;
 

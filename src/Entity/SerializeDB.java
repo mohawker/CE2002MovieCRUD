@@ -1,4 +1,4 @@
-package Entity;
+package entity;
 
 
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import Controller.DBManager;
+import controller.DBManager;
 
 /**
  * Implements DBManager, enables loading and saving of data

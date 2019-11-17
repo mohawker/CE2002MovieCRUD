@@ -1,12 +1,12 @@
-package Controller;
+package controller;
 
 import java.util.ArrayList;
 import java.util.Set;
 
-import Entity.Cineplex;
-import Entity.Movie;
-import Entity.Review;
-import Entity.User;
+import entity.Cineplex;
+import entity.Movie;
+import entity.Review;
+import entity.User;
 
 /**
  * Helper functions for users to add movie reviews

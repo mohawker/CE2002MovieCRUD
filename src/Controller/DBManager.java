@@ -1,6 +1,6 @@
-package Controller;
+package controller;
 
-import Entity.MOBLIMA;
+import entity.MOBLIMA;
 
 /**
  * DataBase Manager (DBManager) enables us to add new ways of saving data such as to a CSV file by extending from this interface

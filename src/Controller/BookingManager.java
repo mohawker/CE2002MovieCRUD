@@ -1,16 +1,16 @@
-package Controller;
+package controller;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Set;
 
-import Entity.Cinema;
-import Entity.Cineplex;
-import Entity.DateChecker;
-import Entity.Movie;
-import Entity.MovieTicket;
-import Entity.Payment;
-import Entity.User;
+import entity.Cinema;
+import entity.Cineplex;
+import entity.DateChecker;
+import entity.Movie;
+import entity.MovieTicket;
+import entity.Payment;
+import entity.User;
 
 /**
  * Makes movie booking for users

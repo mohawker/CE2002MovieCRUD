@@ -1,11 +1,11 @@
-package Boundary;
+package boundary;
 
-import Controller.AdminControl;
-import Controller.InputControl;
-import Controller.SortingManager;
-import Entity.Admin;
-import Entity.DateChecker;
-import Entity.MOBLIMA;
+import controller.AdminControl;
+import controller.InputControl;
+import controller.SortingManager;
+import entity.Admin;
+import entity.DateChecker;
+import entity.MOBLIMA;
 
 /**
  * Provides a view of the functions that an admin can perform

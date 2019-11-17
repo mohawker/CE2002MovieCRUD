@@ -1,4 +1,4 @@
-package Boundary;
+package boundary;
 
 /**
  * Interface for other potential account views to be easily implemented: To easily add more boundaries/views to the application

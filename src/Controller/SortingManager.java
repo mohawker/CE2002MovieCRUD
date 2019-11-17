@@ -1,12 +1,12 @@
-package Controller;
+package controller;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Set;
 
-import Entity.Cineplex;
-import Entity.Movie;
-import Entity.User;
+import entity.Cineplex;
+import entity.Movie;
+import entity.User;
 
 /**
  * Provides helper functions relating to sorting of movies

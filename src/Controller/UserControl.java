@@ -1,14 +1,14 @@
-package Controller;
+package controller;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
-import Entity.Cineplex;
-import Entity.Movie;
-import Entity.User;
-import Entity.VideoPlayer;
+import entity.Cineplex;
+import entity.Movie;
+import entity.User;
+import entity.VideoPlayer;
 
 /**
  * Provides logic to perform user functions

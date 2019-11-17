@@ -1,16 +1,16 @@
-package Controller;
+package controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 import java.util.Set;
 
-import Entity.Admin;
-import Entity.Cinema;
-import Entity.Cineplex;
-import Entity.DateChecker;
-import Entity.Movie;
-import Entity.Price;
+import entity.Admin;
+import entity.Cinema;
+import entity.Cineplex;
+import entity.DateChecker;
+import entity.Movie;
+import entity.Price;
 
 /**
  * Provides logic to perform admin functions

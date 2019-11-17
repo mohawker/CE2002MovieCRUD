@@ -1,15 +1,15 @@
-package Entity;
+package entity;
 
 import java.util.ArrayList;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import Boundary.AdminView;
-import Boundary.UserView;
-import Boundary.View;
-import Controller.DBManager;
-import Controller.InputControl;
+import boundary.AdminView;
+import boundary.UserView;
+import boundary.View;
+import controller.DBManager;
+import controller.InputControl;
 
 /**
  * MOBLIMA loads/saves or instantiates new data and directs users to the correct view (UserView/AdminView)

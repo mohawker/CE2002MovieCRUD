@@ -1,4 +1,4 @@
-package Controller;
+package controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,10 +11,10 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import Entity.Cinema;
-import Entity.Cineplex;
-import Entity.Movie;
-import Entity.User;
+import entity.Cinema;
+import entity.Cineplex;
+import entity.Movie;
+import entity.User;
 
 /**
  * Provides helper functions relating to movies
