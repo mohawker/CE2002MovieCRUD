@@ -144,6 +144,8 @@ public class Initialiser {
 	
 	/**
 	 * Generates an array of Cineplex objects
+	 * @param cinemas - Array of cinemas
+	 * @param movies - Array of movies
 	 * @return ArrayList of Cineplex objects created
 	 */
 	public static ArrayList<Cineplex> generateCineplexes(Cinema[] cinemas, Movie[] movies) {
@@ -172,6 +174,7 @@ public class Initialiser {
 	
 	/**
 	 * Generates a set of unique movies being shown
+	 * @param cineplexes - ArrayList of Cineplexes
 	 * @return Set of movies, with no repeating movies
 	 */
 	public static Set<Movie> generateMovies(ArrayList<Cineplex> cineplexes){

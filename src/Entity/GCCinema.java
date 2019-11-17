@@ -20,11 +20,10 @@ public final class GCCinema extends RetangularCinema{
 	 * @param showtimes - ArrayList of Strings which contain showtimes in 24H format
 	 * @param dates - ArrayList of Strings which contain showtimes in DD/MM/YYYY format
 	 */
-	public GCCinema(String cinema_type, String cinema_code, ArrayList<String> showtimes, ArrayList<String> dates) {
-		super(cinema_type, cinema_code, showtimes, dates);
+	public GCCinema(String cinemaType, String cinemaCode, ArrayList<String> showtimes, ArrayList<String> dates) { // can customise seats based on cinemaType
+		super(cinemaType, cinemaCode, showtimes, dates);
 		setROW(GCROW);
 		setCOL(GCCOL);
 		generateFloorPlan();
 	}
-
 }

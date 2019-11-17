@@ -14,8 +14,8 @@ public abstract class RetangularCinema extends Cinema {
 	 * @param showtimes - ArrayList of Strings which contain showtimes in 24H format
 	 * @param dates - ArrayList of Strings which contain showtimes in DD/MM/YYYY format
 	 */
-	public RetangularCinema(String cinema_type, String cinema_code, ArrayList<String> showtimes, ArrayList<String> dates) { // can customise seats based on cinema_type
-		super(cinema_type, cinema_code, showtimes, dates);
+	public RetangularCinema(String cinemaType, String cinemaCode, ArrayList<String> showtimes, ArrayList<String> dates) { // can customise seats based on cinema_type
+		super(cinemaType, cinemaCode, showtimes, dates);
 	}
 	
 	/**

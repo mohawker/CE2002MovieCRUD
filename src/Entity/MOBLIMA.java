@@ -27,7 +27,7 @@ public class MOBLIMA implements Serializable, View{
 	
 	/**
 	 * Loads up the option for users to select UserView or AdminView
-	 * @param args
+	 * @param args - Standard format for main function
 	 */
 	public static void main(String[] args) {
 		MOBLIMA myApp = loadApp();

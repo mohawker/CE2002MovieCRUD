@@ -32,7 +32,6 @@ public abstract class Cinema implements Serializable{
 			this.showtimes[i] = showtimes;
 		}
 		this.dates = dates;
-
 	}
 	
 	/**

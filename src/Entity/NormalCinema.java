@@ -16,8 +16,8 @@ public final class NormalCinema extends RetangularCinema{
 	 * @param showtimes - ArrayList of Strings which contain showtimes in 24H format
 	 * @param dates - ArrayList of Strings which contain showtimes in DD/MM/YYYY format
 	 */
-	public NormalCinema(String cinema_type, String cinema_code, ArrayList<String> showtimes, ArrayList<String> dates) {
-		super(cinema_type, cinema_code, showtimes, dates);
+	public NormalCinema(String cinemaType, String cinemaCode, ArrayList<String> showtimes, ArrayList<String> dates) {
+		super(cinemaType, cinemaCode, showtimes, dates);
 		// TODO Auto-generated constructor stub
 		setROW(NROW);
 		setCOL(NCOL);

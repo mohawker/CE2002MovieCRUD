@@ -148,12 +148,11 @@ public class InputControl {
 	public static String ageRatingInput() {
 		Scanner scan = new Scanner(System.in);
 		String input = scan.nextLine();
-		if (input.equals("3D")||input.equals("PG13")||input.equals("NC16")||input.equals("M18")||input.equals("R21")||input.contentEquals("G"))
+		if (input.contentEquals("G")||input.equals("3D")||input.equals("PG13")||input.equals("NC16")||input.equals("M18")||input.equals("R21"))
 			return input;			
 		else {
 			System.out.println("Please enter: G/PG13/NC16/M18/R21");
 			return ageRatingInput();
 		}
 	}
-	
 }

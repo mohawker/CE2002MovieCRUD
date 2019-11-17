@@ -7,7 +7,7 @@ public interface View{
 	
 	/**
 	 * Prints out the view depending on the type of user
-	 * @return
+	 * @return An integer
 	 */
 	public abstract int printView();
 }
